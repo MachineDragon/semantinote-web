@@ -286,3 +286,17 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
   .dl-meta { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; }
 }
+
+/* One-time price callout (home value section) — boxed card */
+.price-callout {
+  text-align: center;
+  margin: clamp(28px, 4vw, 44px) auto 0;
+  max-width: 620px;
+  background: var(--card);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: clamp(30px, 4vw, 46px);
+  box-shadow: var(--shadow-soft);
+}
+.price-big { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+.price-sub { color: var(--muted); margin: 14px auto 24px; max-width: 46ch; font-size: 15px; line-height: 1.6; }
