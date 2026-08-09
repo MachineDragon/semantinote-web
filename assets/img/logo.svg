@@ -1,0 +1,26 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SemantiNote">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b52d6"/>
+      <stop offset="1" stop-color="#8a63e8"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="108" height="108" rx="28" fill="url(#bg)"/>
+  <rect x="6" y="6" width="108" height="108" rx="28" fill="url(#sheen)"/>
+  <!-- Feather mark -->
+  <g transform="translate(60 62) scale(2.5) translate(-12 -12)"
+     fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+    <path d="M16 8 2 22"/>
+    <path d="M17.5 15H9"/>
+  </g>
+  <!-- Semantic sparkle (AI hint) -->
+  <g fill="#ffffff">
+    <path transform="translate(82 37)" d="M0,-4.6 C0.8,-1.2 1.2,-0.8 4.6,0 C1.2,0.8 0.8,1.2 0,4.6 C-0.8,1.2 -1.2,0.8 -4.6,0 C-1.2,-0.8 -0.8,-1.2 0,-4.6 Z" opacity="0.95"/>
+    <circle cx="88" cy="31" r="1.5" opacity="0.7"/>
+  </g>
+</svg>

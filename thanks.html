@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank you — SemantiNote</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand"><img src="assets/img/logo.svg" alt="" />SemantiNote</a>
+      <div class="nav-cta"><a href="download.html" class="btn btn-primary">Download</a></div>
+    </div>
+  </header>
+
+  <section class="dl-hero">
+    <div class="wrap" style="max-width:640px;">
+      <span class="eyebrow">Payment complete</span>
+      <h1 style="font-size:clamp(30px,4.5vw,48px);">Thank you! 🎉</h1>
+      <p class="lead" style="max-width:52ch;margin:14px auto 0;">Here's your SemantiNote product key. Open the app, click <strong>Enter product key</strong>, and paste it in — you're set forever, on this and future devices.</p>
+
+      <div class="dl-req" style="margin-top:30px;text-align:center;">
+        <div id="keyBox" style="font-size:22px;font-weight:700;letter-spacing:1px;font-family:ui-monospace,Menlo,monospace;user-select:all;padding:8px 0;">Loading your key…</div>
+        <button id="copyBtn" class="btn" style="margin-top:14px;" hidden>Copy key</button>
+        <p id="keyNote" class="dl-soon" style="margin-top:14px;">We've also emailed it to you (via your Stripe receipt). Keep it somewhere safe.</p>
+      </div>
+
+      <p style="margin-top:24px;"><a href="download.html" class="btn btn-primary">Download SemantiNote</a></p>
+    </div>
+  </section>
+
+  <script>
+    // TODO: set this to your deployed Cloudflare Worker URL.
+    var WORKER_URL = "https://semantinote-license.YOURNAME.workers.dev";
+    var params = new URLSearchParams(location.search);
+    var sessionId = params.get("session_id");
+    var box = document.getElementById("keyBox");
+    var copyBtn = document.getElementById("copyBtn");
+
+    function show(key) {
+      box.textContent = key;
+      copyBtn.hidden = false;
+      copyBtn.onclick = function () {
+        navigator.clipboard.writeText(key);
+        copyBtn.textContent = "Copied!";
+        setTimeout(function () { copyBtn.textContent = "Copy key"; }, 1500);
+      };
+    }
+
+    // The Worker generates the key from Stripe's webhook, which can lag a second
+    // or two after redirect — so poll a few times.
+    function fetchKey(tries) {
+      if (!sessionId) { box.textContent = "No purchase found. Check your email for the key."; return; }
+      fetch(WORKER_URL + "/key?session_id=" + encodeURIComponent(sessionId))
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (d) { if (d.key) { show(d.key); } else { throw 0; } })
+        .catch(function () {
+          if (tries > 0) { setTimeout(function () { fetchKey(tries - 1); }, 1500); }
+          else { box.textContent = "Your key is on its way — check your email receipt."; }
+        });
+    }
+    fetchKey(6);
+  </script>
+</body>
+</html>

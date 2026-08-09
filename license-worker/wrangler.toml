@@ -1,0 +1,17 @@
+# Cloudflare Worker config for the SemantiNote license backend (Stripe track).
+# You can also do all of this in the Cloudflare dashboard UI — see the guide.
+
+name = "semantinote-license"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# KV store that holds issued keys. Create it once with:
+#   wrangler kv namespace create LICENSES
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "LICENSES"
+id = "PASTE_YOUR_KV_NAMESPACE_ID_HERE"
+
+# Secret (do NOT put it here — set it with `wrangler secret put STRIPE_WEBHOOK_SECRET`
+# or in the dashboard under Settings → Variables → Encrypt):
+#   STRIPE_WEBHOOK_SECRET

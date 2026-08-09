@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download — SemantiNote</title>
+  <meta name="description" content="Download SemantiNote for macOS and Windows. Private AI notes that run entirely on your device." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand"><img src="assets/img/logo.svg" alt="" />SemantiNote</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#privacy">Privacy</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="download.html" class="btn btn-primary active">Download</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== DOWNLOAD ===================== -->
+  <section class="dl-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Download</span>
+      <h1 class="reveal" style="font-size:clamp(34px,5.4vw,60px);">Get <span class="grad-text">SemantiNote</span></h1>
+      <p class="lead reveal" style="max-width:56ch;margin:16px auto 0;">Free to download for Mac and Windows. Your notes and AI stay entirely on your device.</p>
+
+      <!-- OS-detecting recommendation is filled by JS -->
+      <p class="reveal" id="osHint" style="margin-top:22px;color:var(--dim);font-size:14px;"></p>
+
+      <div class="dl-cards reveal">
+        <div class="dl-card recommended" id="macCard">
+          <span class="dl-badge" id="macBadge" hidden>Detected</span>
+          <svg class="dl-os" viewBox="0 0 24 24" fill="currentColor"><path d="M16.36 12.68c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.62c.64-.78 1.07-1.85.95-2.92-.92.04-2.03.61-2.69 1.38-.59.68-1.1 1.78-.96 2.83 1.02.08 2.07-.52 2.7-1.29z"/></svg>
+          <h3>macOS</h3>
+          <p class="dl-sub">Universal — Apple Silicon &amp; Intel · macOS 12+</p>
+          <button class="btn btn-primary" disabled>Coming soon</button>
+          <p class="dl-soon">Signed builds are on the way. <a href="#notify" style="color:var(--accent);">Get notified →</a></p>
+        </div>
+
+        <div class="dl-card" id="winCard">
+          <span class="dl-badge" id="winBadge" hidden>Detected</span>
+          <svg class="dl-os" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.1 10.5 4v7.5H3zM11.5 3.9 21 2.5v9H11.5zM3 12.5h7.5V20L3 18.9zM11.5 12.5H21v9l-9.5-1.4z"/></svg>
+          <h3>Windows</h3>
+          <p class="dl-sub">64-bit · Windows 10 &amp; 11</p>
+          <button class="btn btn-primary" disabled>Coming soon</button>
+          <p class="dl-soon">Signed builds are on the way. <a href="#notify" style="color:var(--accent);">Get notified →</a></p>
+        </div>
+      </div>
+
+      <!-- TODO: replace the disabled "Coming soon" buttons with real, code-signed
+           download links once builds are published (e.g. a GitHub Releases URL). -->
+
+      <div class="dl-meta reveal">
+        <div><div class="k">Price</div><div class="v">Free, then $14.99 once</div></div>
+        <div><div class="k">Account</div><div class="v">None required</div></div>
+        <div><div class="k">Internet</div><div class="v">Not required</div></div>
+      </div>
+
+      <!-- Pricing / trial. TODO: point the Buy button at your Stripe Payment Link
+           or Gumroad URL once set up (see DEPLOY.md). Price is easy to change. -->
+      <div class="dl-req reveal" id="buy" style="text-align:center;">
+        <h3>Free 14-day trial, then one simple price</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin:0 auto 6px;max-width:56ch;">
+          The notebook, dictation, and keyword search are <strong>free forever</strong>. The AI —
+          chat with your notes, summaries, semantic search, meeting recording, and adding new
+          secrets — is <strong>free for 14 days</strong>, then a <strong>one-time $14.99</strong>
+          product key keeps it forever. No subscription.
+        </p>
+        <p style="color:var(--dim);font-size:12.5px;margin:0 auto 18px;">Launch price — one-time payment, yours for good.</p>
+        <a class="btn btn-primary btn-lg" href="#" onclick="return false;">Buy a product key — $14.99</a>
+        <p class="dl-soon">Checkout opens once builds are live. After buying, you'll get a key to paste into the app.</p>
+      </div>
+
+      <div class="dl-req reveal" style="text-align:left;">
+        <h3>Free forever</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>The full notebook — rich notes, any file type, tabs, pins, folders</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Voice dictation &amp; keyword search</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Viewing your encrypted secrets and per-note passwords</li>
+        </ul>
+      </div>
+
+      <div class="dl-req reveal" style="text-align:left;">
+        <h3>Pro — free for 14 days, then your one-time key</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Chat with your notes &amp; AI summaries — private, on-device</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Semantic search (find by meaning)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Meeting recording (Teams / Zoom / Slack / Discord)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Adding new secrets to the vault</li>
+        </ul>
+      </div>
+
+      <div class="dl-req reveal" style="text-align:left;">
+        <h3>System requirements</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>macOS 12 (Monterey) or later, or Windows 10/11 (64-bit)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>8 GB RAM recommended for the AI models (more is smoother)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A few GB of free disk space for the model you choose</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Internet needed only once, to download your AI model</li>
+        </ul>
+      </div>
+
+      <!-- Notify me (static placeholder — wire to an email provider later) -->
+      <div class="dl-req reveal" id="notify" style="text-align:center;">
+        <h3>Be first to know when it's ready</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin-bottom:18px;">Drop your email and we'll send you the download link the moment signed builds land. No spam, ever.</p>
+        <form class="notify-form" onsubmit="return false;" style="display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+          <input type="email" placeholder="you@example.com" required style="flex:1;min-width:220px;background:var(--bg);border:1px solid var(--border-2);color:var(--text);border-radius:12px;padding:13px 16px;font-size:15px;" />
+          <button class="btn btn-primary" type="submit">Notify me</button>
+        </form>
+        <!-- TODO: connect this form to an email/list provider (e.g. Buttondown, ConvertKit, Formspree). -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand"><img src="assets/img/logo.svg" alt="" style="width:30px;height:30px;" />SemantiNote</div>
+        <p class="footer-tag">Private AI notes that live on your machine. Search, chat, transcribe and organize — all offline.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="features.html">Features</a>
+          <a href="index.html#how">How it works</a>
+          <a href="download.html">Download</a>
+        </div>
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <a href="index.html#privacy">Local-first</a>
+          <a href="features.html#secret-safe">Secret safe</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 SemantiNote. All rights reserved.</span>
+      <span>Made for people who like to keep their thinking private.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
