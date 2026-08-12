@@ -300,3 +300,90 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 }
 .price-big { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
 .price-sub { color: var(--muted); margin: 14px auto 24px; max-width: 46ch; font-size: 15px; line-height: 1.6; }
+
+/* Sale pricing + satisfaction guarantee */
+.price-was { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--dim); font-weight: 600; }
+.price-sale-tag { display: inline-block; background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); font-weight: 700; font-size: 13px; padding: 5px 13px; border-radius: 999px; margin-bottom: 14px; }
+.price-guarantee { color: var(--muted); font-size: 13.5px; margin: 16px auto 0; max-width: 48ch; line-height: 1.55; }
+
+/* Contact / support form */
+.sn-form { display: flex; flex-direction: column; gap: 14px; max-width: 480px; margin: 0 auto; }
+.sn-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--text); }
+.sn-form input, .sn-form select, .sn-form textarea {
+  font: inherit; font-weight: 400; font-size: 14.5px; color: var(--text);
+  background: var(--bg-2); border: 1px solid var(--border-2); border-radius: 10px; padding: 11px 13px; width: 100%; box-sizing: border-box;
+}
+.sn-form input:focus, .sn-form select:focus, .sn-form textarea:focus { outline: none; border-color: var(--accent); }
+.sn-form textarea { resize: vertical; }
+.sn-form .btn { align-self: flex-start; margin-top: 2px; }
+.form-status { font-size: 14px; margin: 6px 0 0; display: none; }
+.form-status.ok { display: block; color: #4ecb8d; }
+.form-status.err { display: block; color: #e08472; }
+
+/* Legal pages */
+.legal { max-width: 760px; text-align: left; }
+.legal h1 { text-align: left; }
+.legal-updated { color: var(--dim); font-size: 13px; margin: 6px 0 22px; }
+.legal-lead { background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 24px; }
+.legal-lead p { color: var(--muted); font-size: 15.5px; margin: 0; line-height: 1.6; }
+.legal h2 { font-size: 19px; margin: 26px 0 8px; color: var(--text); }
+.legal > p { color: var(--muted); font-size: 15px; line-height: 1.65; margin: 0 0 10px; }
+.legal-list { color: var(--muted); font-size: 15px; line-height: 1.65; padding-left: 20px; margin: 0 0 10px; }
+.legal-list li { margin-bottom: 8px; }
+.legal-link { color: var(--accent); }
+.legal-foot-links { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 14px; }
+.legal-foot-links a { color: var(--accent); }
+
+/* "See it in action" auto-rotating screenshot showcase */
+.showcase { max-width: 900px; margin: 0 auto; }
+.showcase-frame { position: relative; border: 1px solid var(--border-2); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); background: var(--bg-2); aspect-ratio: 16 / 10; }
+.showcase-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
+.showcase-slide.active { opacity: 1; }
+.showcase-slide img, .showcase-slide video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.showcase-caption { text-align: center; color: var(--muted); font-size: 14.5px; margin-top: 16px; min-height: 1.4em; font-weight: 500; }
+.showcase-dots { display: flex; gap: 9px; justify-content: center; margin-top: 12px; }
+.showcase-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-2); border: none; padding: 0; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.showcase-dot.active { background: var(--accent); transform: scale(1.2); }
+.showcase-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--border-2); background: rgba(20, 20, 22, 0.62);
+  color: var(--text); font-size: 24px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  opacity: 0.6; transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+}
+.showcase-frame:hover .showcase-nav { opacity: 1; }
+.showcase-nav:hover { background: var(--grad); border-color: transparent; opacity: 1; }
+.showcase-nav.prev { left: 12px; padding-right: 3px; }
+.showcase-nav.next { right: 12px; padding-left: 3px; }
+
+/* ---------- Mission / Why ---------- */
+.mission-statement { max-width: 820px; margin: 0 auto 40px; text-align: center; }
+.mission-statement p { font-size: 18px; line-height: 1.7; color: var(--text); }
+.mission-statement .mission-punch { margin-top: 18px; font-size: 20px; font-weight: 600; color: var(--muted); }
+.mission-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 34px; }
+.mission-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; }
+.mission-card h3 { font-size: 16.5px; margin-bottom: 8px; }
+.mission-card p { color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.mission-who { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 900px; margin: 0 auto; }
+.who-card { background: var(--bg-2); border: 1px solid var(--border-2); border-radius: var(--radius); padding: 22px 24px; }
+.who-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: var(--grad); padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
+.who-card p { color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+/* ---------- Incentives / Nothing to lose ---------- */
+.try-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 30px; }
+.try-card { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
+.try-check { width: 30px; height: 30px; border-radius: 50%; background: rgba(94, 200, 130, 0.15); color: #5ec882; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin-bottom: 14px; }
+.try-card h3 { font-size: 17px; margin-bottom: 8px; }
+.try-card p { color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+.try-cta { text-align: center; }
+.try-note { display: block; margin-top: 14px; color: var(--dim); font-size: 14px; }
+
+@media (max-width: 860px) {
+  .mission-grid, .try-grid { grid-template-columns: 1fr 1fr; }
+  .mission-who { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .mission-grid, .try-grid { grid-template-columns: 1fr; }
+}
