@@ -98,9 +98,10 @@
   });
 
   /* ---------------- "See it in action" showcase ---------------- */
-  // A reel of real recordings. Video slides play from the start and advance
-  // when the clip ENDS (so full clips play, not fixed-length cuts); image
-  // slides advance on a short timer. Hover pauses; dots jump.
+  // A reel of real recordings. It auto-plays the moment it scrolls into view,
+  // plays each clip in full, then advances to the next. Video slides advance on
+  // the clip's 'ended' event; image slides advance on a short timer. Prev/next
+  // and dots jump. No hover-pause (the cursor is usually over it while watching).
   var showcase = document.querySelector(".showcase");
   if (showcase) {
     var slides = Array.prototype.slice.call(showcase.querySelectorAll(".showcase-slide"));
@@ -108,62 +109,55 @@
     var caption = showcase.querySelector(".showcase-caption");
     var prevBtn = showcase.querySelector(".showcase-nav.prev");
     var nextBtn = showcase.querySelector(".showcase-nav.next");
-    var idx = 0, timer = null, hovering = false, inview = false, started = false;
+    var idx = 0, timer = null, inview = false;
     var IMG_MS = 4200, SAFETY_MS = 32000;
     var vidOf = function (i) { return slides[i] ? slides[i].querySelector("video") : null; };
     var clearTimer = function () { if (timer) { clearTimeout(timer); timer = null; } };
-    var schedule = function () {
-      clearTimer();
-      var v = vidOf(idx);
-      // Video slides advance on 'ended'; a safety cap covers a stalled clip.
-      timer = setTimeout(next, v ? SAFETY_MS : IMG_MS);
-    };
     var render = function () {
       slides.forEach(function (s, j) { s.classList.toggle("active", j === idx); });
       dots.forEach(function (d, j) { d.classList.toggle("active", j === idx); });
       if (caption) { caption.textContent = slides[idx].getAttribute("data-caption") || ""; }
     };
-    // Change to slide i; play it from the start only while visible & not hovered.
+    // Play the current slide from the start; advance on the clip's end (videos)
+    // or after a short beat (images). A safety cap covers a stalled clip.
+    var playCurrent = function () {
+      clearTimer();
+      var v = vidOf(idx);
+      if (v) { try { v.currentTime = 0; } catch (e) {} v.play().catch(function () {}); timer = setTimeout(next, SAFETY_MS); }
+      else { timer = setTimeout(next, IMG_MS); }
+    };
     var go = function (i) {
       idx = (i + slides.length) % slides.length;
       render();
       slides.forEach(function (s) { var vv = s.querySelector("video"); if (vv) { try { vv.pause(); } catch (e) {} } });
-      if (inview && !hovering) {
-        var v = vidOf(idx);
-        if (v) { try { v.currentTime = 0; } catch (e) {} v.play().catch(function () {}); }
-        schedule();
-      } else { clearTimer(); }
+      if (inview) { playCurrent(); } else { clearTimer(); }
     };
     var next = function () { go(idx + 1); };
     var prev = function () { go(idx - 1); };
     slides.forEach(function (s) {
       var v = s.querySelector("video");
-      if (v) { v.addEventListener("ended", function () { if (inview && !hovering && slides[idx] === s) { next(); } }); }
+      if (v) { v.addEventListener("ended", function () { if (inview && slides[idx] === s) { next(); } }); }
     });
     dots.forEach(function (d, j) { d.addEventListener("click", function () { go(j); }); });
     if (prevBtn) { prevBtn.addEventListener("click", prev); }
     if (nextBtn) { nextBtn.addEventListener("click", next); }
-    showcase.addEventListener("mouseenter", function () { hovering = true; clearTimer(); var v = vidOf(idx); if (v) { try { v.pause(); } catch (e) {} } });
-    showcase.addEventListener("mouseleave", function () { hovering = false; if (inview) { var v = vidOf(idx); if (v) { v.play().catch(function () {}); } schedule(); } });
 
-    // Start from clip 1 only when the reel scrolls into view; pause it off-screen.
-    var inViewCheck = function () {
-      var r = showcase.getBoundingClientRect();
-      var vis = r.top < window.innerHeight * 0.75 && r.bottom > window.innerHeight * 0.25;
-      if (vis && !inview) {
-        inview = true;
-        if (!started) { started = true; go(0); }
-        else if (!hovering) { var v = vidOf(idx); if (v) { v.play().catch(function () {}); } schedule(); }
-      } else if (!vis && inview) {
-        inview = false; clearTimer();
-        var vv = vidOf(idx); if (vv) { try { vv.pause(); } catch (e) {} }
-      }
-    };
-    if (slides.length) {
-      render();
-      window.addEventListener("scroll", inViewCheck, { passive: true });
-      window.addEventListener("resize", inViewCheck);
-      inViewCheck();
+    render();
+    // Auto-play whenever the reel is on screen; pause (to save resources) when it
+    // scrolls away, and resume from the current clip when it comes back.
+    if ("IntersectionObserver" in window) {
+      var sio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !inview) { inview = true; playCurrent(); }
+          else if (!en.isIntersecting && inview) {
+            inview = false; clearTimer();
+            var v = vidOf(idx); if (v) { try { v.pause(); } catch (e) {} }
+          }
+        });
+      }, { threshold: 0.25 });
+      sio.observe(showcase);
+    } else {
+      inview = true; playCurrent();
     }
   }
 })();
