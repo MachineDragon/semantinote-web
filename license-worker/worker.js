@@ -62,7 +62,7 @@ background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 12px 30px -1
 <body><div class="card">
 <svg class="logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b52d6"/><stop offset="1" stop-color="#8a63e8"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#lg)"/><g transform="translate(32 33) scale(1.55) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></g></svg>
 <h1>Thank you! 🎉</h1>
-<p class="sub">You just unlocked <b>SemantiNote Pro</b> — yours for life. Here's your product key:</p>
+<p class="sub">Thanks for your <b>SemantiNote Product Key</b> — yours for life. Here it is:</p>
 <div class="klabel">Your product key</div>
 <div class="key" id="k">Loading your key…</div>
 <button class="copy" id="c" hidden>Copy key</button>
@@ -107,7 +107,7 @@ async function sendKeyEmail(env, to, key) {
   const html = `<!doctype html><html><body style="margin:0;background:#141418;padding:32px;font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:#e9e9ee">
 <div style="max-width:520px;margin:0 auto;background:#1b1b21;border:1px solid #2c2c34;border-radius:16px;padding:36px 32px;text-align:center">
 <div style="font-size:26px;font-weight:700;margin-bottom:6px">Thank you! 🎉</div>
-<p style="color:#a9a9b4;margin:0 0 22px">You just unlocked <b>SemantiNote Pro</b> — yours for life. Here's your product key:</p>
+<p style="color:#a9a9b4;margin:0 0 22px">Thanks for your <b>SemantiNote Product Key</b> — yours for life. Here it is:</p>
 <div style="font:800 24px/1.3 ui-monospace,Menlo,monospace;letter-spacing:2px;color:#fff;background:linear-gradient(135deg,rgba(91,82,214,.22),rgba(138,99,232,.12));border:1px solid #3a3a45;border-radius:14px;padding:18px 12px">${key}</div>
 <div style="text-align:left;max-width:380px;margin:24px auto 0;color:#c3c3cc;font-size:14px">
 <p style="margin:6px 0"><b>1.</b> Open SemantiNote</p>
@@ -121,7 +121,7 @@ async function sendKeyEmail(env, to, key) {
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "authorization": `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
-      body: JSON.stringify({ from: EMAIL_FROM, to: [to], subject: "Your SemantiNote Pro key 🔑", html }),
+      body: JSON.stringify({ from: EMAIL_FROM, to: [to], subject: "Your SemantiNote Product Key 🔑", html }),
     });
   } catch (e) { /* best effort */ }
 }
