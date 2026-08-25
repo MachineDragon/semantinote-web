@@ -1,0 +1,8 @@
+{
+  // Static marketing site for SemantiNote, served as a Cloudflare Worker with
+  // static assets (assets-only — no Worker script). `npx wrangler deploy` uploads
+  // everything in "." except the paths listed in .assetsignore.
+  "name": "semantinote-web",
+  "compatibility_date": "2025-06-01",
+  "assets": { "directory": "." }
+}
