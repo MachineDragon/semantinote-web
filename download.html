@@ -48,7 +48,7 @@
           <h3>macOS</h3>
           <p class="dl-sub">Apple Silicon &amp; Intel · Universal · macOS 12+</p>
           <a class="btn btn-primary" href="https://github.com/MachineDragon/semantinote-web/releases/latest/download/SemantiNote-mac.dmg">Download for macOS</a>
-          <p class="dl-soon">Unsigned test build — on first open, right-click the app → <strong>Open</strong>.</p>
+          <p class="dl-soon">On first open, right-click the app → <strong>Open</strong> (one-time — see below).</p>
         </div>
 
         <div class="dl-card" id="winCard">
@@ -57,7 +57,7 @@
           <h3>Windows</h3>
           <p class="dl-sub">64-bit · Windows 10 &amp; 11</p>
           <a class="btn btn-primary" href="https://github.com/MachineDragon/semantinote-web/releases/latest/download/SemantiNote-win.exe">Download for Windows</a>
-          <p class="dl-soon">Unsigned test build — if Windows warns, click <strong>More info → Run anyway</strong>.</p>
+          <p class="dl-soon">If Windows warns, click <strong>More info → Run anyway</strong> (one-time — see below).</p>
         </div>
       </div>
 
@@ -68,6 +68,35 @@
         <div><div class="k">Price</div><div class="v">Free 14-day trial, then <span class="price-was">$25</span> $9.99 once — yours for life</div></div>
         <div><div class="k">Account</div><div class="v">None required</div></div>
         <div><div class="k">Internet</div><div class="v">Once, to download the app &amp; your AI model — then fully offline</div></div>
+      </div>
+
+      <!-- First-run instructions: SemantiNote isn't code-signed yet, so the OS shows a one-time warning. -->
+      <div class="dl-req reveal" id="firstrun" style="text-align:left;">
+        <h3>Opening it the first time — this is normal ✅</h3>
+        <p style="color:var(--muted);font-size:14.5px;margin-bottom:18px;max-width:60ch;">
+          SemantiNote is a brand-new app, so it isn't code-signed by Apple/Microsoft yet. Your computer may show a one-time
+          security warning — it's <strong>not</strong> a virus, just an unrecognized new publisher. Here's how to open it
+          (you only do this once, then it opens normally forever):
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+          <div>
+            <h4 style="margin:0 0 8px;">🪟 &nbsp;Windows</h4>
+            <p style="color:var(--muted);font-size:14px;margin:0 0 6px;">If you see <em>“Windows protected your PC”</em>:</p>
+            <ol style="color:var(--muted);font-size:14px;padding-left:20px;margin:0;line-height:1.7;">
+              <li>Click <strong>More info</strong></li>
+              <li>Click <strong>Run anyway</strong></li>
+            </ol>
+          </div>
+          <div>
+            <h4 style="margin:0 0 8px;">&#63743; &nbsp;macOS</h4>
+            <p style="color:var(--muted);font-size:14px;margin:0 0 6px;">If you see <em>“can’t be opened… unidentified developer”</em>:</p>
+            <ol style="color:var(--muted);font-size:14px;padding-left:20px;margin:0;line-height:1.7;">
+              <li><strong>Right-click</strong> (or Control-click) the SemantiNote app → <strong>Open</strong></li>
+              <li>Click <strong>Open</strong> again in the pop-up</li>
+            </ol>
+            <p style="color:var(--dim);font-size:13px;margin:8px 0 0;">Still stuck? System&nbsp;Settings → Privacy&nbsp;&amp;&nbsp;Security → scroll down → <strong>Open Anyway</strong>.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Pricing / trial. TODO: point the Buy button at your Stripe Payment Link

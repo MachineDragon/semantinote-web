@@ -71,7 +71,7 @@ background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 12px 30px -1
 <li><b>2.</b> Click <b>Enter product key</b> (or the badge in the status bar)</li>
 <li><b>3.</b> Paste your key and hit <b>Activate</b> — done forever</li>
 </ol>
-<p class="foot">Pay once — <b>yours forever</b>. No subscription, no monthly fees, ever. Save this key somewhere safe; it works on your other devices too.</p>
+<p class="foot">📧 We've also emailed your key to you. Pay once — <b>yours forever</b>: no subscription, no monthly fees. Keep it to re-activate on your other devices.</p>
 <p class="enjoy">Enjoy your private AI notebook. 💜</p>
 </div>
 <script>
@@ -98,6 +98,34 @@ async function stripeSigValid(rawBody, sigHeader, secret) {
   return diff === 0;
 }
 
+// Email the buyer their product key via Resend (best-effort — the thank-you page
+// still shows the key if this fails). Needs the RESEND_API_KEY secret + a verified
+// sending domain (semantinote.com). "from" must be an address on that domain.
+const EMAIL_FROM = "SemantiNote <keys@semantinote.com>";
+async function sendKeyEmail(env, to, key) {
+  if (!env.RESEND_API_KEY || !to) { return; }
+  const html = `<!doctype html><html><body style="margin:0;background:#141418;padding:32px;font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:#e9e9ee">
+<div style="max-width:520px;margin:0 auto;background:#1b1b21;border:1px solid #2c2c34;border-radius:16px;padding:36px 32px;text-align:center">
+<div style="font-size:26px;font-weight:700;margin-bottom:6px">Thank you! 🎉</div>
+<p style="color:#a9a9b4;margin:0 0 22px">You just unlocked <b>SemantiNote Pro</b> — yours for life. Here's your product key:</p>
+<div style="font:800 24px/1.3 ui-monospace,Menlo,monospace;letter-spacing:2px;color:#fff;background:linear-gradient(135deg,rgba(91,82,214,.22),rgba(138,99,232,.12));border:1px solid #3a3a45;border-radius:14px;padding:18px 12px">${key}</div>
+<div style="text-align:left;max-width:380px;margin:24px auto 0;color:#c3c3cc;font-size:14px">
+<p style="margin:6px 0"><b>1.</b> Open SemantiNote</p>
+<p style="margin:6px 0"><b>2.</b> Click <b>Enter product key</b> (or the badge in the status bar)</p>
+<p style="margin:6px 0"><b>3.</b> Paste your key and hit <b>Activate</b> — done forever</p>
+</div>
+<p style="margin-top:24px;color:#8f8f99;font-size:13px">Pay once — <b style="color:#e9e9ee">yours forever</b>. No subscription, no monthly fees. Keep this email so you can re-activate on your other devices.</p>
+<p style="margin-top:8px;color:#a99be6;font-weight:600">Enjoy your private AI notebook. 💜</p>
+</div></body></html>`;
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "authorization": `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
+      body: JSON.stringify({ from: EMAIL_FROM, to: [to], subject: "Your SemantiNote Pro key 🔑", html }),
+    });
+  } catch (e) { /* best effort */ }
+}
+
 export default {
   async fetch(request, env) {
    try {
@@ -122,7 +150,10 @@ export default {
           await env.LICENSES.put(`k:${key}`, "active");          // key → status (app checks this)
           await env.LICENSES.put(`s:${session.id}`, key);        // session → key (success page reads this)
           const email = session.customer_details && session.customer_details.email;
-          if (email) { await env.LICENSES.put(`e:${email.toLowerCase()}`, key); } // email → key (retrieval later)
+          if (email) {
+            await env.LICENSES.put(`e:${email.toLowerCase()}`, key); // email → key (retrieval)
+            await sendKeyEmail(env, email, key);                     // email the buyer their key
+          }
         }
       }
       return json({ received: true });
