@@ -1,5 +1,6 @@
 # Files in the repo that must NOT be published as part of the website.
-# (gitignore-style patterns; .git and node_modules are excluded automatically.)
+# (gitignore-style patterns.)
+.git
 /license-worker/
 *.md
 wrangler.jsonc
