@@ -133,7 +133,10 @@ h2.section-title { font-size: clamp(28px, 4vw, 42px); }
 .frame-bar i:nth-child(2) { background: #febc2e; }
 .frame-bar i:nth-child(3) { background: #28c840; }
 .frame-bar span { margin-left: 10px; font-size: 12px; color: var(--dim); }
-.frame img { width: 100%; display: block; }
+/* Reserve each screenshot's space up front (exact 2640x1664 ratio) so late-loading
+   images/videos never grow the page after an anchor jump — that layout shift is what
+   made nav/footer links (e.g. "Pricing") land on the wrong section. */
+.frame img, .frame video { width: 100%; display: block; aspect-ratio: 2640 / 1664; object-fit: cover; }
 /* Placeholder shown until a real screenshot is dropped in */
 .frame .ph {
   aspect-ratio: 16 / 10; display: flex; flex-direction: column;
@@ -265,6 +268,12 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 }
 
 /* ---------------------------------------------------------------- Responsive */
+@media (max-width: 1100px) {
+  /* Below this, a side-by-side screenshot is too small to read. Stack the feature
+     rows so each screenshot spans the full width — legible without zooming. */
+  .feat-row, .feat-row.reverse .feat-row-text { grid-template-columns: 1fr; order: 0; }
+  .feat-row .frame { order: -1; }
+}
 @media (max-width: 940px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
   .feat-grid { grid-template-columns: repeat(2, 1fr); }
