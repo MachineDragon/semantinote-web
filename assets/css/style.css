@@ -268,9 +268,12 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 }
 
 /* ---------------------------------------------------------------- Responsive */
-@media (max-width: 1100px) {
-  /* Below this, a side-by-side screenshot is too small to read. Stack the feature
-     rows so each screenshot spans the full width — legible without zooming. */
+@media (max-width: 1400px) {
+  /* A side-by-side screenshot squeezes 3 app panels into half a row, so the text
+     ends up ~7-8px — unreadable. On anything laptop-sized or smaller, stack the
+     feature rows so each screenshot spans the FULL width (~2x bigger, legible
+     without zooming). Only true large desktop displays keep the compact 2-column
+     layout. The browser picks automatically based on its own window width. */
   .feat-row, .feat-row.reverse .feat-row-text { grid-template-columns: 1fr; order: 0; }
   .feat-row .frame { order: -1; }
 }
