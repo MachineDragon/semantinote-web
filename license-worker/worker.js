@@ -176,8 +176,31 @@ export default {
     if (request.method === "GET") {
       const key = url.searchParams.get("key");
       if (!key) return json({ valid: false, error: "no key" });
-      const status = await env.LICENSES.get(`k:${key.trim().toUpperCase()}`);
-      return json({ valid: status === "active" });
+      const kId = `k:${key.trim().toUpperCase()}`;
+      const raw = await env.LICENSES.get(kId);
+      if (!raw) return json({ valid: false });
+
+      // A key's value is either the legacy string "active" (issued by the webhook)
+      // or a stamped JSON record. Accept both so existing keys keep working.
+      let rec = null;
+      try { rec = JSON.parse(raw); } catch { /* legacy "active" string */ }
+      const active = rec ? rec.status === "active" : raw === "active";
+      if (!active) return json({ valid: false });
+
+      // Stamp the activation: first/last time + a running count, so the KV entry
+      // shows how many times this key was used/activated (a key-sharing signal).
+      // Best-effort — a write failure must never block a valid activation.
+      const now = new Date().toISOString();
+      const prevCount = (rec && (rec.timesUsed ?? rec.hits)) || 0; // ?? rec.hits: tolerate any old field name
+      const stamped = {
+        status: "active",
+        firstActivatedAt: (rec && rec.firstActivatedAt) || now,
+        lastActivatedAt: now,
+        timesUsed: prevCount + 1,
+      };
+      try { await env.LICENSES.put(kId, JSON.stringify(stamped)); } catch { /* ignore */ }
+
+      return json({ valid: true });
     }
 
     return json({ error: "not found" }, 404);
