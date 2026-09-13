@@ -197,6 +197,26 @@
   onClick('a[href*="SemantiNote-win"]', "download_win");
   onClick('a[href*="buy.stripe"]', "click_buy");
 
+  // Download reassurance: briefly show "Downloading… ✓" so the user knows it
+  // started (the file downloads without changing the page, which otherwise looks
+  // like nothing happened — and made Clarity flag a false "dead click").
+  document.querySelectorAll('a[href*="SemantiNote-mac"], a[href*="SemantiNote-win"]').forEach(function (a) {
+    a.addEventListener("click", function () {
+      if (a.dataset.dlBusy) { return; }
+      a.dataset.dlBusy = "1";
+      var original = a.innerHTML;
+      a.innerHTML = "Downloading… ✓";
+      a.style.pointerEvents = "none";
+      a.style.opacity = "0.85";
+      setTimeout(function () {
+        a.innerHTML = original;
+        a.style.pointerEvents = "";
+        a.style.opacity = "";
+        delete a.dataset.dlBusy;
+      }, 3000);
+    });
+  });
+
   // "Did they watch the demos?" — fire once when a feature demo scrolls into view
   // (the index hero clip is excluded so this reflects real demo engagement).
   var demoFired = false;
