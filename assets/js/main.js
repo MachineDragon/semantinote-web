@@ -205,7 +205,7 @@
       if (a.dataset.dlBusy) { return; }
       a.dataset.dlBusy = "1";
       var original = a.innerHTML;
-      a.innerHTML = "Downloading… ✓";
+      a.innerHTML = "Download started ✓";
       a.style.pointerEvents = "none";
       a.style.opacity = "0.85";
       setTimeout(function () {
@@ -213,7 +213,7 @@
         a.style.pointerEvents = "";
         a.style.opacity = "";
         delete a.dataset.dlBusy;
-      }, 3000);
+      }, 5000);
     });
   });
 
