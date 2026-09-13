@@ -161,3 +161,54 @@
     }
   }
 })();
+
+/* ============================================================
+   Analytics: Microsoft Clarity + lightweight event tracking.
+   Clarity is privacy-friendly session analytics (heatmaps + recordings)
+   used to understand where visitors hesitate (e.g. the download step).
+
+   >>> TO ACTIVATE: create a free project at https://clarity.microsoft.com,
+       copy its Project ID, and paste it below in place of PASTE_CLARITY_ID.
+   Until then this block does nothing (no tracking, no errors).
+   ============================================================ */
+(function () {
+  var CLARITY_ID = "yheruwpyeh"; // Microsoft Clarity project ID
+
+  // Load Clarity only when a real ID is set.
+  if (CLARITY_ID && CLARITY_ID !== "PASTE_CLARITY_ID") {
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", CLARITY_ID);
+  }
+
+  // Fire a Clarity custom event (no-op if Clarity isn't loaded yet).
+  function track(name) { try { if (window.clarity) { window.clarity("event", name); } } catch (e) {} }
+
+  function onClick(selector, name) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      el.addEventListener("click", function () { track(name); });
+    });
+  }
+
+  // Conversion-funnel events: who clicks Download / Buy.
+  onClick('a[href*="SemantiNote-mac"]', "download_mac");
+  onClick('a[href*="SemantiNote-win"]', "download_win");
+  onClick('a[href*="buy.stripe"]', "click_buy");
+
+  // "Did they watch the demos?" — fire once when a feature demo scrolls into view
+  // (the index hero clip is excluded so this reflects real demo engagement).
+  var demoFired = false;
+  var shots = document.querySelectorAll('img.shot[data-clip]');
+  if (shots.length && "IntersectionObserver" in window) {
+    var dobs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && !demoFired) { demoFired = true; track("demo_viewed"); }
+      });
+    }, { threshold: 0.4 });
+    shots.forEach(function (s) {
+      if ((s.getAttribute("src") || "").indexOf("hero") === -1) { dobs.observe(s); }
+    });
+  }
+})();
