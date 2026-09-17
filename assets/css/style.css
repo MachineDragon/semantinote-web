@@ -284,7 +284,10 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
      without zooming). Only true large desktop displays keep the compact 2-column
      layout. The browser picks automatically based on its own window width. */
   .feat-row, .feat-row.reverse .feat-row-text { grid-template-columns: 1fr; order: 0; }
-  .feat-row .frame { order: -1; }
+  /* Keep each screenshot BELOW its own heading when stacked, so an image can't
+     sit under the previous section's heading (e.g. the model-picker shot ending
+     up under "Semantic search"). */
+  .feat-row .frame { order: 1; }
 }
 @media (max-width: 940px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -300,7 +303,7 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
   }
   .nav[data-open="true"] .nav-links a { padding: 10px 0; font-size: 16px; }
   .feat-row, .feat-row.reverse .feat-row-text { grid-template-columns: 1fr; order: 0; }
-  .feat-row .frame { order: -1; }
+  .feat-row .frame { order: 1; }
   .feat-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .dl-cards { grid-template-columns: 1fr; }
@@ -393,7 +396,7 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .who-card p { color: var(--muted); font-size: 15px; line-height: 1.65; }
 
 /* ---------- Incentives / Nothing to lose ---------- */
-.try-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 30px; }
+.try-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 30px; }
 .try-card { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
 .try-check { width: 30px; height: 30px; border-radius: 50%; background: rgba(94, 200, 130, 0.15); color: #5ec882; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin-bottom: 14px; }
 .try-card h3 { font-size: 17px; margin-bottom: 8px; }
