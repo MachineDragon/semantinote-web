@@ -204,6 +204,15 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .vs-chip.good { border-color: rgba(78,203,141,0.4); background: rgba(78,203,141,0.06); }
 .vs-chip p { font-size: 14px; color: var(--muted); margin: 0; }
 
+/* Problems → solutions grid (problem-first, scannable) */
+.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 34px; }
+.problem-card { border: 1px solid var(--border); border-radius: 16px; padding: 24px; background: var(--card); display: flex; flex-direction: column; }
+.problem-card .p-q { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.35; margin-bottom: 11px; }
+.problem-card .p-a { font-size: 14.5px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
+.problem-card .p-a strong { color: var(--accent); font-weight: 700; }
+.problem-card .p-a em { color: var(--text); font-style: italic; }
+.problem-card .p-who { font-size: 12px; color: var(--dim); letter-spacing: 0.02em; border-top: 1px solid var(--border); padding-top: 12px; }
+
 /* Privacy banner */
 .privacy {
   background: linear-gradient(135deg, rgba(91,82,214,0.14), rgba(138,99,232,0.06));
@@ -398,4 +407,54 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 }
 @media (max-width: 520px) {
   .mission-grid, .try-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   FAQ accordion (objection handling)
+   ========================================================================= */
+.faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 4px 20px;
+  transition: border-color 0.2s var(--ease);
+}
+.faq-item[open] { border-color: var(--border-2); }
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  font-weight: 650; font-size: 16.5px; color: var(--text);
+  padding: 16px 34px 16px 0; position: relative;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+  font-size: 24px; font-weight: 400; color: var(--accent); line-height: 1; transition: transform 0.2s var(--ease);
+}
+.faq-item[open] summary::after { content: "\2013"; }
+.faq-item summary:hover { color: var(--accent); }
+.faq-item > p { color: var(--muted); font-size: 15px; line-height: 1.65; padding: 0 0 18px; margin: 0; }
+.faq-item > p strong { color: var(--text); }
+
+/* =========================================================================
+   Sticky mobile CTA bar (shown only on small screens)
+   ========================================================================= */
+.mobile-cta { display: none; }
+@media (max-width: 760px) {
+  .mobile-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+    padding: 11px 16px calc(11px + env(safe-area-inset-bottom, 0px));
+    background: rgba(20, 20, 22, 0.97);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-top: 1px solid var(--border-2);
+    box-shadow: 0 -8px 30px -12px rgba(0, 0, 0, 0.6);
+  }
+  .mobile-cta-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .mobile-cta-text strong { font-size: 15px; color: var(--text); }
+  .mobile-cta-text span { font-size: 12.5px; color: var(--muted); }
+  .mobile-cta .btn { flex-shrink: 0; padding: 11px 18px; font-size: 15px; }
+  /* keep the footer clear of the fixed bar */
+  .footer { padding-bottom: 84px; }
 }
