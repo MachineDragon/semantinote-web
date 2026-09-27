@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Episodes — See SemantiNote in action</title>
+  <meta name="description" content="Short episodes showing what SemantiNote does: search notes by meaning, record lectures and meetings, chat with a local AI, read PDFs and CSVs, and keep everything private on your own machine." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta property="og:title" content="SemantiNote Episodes — See it in action" />
+  <meta property="og:description" content="Short, funny episodes showing exactly what SemantiNote does — search by meaning, record meetings & lectures, chat with your notes, all private on your computer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://semantinote.com/episodes.html" />
+  <link rel="canonical" href="https://semantinote.com/episodes.html" />
+  <meta property="og:image" content="https://semantinote.com/assets/img/shots/hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SemantiNote Episodes — See it in action" />
+  <meta name="twitter:description" content="Short episodes showing what SemantiNote does — all private, on your machine." />
+  <meta name="twitter:image" content="https://semantinote.com/assets/img/shots/hero.png" />
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand"><img src="assets/img/logo.svg" alt="" />SemantiNote</a>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="episodes.html" class="active">Episodes</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#privacy">Privacy</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="help.html">Help</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="download.html" class="btn btn-primary">Download</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== EPISODES ===================== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>SemantiNote, in action</h2>
+        <p class="lead">Short episodes showing exactly what SemantiNote does — search by meaning, record lectures &amp; meetings, chat with your notes, read PDFs &amp; spreadsheets, and keep everything private on your own machine.</p>
+      </div>
+
+      <!-- Player -->
+      <div class="ep-player-wrap" id="playerWrap">
+        <div class="ep-stage">
+          <video id="epVideo" controls playsinline preload="metadata" poster=""></video>
+        </div>
+        <div class="ep-now" id="epNow">Episode 1 of 10</div>
+        <h3 class="ep-title" id="epTitle"></h3>
+        <p class="ep-desc" id="epDesc"></p>
+        <div class="ep-controls">
+          <button class="btn btn-ghost btn-sm" id="epPrev" aria-label="Previous episode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            Previous
+          </button>
+          <button class="btn btn-primary btn-sm" id="epNext" aria-label="Next episode">
+            Next
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <span class="spacer"></span>
+          <label class="ep-autoplay"><input type="checkbox" id="epAutoplay" checked /> Autoplay next</label>
+        </div>
+      </div>
+
+      <!-- All episodes -->
+      <div class="ep-grid" id="epGrid" aria-label="All episodes"></div>
+
+      <!-- Social -->
+      <div class="socials">
+        <div class="section-head" style="margin-bottom:24px;">
+          <h2 style="font-size:clamp(22px,3vw,28px);">Follow SemantiNote</h2>
+          <p class="lead" style="margin-top:10px;">New episodes and tips drop here first.</p>
+        </div>
+        <a class="social-row" href="https://www.youtube.com/@SemantiNote" target="_blank" rel="noopener">
+          <span class="social-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+          <span class="social-txt"><span class="social-name">YouTube</span><span class="social-handle">youtube.com/@SemantiNote</span></span>
+          <svg class="social-go" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="social-row" href="https://x.com/SemantiNote" target="_blank" rel="noopener">
+          <span class="social-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+          <span class="social-txt"><span class="social-name">X (Twitter)</span><span class="social-handle">x.com/SemantiNote</span></span>
+          <svg class="social-go" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="social-row" href="https://www.instagram.com/semantinote/" target="_blank" rel="noopener">
+          <span class="social-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span>
+          <span class="social-txt"><span class="social-name">Instagram</span><span class="social-handle">instagram.com/semantinote</span></span>
+          <svg class="social-go" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="social-row" href="https://www.tiktok.com/@semantinote" target="_blank" rel="noopener">
+          <span class="social-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+          <span class="social-txt"><span class="social-name">TikTok</span><span class="social-handle">tiktok.com/@semantinote</span></span>
+          <svg class="social-go" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+
+      <div style="text-align:center;margin-top:clamp(48px,7vw,72px);">
+        <a href="download.html" class="btn btn-primary btn-lg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+          Download SemantiNote free
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand"><img src="assets/img/logo.svg" alt="" style="width:30px;height:30px;" />SemantiNote</div>
+        <p class="footer-tag">Private AI notes that live on your machine. Search, chat, transcribe and organize — all offline.</p>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@SemantiNote" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://x.com/SemantiNote" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/semantinote/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://www.tiktok.com/@semantinote" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="features.html">Features</a>
+          <a href="episodes.html">Episodes</a>
+          <a href="index.html#how">How it works</a>
+          <a href="download.html">Download</a>
+        </div>
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <a href="index.html#privacy">Local-first</a>
+          <a href="features.html#secret-safe">Secret safe</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="refund.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 SemantiNote. All rights reserved.</span>
+      <span>Made for people who like to keep their thinking private.</span>
+    </div>
+  </footer>
+
+  <!-- ===================== STICKY MOBILE CTA ===================== -->
+  <div class="mobile-cta">
+    <div class="mobile-cta-text">
+      <strong>Free to start</strong>
+      <span><span class="price-was">$25</span> $9.99 once · no subscription</span>
+    </div>
+    <a href="download.html" class="btn btn-primary">Download free</a>
+  </div>
+
+  <script>
+    (function () {
+      var BASE = "assets/episodes/";
+      var EPISODES = [
+        { f: "c1-paper-mountain",      t: "The Paper Mountain",     d: "Search by meaning, not keywords. Buried in 400 pages, Dave describes the contract he needs — and SemantiNote finds the note with zero matching words.", dur: "0:55" },
+        { f: "c2-meeting-memory",      t: "Meeting Memory",         d: "Kevin agreed to four things and remembers none of them. SemantiNote recorded and transcribed the meeting, so every promise is searchable.", dur: "1:09" },
+        { f: "c3-grandpa-passwords",   t: "Grandpa's Passwords",    d: "47 sticky notes, zero working logins. The encrypted Secret Safe keeps every password in one private place — no more lockouts.", dur: "1:04" },
+        { f: "c4-all-nighter",         t: "The All-Nighter",        d: "3 AM, four notebooks, one missing page. Ken just asks his own notes how cells turn food into energy — and gets the answer instantly.", dur: "1:21" },
+        { f: "c5-token-bill",          t: "The $16,200 Bill",       d: "A company's cloud-AI bill won't stop climbing. One employee shows the fix: AI that runs on your own computer, for free.", dur: "1:19" },
+        { f: "c6-lecture-nap",         t: "The Lecture Nap",        d: "Jamal sleeps through his 9 AM. SemantiNote recorded and summarized the whole lecture — so he still walks away with an A+.", dur: "1:30" },
+        { f: "c7-data-leak",           t: "The Data Leak",          d: "Staff pasted client data into cloud chatbots 1,284 times. SemantiNote's AI runs locally — so sensitive data never leaves the machine.", dur: "1:30" },
+        { f: "c8-hardcoded-key",       t: "The Hardcoded Key",      d: "Leo's about to push his API key to the whole internet. He asks the built-in AI to review his code first — and dodges a disaster.", dur: "0:59" },
+        { f: "c9-csv-spend",           t: "CSV in Seconds",         d: "“Q2 token spend by Friday.” Sam drops the expense CSV into SemantiNote, asks a question, and has the numbers in seconds.", dur: "1:03" },
+        { f: "c10-performance-review", t: "The Performance Review", d: "Nina's review is in an hour and she can't recall what she did all year. She asks a year of notes — and walks in completely ready.", dur: "1:11" }
+      ];
+
+      var video = document.getElementById("epVideo");
+      var elNow = document.getElementById("epNow");
+      var elTitle = document.getElementById("epTitle");
+      var elDesc = document.getElementById("epDesc");
+      var elPrev = document.getElementById("epPrev");
+      var elNext = document.getElementById("epNext");
+      var elAuto = document.getElementById("epAutoplay");
+      var grid = document.getElementById("epGrid");
+      var wrap = document.getElementById("playerWrap");
+      var current = 0;
+
+      try { elAuto.checked = localStorage.getItem("sn.autoplay") !== "0"; } catch (e) {}
+      elAuto.addEventListener("change", function () {
+        try { localStorage.setItem("sn.autoplay", elAuto.checked ? "1" : "0"); } catch (e) {}
+      });
+
+      var PLAY_SVG = '<svg viewBox="0 0 68 68" fill="none" aria-hidden="true"><circle cx="34" cy="34" r="32" fill="rgba(0,0,0,.55)" stroke="#fff" stroke-width="2"/><path d="M28 22l20 12-20 12z" fill="#fff"/></svg>';
+
+      // Build the episode grid.
+      EPISODES.forEach(function (ep, i) {
+        var card = document.createElement("button");
+        card.className = "ep-card";
+        card.setAttribute("data-i", i);
+        card.setAttribute("aria-label", "Play episode " + (i + 1) + ": " + ep.t);
+        card.innerHTML =
+          '<div class="ep-thumb">' +
+            '<img loading="lazy" src="' + BASE + ep.f + '.jpg" alt="' + ep.t + ' — SemantiNote episode ' + (i + 1) + '" />' +
+            '<span class="ep-nowtag">Now playing</span>' +
+            '<span class="ep-dur">' + ep.dur + '</span>' +
+            '<span class="ep-play">' + PLAY_SVG + '</span>' +
+          '</div>' +
+          '<div class="ep-body">' +
+            '<div class="num">Episode ' + (i + 1) + '</div>' +
+            '<h3>' + ep.t + '</h3>' +
+            '<p>' + ep.d + '</p>' +
+          '</div>';
+        card.addEventListener("click", function () { load(i, true, true); });
+        grid.appendChild(card);
+      });
+      var cards = Array.prototype.slice.call(grid.querySelectorAll(".ep-card"));
+
+      function load(i, play, scroll) {
+        if (i < 0 || i >= EPISODES.length) { return; }
+        current = i;
+        var ep = EPISODES[i];
+        video.pause();
+        video.innerHTML =
+          '<source src="' + BASE + ep.f + '.webm" type="video/webm" />' +
+          '<source src="' + BASE + ep.f + '.mp4" type="video/mp4" />';
+        video.setAttribute("poster", BASE + ep.f + ".jpg");
+        video.load();
+        elNow.textContent = "Episode " + (i + 1) + " of " + EPISODES.length;
+        elTitle.textContent = ep.t;
+        elDesc.textContent = ep.d;
+        elPrev.disabled = (i === 0);
+        elNext.disabled = (i === EPISODES.length - 1);
+        cards.forEach(function (c, ci) { c.classList.toggle("active", ci === i); });
+        try { history.replaceState(null, "", "#e" + (i + 1)); } catch (e) {}
+        if (play) { var p = video.play(); if (p && p.catch) { p.catch(function () {}); } }
+        if (scroll) { wrap.scrollIntoView({ behavior: "smooth", block: "start" }); }
+      }
+
+      elPrev.addEventListener("click", function () { load(current - 1, true, false); });
+      elNext.addEventListener("click", function () { load(current + 1, true, false); });
+      video.addEventListener("ended", function () {
+        if (elAuto.checked && current < EPISODES.length - 1) { load(current + 1, true, false); }
+      });
+
+      // Deep link (#e3) support.
+      var start = 0;
+      var m = (location.hash || "").match(/^#e(\d+)$/);
+      if (m) { var n = parseInt(m[1], 10) - 1; if (n >= 0 && n < EPISODES.length) { start = n; } }
+      load(start, false, false);
+    })();
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
