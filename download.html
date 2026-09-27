@@ -63,22 +63,19 @@
         </div>
       </div>
 
-      <!-- First-run instructions: SemantiNote isn't code-signed yet, so the OS shows a one-time warning. -->
+      <!-- Post-download header: revealed by JS after a download click. -->
+      <div class="dl-started" id="dlStarted" hidden aria-live="polite">
+        <span class="dl-started-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Download started
+        </span>
+        <h2>Thanks for downloading!</h2>
+        <p>Your download will begin automatically. If it didn’t start, <a id="dlManual" href="https://github.com/MachineDragon/semantinote-web/releases/latest/download/SemantiNote-mac.dmg">download SemantiNote manually</a>.</p>
+      </div>
+
       <style>
-        .fr-wrap{max-width:960px;margin:0 auto;text-align:left}
-        .fr-safe{display:flex;gap:14px;align-items:flex-start;background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.35);border-radius:14px;padding:18px 20px;margin:0 auto 28px;max-width:760px}
-        .fr-safe svg{flex:0 0 auto;color:#2ecc71;margin-top:2px}
-        .fr-safe p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
-        .fr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
-        .fr-os h4{margin:0 0 6px;font-size:17px;line-height:1.4}
-        .fr-os h4 .os-ico{width:18px;height:18px;vertical-align:-3px;margin-right:7px;fill:currentColor}
-        .fr-os .fr-note{color:var(--muted);font-size:13.5px;margin:0 0 14px}
-        .fr-step{display:flex;gap:12px;align-items:flex-start;margin:0 0 16px}
-        .fr-num{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--grad,#7c5cff);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:4px}
-        .fr-step .fr-txt{color:var(--muted);font-size:14px;line-height:1.6}
-        .fr-shot{display:block;margin:8px 0 0;width:100%;max-width:340px;height:auto;border-radius:10px}
         /* dialog mockup palette (light, like the real OS dialogs) */
-        .dlg-bg{fill:#f4f5f7}.dlg-card{fill:#ffffff}.dlg-bar{fill:#e9eb0f}
+        .dlg-bg{fill:#f4f5f7}.dlg-card{fill:#ffffff}
         .dlg-title{fill:#1d1d1f;font-family:-apple-system,Segoe UI,system-ui,sans-serif;font-weight:700}
         .dlg-text{fill:#6b7078;font-family:-apple-system,Segoe UI,system-ui,sans-serif}
         .dlg-link{fill:#0067c5;font-family:Segoe UI,system-ui,sans-serif}
@@ -86,103 +83,184 @@
         .dlg-btn-txt-w{fill:#ffffff;font-family:-apple-system,Segoe UI,system-ui,sans-serif}
         .hl{fill:none;stroke:#ff3b30;stroke-width:3}
         .hl-arrow{stroke:#ff3b30;stroke-width:3;fill:none;stroke-linecap:round}
+        /* Download-started header */
+        .dl-started{max-width:640px;margin:8px auto 0;text-align:center;scroll-margin-top:90px;animation:dlpop .3s ease}
+        @keyframes dlpop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+        .dl-started-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(46,204,113,.16);color:#2ecc71;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:20px}
+        .dl-started-badge svg{width:15px;height:15px}
+        .dl-started h2{font-size:clamp(24px,3.4vw,34px);margin:14px 0 8px;color:var(--text)}
+        .dl-started>p{color:var(--muted);font-size:14.5px;margin:0 auto;max-width:52ch}
+        .dl-started>p a{color:var(--accent);text-decoration:underline}
+        /* Install steps — clean numbered cards */
+        .dl-inst{max-width:860px;margin:34px auto 0;text-align:center}
+        .inst-h{font-size:clamp(18px,2.4vw,22px);margin:0 0 26px;color:var(--text)}
+        body.post-download .inst-h{display:none}
+        .inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin:0 auto}
+        .inst-grid[hidden]{display:none}
+        @media(max-width:520px){.inst-grid{grid-template-columns:1fr;gap:34px}}
+        .inst-step{text-align:center}
+        .inst-num{width:44px;height:44px;border-radius:50%;background:var(--grad,#7c5cff);color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+        .inst-shot{background:var(--bg-3,#262626);border:1px solid var(--border,#333);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center;min-height:150px}
+        .inst-shot svg{width:100%;max-width:320px;height:auto;border-radius:8px}
+        .inst-cap{color:var(--muted);font-size:15px;margin:16px auto 0;max-width:30ch;line-height:1.5}
+        .inst-cap strong{color:var(--text)}
+        .inst-safe{color:var(--dim);font-size:13px;margin:30px auto 0;max-width:60ch;line-height:1.6}
+        /* Focus mode: after a download click, hide everything except the steps. */
+        body.post-download .dl-hero > .wrap > *:not(#dlStarted):not(#firstrun){display:none}
+        .dl-more{margin-top:26px;font-size:13px}
+        .dl-more a{color:var(--dim);text-decoration:underline;cursor:pointer}
+        .dl-more[hidden]{display:none}
       </style>
-      <div class="dl-req reveal" id="firstrun" style="text-align:center;">
-        <h3>Opening it the first time — this is normal &amp; safe ✅</h3>
-        <div class="fr-wrap">
-          <div class="fr-safe">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <p><strong>Is this safe? Yes.</strong> SemantiNote is a brand-new indie app, so it isn't “code-signed” by Apple/Microsoft yet (that’s a costly yearly fee we’ll add as we grow). Your computer shows a one-time <em>“unrecognized developer”</em> warning for <em>any</em> new app — it is <strong>not</strong> a virus scan result. Your notes and AI never leave your device, and every purchase is <strong>100% refundable</strong>. Here’s how to open it — <strong>you only do this once</strong>, then it launches normally forever.</p>
+      <div class="dl-inst reveal" id="firstrun">
+        <h3 class="inst-h">Installing takes about 30 seconds</h3>
+
+        <!-- ===== WINDOWS ===== -->
+        <div class="inst-grid" data-os="win">
+          <div class="inst-step">
+            <div class="inst-num">1</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 420 250" role="img" aria-label="Chrome toolbar — click the download icon at the top-right, then open SemantiNote-win.exe">
+                <rect x="0" y="0" width="420" height="250" rx="12" fill="#eceef1"/>
+                <path d="M12 0 h396 a12 12 0 0 1 12 12 v40 h-420 v-40 a12 12 0 0 1 12 -12z" fill="#ffffff"/>
+                <line x1="0" y1="52" x2="420" y2="52" stroke="#dadce0" stroke-width="1"/>
+                <rect x="18" y="15" width="250" height="22" rx="11" fill="#f1f3f4"/>
+                <circle cx="33" cy="26" r="4.5" fill="none" stroke="#9aa0a6" stroke-width="1.4"/>
+                <rect x="46" y="23" width="150" height="6" rx="3" fill="#dadce0"/>
+                <path d="M298 19.5 l2.3 4.7 5.2 .75 -3.75 3.65 .9 5.15 -4.65 -2.45 -4.65 2.45 .9 -5.15 -3.75 -3.65 5.2 -.75z" fill="none" stroke="#5f6368" stroke-width="1.4" stroke-linejoin="round"/>
+                <circle cx="330" cy="26" r="8" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <rect x="352" y="20" width="13" height="13" rx="2.5" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <circle cx="358.5" cy="20" r="2.6" fill="#ffffff" stroke="#5f6368" stroke-width="1.4"/>
+                <line x1="378" y1="16" x2="378" y2="36" stroke="#dadce0" stroke-width="1.4"/>
+                <circle cx="398" cy="26" r="15" fill="#e8f0fe"/>
+                <path d="M398 18 v10 M393 24 l5 5 5 -5 M391 34 h14" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse class="hl" cx="398" cy="26" rx="19" ry="18"/>
+                <rect x="180" y="66" width="226" height="164" rx="12" fill="#000" opacity="0.06"/>
+                <rect x="178" y="64" width="226" height="164" rx="12" fill="#ffffff" stroke="#e8eaed" stroke-width="1"/>
+                <text x="196" y="92" font-size="13" font-weight="700" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">Recent download history</text>
+                <path d="M386 86 l9 9 M395 86 l-9 9" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
+                <image href="assets/img/logo.svg" x="196" y="108" width="30" height="30"/>
+                <text x="234" y="122" font-size="12.5" font-weight="700" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">SemantiNote-win.exe</text>
+                <text x="234" y="138" font-size="11" fill="#5f6368" font-family="Segoe UI,system-ui,sans-serif">just now</text>
+                <text x="196" y="210" font-size="12.5" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">Full download history</text>
+                <path d="M384 202 h9 v9 M393 202 l-10 10" fill="none" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="inst-cap">Open <strong>SemantiNote-win.exe</strong> from your Downloads</p>
           </div>
-
-          <div class="fr-grid">
-            <!-- ===== WINDOWS ===== -->
-            <div class="fr-os">
-              <h4><svg class="os-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.1 10.5 4v7.5H3zM11.5 3.9 21 2.5v9H11.5zM3 12.5h7.5V20L3 18.9zM11.5 12.5H21v9l-9.5-1.4z"/></svg>Windows <span style="color:var(--dim);font-weight:500;font-size:14px;">— if you see “Windows protected your PC”</span></h4>
-              <div class="fr-step">
-                <span class="fr-num">1</span>
-                <div class="fr-txt">Click the small <strong>More info</strong> link (circled below).
-                  <svg class="fr-shot" viewBox="0 0 360 208" role="img" aria-label="Windows SmartScreen dialog with the More info link circled in red">
-                    <rect class="dlg-bg" x="0" y="0" width="360" height="208" rx="10"/>
-                    <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
-                    <text class="dlg-title" x="46" y="56" font-size="16.5">Windows protected your PC</text>
-                    <text class="dlg-text" x="46" y="86" font-size="12">Microsoft Defender SmartScreen</text>
-                    <text class="dlg-text" x="46" y="104" font-size="12">prevented an unrecognized app from</text>
-                    <text class="dlg-text" x="46" y="122" font-size="12">starting. Running this app might put</text>
-                    <text class="dlg-text" x="46" y="140" font-size="12">your PC at risk.</text>
-                    <text class="dlg-link" x="46" y="172" font-size="13" font-weight="600">More info</text>
-                    <ellipse class="hl" cx="80" cy="167" rx="48" ry="15"/>
-                    <path class="hl-arrow" d="M168 164 Q140 150 132 165"/><path class="hl-arrow" d="M132 165 l8 -3 m-8 3 l3 -8"/>
-                    <rect class="dlg-btn" x="248" y="156" width="80" height="28" rx="4"/>
-                    <text class="dlg-btn-txt" x="288" y="174" font-size="12" text-anchor="middle">Don't run</text>
-                  </svg>
-                </div>
-              </div>
-              <div class="fr-step">
-                <span class="fr-num">2</span>
-                <div class="fr-txt">Then click <strong>Run anyway</strong>.
-                  <svg class="fr-shot" viewBox="0 0 360 210" role="img" aria-label="Windows SmartScreen dialog with the Run anyway button circled in red">
-                    <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
-                    <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
-                    <text class="dlg-title" x="46" y="54" font-size="16">Windows protected your PC</text>
-                    <text class="dlg-text" x="46" y="88" font-size="12">App:  SemantiNote-win.exe</text>
-                    <text class="dlg-text" x="46" y="110" font-size="12">Publisher:  Unknown publisher</text>
-                    <rect class="dlg-btn-blue" x="112" y="150" width="112" height="32" rx="5"/>
-                    <text class="dlg-btn-txt-w" x="168" y="171" font-size="13" font-weight="600" text-anchor="middle">Run anyway</text>
-                    <rect class="dlg-btn" x="236" y="150" width="88" height="32" rx="5"/>
-                    <text class="dlg-btn-txt" x="280" y="171" font-size="12" text-anchor="middle">Don't run</text>
-                    <rect class="hl" x="107" y="145" width="122" height="42" rx="8"/>
-                    <path class="hl-arrow" d="M168 204 V190"/><path class="hl-arrow" d="M168 190 l-4 7 m4 -7 l4 7"/>
-                  </svg>
-                </div>
-              </div>
-              <p style="color:var(--dim);font-size:13px;margin:0;">That’s it — SemantiNote opens and never asks again.</p>
+          <div class="inst-step">
+            <div class="inst-num">2</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 210" role="img" aria-label="Windows SmartScreen dialog — click the small More info link">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
+                <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
+                <text class="dlg-title" x="46" y="56" font-size="16.5">Windows protected your PC</text>
+                <text class="dlg-text" x="46" y="86" font-size="12">Microsoft Defender SmartScreen</text>
+                <text class="dlg-text" x="46" y="104" font-size="12">prevented an unrecognized app from</text>
+                <text class="dlg-text" x="46" y="122" font-size="12">starting. Running this app might put</text>
+                <text class="dlg-text" x="46" y="140" font-size="12">your PC at risk.</text>
+                <text class="dlg-link" x="46" y="174" font-size="13" font-weight="600">More info</text>
+                <ellipse class="hl" cx="80" cy="169" rx="46" ry="14"/>
+                <path class="hl-arrow" d="M170 166 Q142 152 134 167"/><path class="hl-arrow" d="M134 167 l8 -3 m-8 3 l3 -8"/>
+                <rect class="dlg-btn" x="248" y="158" width="80" height="28" rx="4"/>
+                <text class="dlg-btn-txt" x="288" y="176" font-size="12" text-anchor="middle">Don't run</text>
+              </svg>
             </div>
-
-            <!-- ===== macOS ===== -->
-            <div class="fr-os">
-              <h4><svg class="os-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.36 12.68c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.62c.64-.78 1.07-1.85.95-2.92-.92.04-2.03.61-2.69 1.38-.59.68-1.1 1.78-.96 2.83 1.02.08 2.07-.52 2.7-1.29z"/></svg>macOS <span style="color:var(--dim);font-weight:500;font-size:14px;">— if you see “Apple could not verify…”</span></h4>
-              <div class="fr-step">
-                <span class="fr-num">1</span>
-                <div class="fr-txt">A box pops up saying it can’t be opened. Just click <strong>Done</strong> (don’t move to Trash).
-                  <svg class="fr-shot" viewBox="0 0 360 210" role="img" aria-label="macOS cannot verify dialog, click Done">
-                    <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
-                    <rect class="dlg-card" x="66" y="14" width="228" height="184" rx="14"/>
-                    <circle cx="180" cy="48" r="18" fill="#fef3c7"/><text x="180" y="56" font-size="20" text-anchor="middle">⚠️</text>
-                    <text class="dlg-title" x="180" y="92" font-size="13" text-anchor="middle">“SemantiNote” Not Opened</text>
-                    <text class="dlg-text" x="180" y="114" font-size="10.5" text-anchor="middle">Apple could not verify</text>
-                    <text class="dlg-text" x="180" y="130" font-size="10.5" text-anchor="middle">“SemantiNote” is free of malware.</text>
-                    <rect class="dlg-btn" x="84" y="156" width="106" height="30" rx="6"/>
-                    <text class="dlg-btn-txt" x="137" y="176" font-size="11" text-anchor="middle">Move to Trash</text>
-                    <rect class="dlg-btn-blue" x="200" y="156" width="64" height="30" rx="6"/>
-                    <text class="dlg-btn-txt-w" x="232" y="176" font-size="12.5" font-weight="600" text-anchor="middle">Done</text>
-                    <rect class="hl" x="195" y="151" width="74" height="40" rx="9"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="fr-step">
-                <span class="fr-num">2</span>
-                <div class="fr-txt">Open <strong>System&nbsp;Settings → Privacy&nbsp;&amp;&nbsp;Security</strong>, scroll down, and click <strong>Open Anyway</strong>.
-                  <svg class="fr-shot" viewBox="0 0 360 196" role="img" aria-label="macOS System Settings Privacy and Security with Open Anyway button circled in red">
-                    <rect class="dlg-bg" x="0" y="0" width="360" height="196" rx="10"/>
-                    <rect class="dlg-card" x="24" y="16" width="312" height="150" rx="8"/>
-                    <text class="dlg-title" x="46" y="50" font-size="13">Security</text>
-                    <text class="dlg-text" x="46" y="84" font-size="11.5">“SemantiNote” was blocked</text>
-                    <text class="dlg-text" x="46" y="102" font-size="11.5">to protect your Mac.</text>
-                    <rect class="dlg-btn-blue" x="196" y="112" width="116" height="32" rx="6"/>
-                    <text class="dlg-btn-txt-w" x="254" y="133" font-size="12.5" font-weight="600" text-anchor="middle">Open Anyway</text>
-                    <rect class="hl" x="191" y="107" width="126" height="42" rx="9"/>
-                    <path class="hl-arrow" d="M254 164 V150"/><path class="hl-arrow" d="M254 150 l-4 7 m4 -7 l4 7"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="fr-step">
-                <span class="fr-num">3</span>
-                <div class="fr-txt">Confirm with your password / Touch&nbsp;ID → SemantiNote opens. It never asks again.</div>
-              </div>
+            <p class="inst-cap">If Windows warns, click the small <strong>More info</strong> link</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">3</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 210" role="img" aria-label="Windows SmartScreen dialog with the Run anyway button circled in red">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
+                <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
+                <text class="dlg-title" x="46" y="54" font-size="16">Windows protected your PC</text>
+                <text class="dlg-text" x="46" y="88" font-size="12">App:  SemantiNote-win.exe</text>
+                <text class="dlg-text" x="46" y="110" font-size="12">Publisher:  Unknown publisher</text>
+                <rect class="dlg-btn-blue" x="112" y="150" width="112" height="32" rx="5"/>
+                <text class="dlg-btn-txt-w" x="168" y="171" font-size="13" font-weight="600" text-anchor="middle">Run anyway</text>
+                <rect class="dlg-btn" x="236" y="150" width="88" height="32" rx="5"/>
+                <text class="dlg-btn-txt" x="280" y="171" font-size="12" text-anchor="middle">Don't run</text>
+                <rect class="hl" x="107" y="145" width="122" height="42" rx="8"/>
+                <path class="hl-arrow" d="M168 204 V190"/><path class="hl-arrow" d="M168 190 l-4 7 m4 -7 l4 7"/>
+              </svg>
             </div>
+            <p class="inst-cap">Then click <strong>Run anyway</strong></p>
           </div>
         </div>
+
+        <!-- ===== macOS ===== -->
+        <div class="inst-grid" data-os="mac" hidden>
+          <div class="inst-step">
+            <div class="inst-num">1</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 420 250" role="img" aria-label="Chrome toolbar — click the download icon at the top-right, then open SemantiNote-mac.dmg">
+                <rect x="0" y="0" width="420" height="250" rx="12" fill="#eceef1"/>
+                <path d="M12 0 h396 a12 12 0 0 1 12 12 v40 h-420 v-40 a12 12 0 0 1 12 -12z" fill="#ffffff"/>
+                <line x1="0" y1="52" x2="420" y2="52" stroke="#dadce0" stroke-width="1"/>
+                <rect x="18" y="15" width="250" height="22" rx="11" fill="#f1f3f4"/>
+                <circle cx="33" cy="26" r="4.5" fill="none" stroke="#9aa0a6" stroke-width="1.4"/>
+                <rect x="46" y="23" width="150" height="6" rx="3" fill="#dadce0"/>
+                <path d="M298 19.5 l2.3 4.7 5.2 .75 -3.75 3.65 .9 5.15 -4.65 -2.45 -4.65 2.45 .9 -5.15 -3.75 -3.65 5.2 -.75z" fill="none" stroke="#5f6368" stroke-width="1.4" stroke-linejoin="round"/>
+                <circle cx="330" cy="26" r="8" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <rect x="352" y="20" width="13" height="13" rx="2.5" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <circle cx="358.5" cy="20" r="2.6" fill="#ffffff" stroke="#5f6368" stroke-width="1.4"/>
+                <line x1="378" y1="16" x2="378" y2="36" stroke="#dadce0" stroke-width="1.4"/>
+                <circle cx="398" cy="26" r="15" fill="#e8f0fe"/>
+                <path d="M398 18 v10 M393 24 l5 5 5 -5 M391 34 h14" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse class="hl" cx="398" cy="26" rx="19" ry="18"/>
+                <rect x="180" y="66" width="226" height="164" rx="12" fill="#000" opacity="0.06"/>
+                <rect x="178" y="64" width="226" height="164" rx="12" fill="#ffffff" stroke="#e8eaed" stroke-width="1"/>
+                <text x="196" y="92" font-size="13" font-weight="700" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">Recent download history</text>
+                <path d="M386 86 l9 9 M395 86 l-9 9" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
+                <image href="assets/img/logo.svg" x="196" y="108" width="30" height="30"/>
+                <text x="234" y="122" font-size="12.5" font-weight="700" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">SemantiNote-mac.dmg</text>
+                <text x="234" y="138" font-size="11" fill="#5f6368" font-family="-apple-system,Segoe UI,system-ui,sans-serif">just now</text>
+                <text x="196" y="210" font-size="12.5" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">Full download history</text>
+                <path d="M384 202 h9 v9 M393 202 l-10 10" fill="none" stroke="#5f6368" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="inst-cap">Open <strong>SemantiNote-mac.dmg</strong> from your Downloads</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">2</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 220" role="img" aria-label="Installer window — drag the SemantiNote icon onto the Applications folder">
+                <rect x="18" y="12" width="324" height="196" rx="14" fill="#f3f1ee" stroke="#d8d5d1" stroke-width="1"/>
+                <path d="M18 26 a14 14 0 0 1 14 -14 h296 a14 14 0 0 1 14 14 v6 h-324z" fill="#e7e4e0"/>
+                <circle cx="40" cy="26" r="5.5" fill="#ff5f57"/>
+                <circle cx="58" cy="26" r="5.5" fill="#febc2e"/>
+                <circle cx="76" cy="26" r="5.5" fill="#28c840"/>
+                <image href="assets/img/logo.svg" x="66" y="72" width="60" height="60"/>
+                <text x="96" y="152" font-size="12.5" font-weight="600" text-anchor="middle" fill="#2b2b2b" font-family="-apple-system,system-ui,sans-serif">SemantiNote</text>
+                <path d="M150 102 h50 M193 93 l11 9 -11 9" fill="none" stroke="#9aa0a6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M232 84 h20 l7 8 h35 a5 5 0 0 1 5 5 v3 h-72z" fill="#5a9bd8"/>
+                <rect x="228" y="94" width="72" height="44" rx="6" fill="#7cb2e8"/>
+                <text x="264" y="152" font-size="12.5" font-weight="600" text-anchor="middle" fill="#2b2b2b" font-family="-apple-system,system-ui,sans-serif">Applications</text>
+              </svg>
+            </div>
+            <p class="inst-cap">Drag <strong>SemantiNote</strong> into your Applications folder</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">3</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 196" role="img" aria-label="macOS Privacy and Security with the Open Anyway button circled in red">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="196" rx="10"/>
+                <rect class="dlg-card" x="24" y="16" width="312" height="150" rx="8"/>
+                <text class="dlg-title" x="46" y="50" font-size="13">Privacy &amp; Security</text>
+                <text class="dlg-text" x="46" y="84" font-size="11.5">“SemantiNote” was blocked</text>
+                <text class="dlg-text" x="46" y="102" font-size="11.5">to protect your Mac.</text>
+                <rect class="dlg-btn-blue" x="196" y="112" width="116" height="32" rx="6"/>
+                <text class="dlg-btn-txt-w" x="254" y="133" font-size="12.5" font-weight="600" text-anchor="middle">Open Anyway</text>
+                <rect class="hl" x="191" y="107" width="126" height="42" rx="9"/>
+                <path class="hl-arrow" d="M254 164 V150"/><path class="hl-arrow" d="M254 150 l-4 7 m4 -7 l4 7"/>
+              </svg>
+            </div>
+            <p class="inst-cap">The first time it’s blocked — open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong></p>
+          </div>
+        </div>
+
+        <p class="inst-safe">The one-time “unrecognized app” warning is normal for brand-new apps — it’s safe, and your notes never leave your device.</p>
+        <p class="dl-more" id="dlMore" hidden><a id="dlMoreLink">‹ Choose a different download</a></p>
       </div>
 
       <div class="dl-meta reveal">
@@ -278,5 +356,54 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    // After a download click, reveal the "download started" panel and scroll to it
+    // so users see the install + first-open steps instead of missing them below the fold.
+    (function () {
+      var started = document.getElementById("dlStarted");
+      var manual = document.getElementById("dlManual");
+      var grids = document.querySelectorAll("#firstrun .inst-grid");
+      var dlMore = document.getElementById("dlMore");
+      var dlMoreLink = document.getElementById("dlMoreLink");
+      var MAC_URL = "https://github.com/MachineDragon/semantinote-web/releases/latest/download/SemantiNote-mac.dmg";
+      var WIN_URL = "https://github.com/MachineDragon/semantinote-web/releases/latest/download/SemantiNote-win.exe";
+      if (!started) { return; }
+
+      // Show only one OS's install cards (the download button the visitor clicks decides which).
+      function showOnly(os) {
+        grids.forEach(function (g) { g.hidden = (g.dataset.os !== os); });
+      }
+
+      // Default the visible steps to the visitor's OS (before any click).
+      var isMacDefault = /Mac|iPhone|iPad|iPod/.test(navigator.platform || "") || /Mac OS X/.test(navigator.userAgent || "");
+      showOnly(isMacDefault ? "mac" : "win");
+      if (manual) { manual.setAttribute("href", isMacDefault ? MAC_URL : WIN_URL); }
+
+      if (dlMoreLink) {
+        dlMoreLink.addEventListener("click", function () {
+          // Leave focus mode → show the whole page again.
+          document.body.classList.remove("post-download");
+          started.hidden = true;
+          if (dlMore) { dlMore.hidden = true; }
+          document.querySelector(".dl-hero").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      document.querySelectorAll('.dl-cards a[href$=".dmg"], .dl-cards a[href$=".exe"]').forEach(function (a) {
+        a.addEventListener("click", function () {
+          var href = a.getAttribute("href") || "";
+          var isWin = /\.exe(\?|#|$)/i.test(href);
+          if (manual) { manual.setAttribute("href", href); }
+          started.hidden = false;
+          if (dlMore) { dlMore.hidden = false; }
+          showOnly(isWin ? "win" : "mac");
+          // Focus mode: hide the marketing so only the steps remain.
+          document.body.classList.add("post-download");
+          // Let the browser kick off the download first, then jump to the top of the guide.
+          setTimeout(function () { window.scrollTo({ top: 0, behavior: "smooth" }); }, 300);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
