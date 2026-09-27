@@ -225,8 +225,8 @@
         var ep = EPISODES[i];
         video.pause();
         video.innerHTML =
-          '<source src="' + BASE + ep.f + '.webm" type="video/webm" />' +
-          '<source src="' + BASE + ep.f + '.mp4" type="video/mp4" />';
+          '<source src="' + BASE + ep.f + '.mp4" type="video/mp4" />' +
+          '<source src="' + BASE + ep.f + '.webm" type="video/webm" />';
         video.setAttribute("poster", BASE + ep.f + ".jpg");
         video.load();
         elNow.textContent = "Episode " + (i + 1) + " of " + EPISODES.length;
