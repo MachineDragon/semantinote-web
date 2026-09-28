@@ -110,7 +110,7 @@
     var prevBtn = showcase.querySelector(".showcase-nav.prev");
     var nextBtn = showcase.querySelector(".showcase-nav.next");
     var idx = 0, timer = null, inview = false;
-    var IMG_MS = 4200, SAFETY_MS = 32000;
+    var IMG_MS = 4200, SAFETY_MS = 45000;
     var vidOf = function (i) { return slides[i] ? slides[i].querySelector("video") : null; };
     var clearTimer = function () { if (timer) { clearTimeout(timer); timer = null; } };
     var render = function () {
@@ -197,6 +197,11 @@
   onClick('a[href*="SemantiNote-win"]', "download_win");
   onClick('a[href*="buy.stripe"]', "click_buy");
 
+  // Which button sent them to the download page (hero, pricing, final, …)?
+  document.querySelectorAll("[data-track]").forEach(function (el) {
+    el.addEventListener("click", function () { track(el.dataset.track); });
+  });
+
   // Download reassurance: briefly show "Downloading… ✓" so the user knows it
   // started (the file downloads without changing the page, which otherwise looks
   // like nothing happened — and made Clarity flag a false "dead click").
@@ -231,4 +236,13 @@
       if ((s.getAttribute("src") || "").indexOf("hero") === -1) { dobs.observe(s); }
     });
   }
+
+  // Homepage demo reel sits in the hero (always seen), so track real interest:
+  // the first time a visitor clicks through the clips.
+  var reelFired = false;
+  document.querySelectorAll(".showcase-nav, .showcase-dot").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!reelFired) { reelFired = true; track("demo_clicked"); }
+    });
+  });
 })();

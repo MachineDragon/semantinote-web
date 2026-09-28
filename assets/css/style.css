@@ -85,7 +85,7 @@ h2.section-title { font-size: clamp(28px, 4vw, 42px); }
   transition: transform 0.18s var(--ease), box-shadow 0.2s var(--ease), background 0.2s, border-color 0.2s;
   white-space: nowrap;
 }
-.btn svg { width: 18px; height: 18px; }
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 10px 30px -8px rgba(107, 95, 196, 0.7); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 38px -10px rgba(107, 95, 196, 0.85); }
 .btn-ghost { background: rgba(255, 255, 255, 0.04); color: var(--text); border-color: var(--border-2); }
@@ -110,12 +110,12 @@ h2.section-title { font-size: clamp(28px, 4vw, 42px); }
 .nav-toggle svg { width: 26px; height: 26px; }
 
 /* ---------------------------------------------------------------- Hero */
-.hero { position: relative; padding: clamp(56px, 9vw, 110px) 0 40px; text-align: center; }
+.hero { position: relative; padding: clamp(48px, 7vw, 92px) 0 40px; text-align: center; }
 .hero h1 { font-size: clamp(38px, 6.4vw, 74px); max-width: 16ch; margin: 0 auto 22px; }
 .hero .lead { max-width: 62ch; margin: 0 auto 32px; }
 .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .hero-note { margin-top: 16px; font-size: 13.5px; color: var(--dim); }
-.hero-shot { margin-top: clamp(40px, 6vw, 72px); }
+.hero-shot { margin-top: clamp(30px, 4vw, 48px); }
 
 /* Window frame around screenshots */
 .frame {
@@ -212,6 +212,7 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .problem-card .p-a strong { color: var(--accent); font-weight: 700; }
 .problem-card .p-a em { color: var(--text); font-style: italic; }
 .problem-card .p-who { font-size: 12px; color: var(--dim); letter-spacing: 0.02em; border-top: 1px solid var(--border); padding-top: 12px; }
+.problem-card .p-a:last-child { margin-bottom: 0; }
 
 /* Privacy banner */
 .privacy {
@@ -246,7 +247,7 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .dl-card .btn { width: 100%; justify-content: center; }
 .dl-soon { font-size: 12.5px; color: var(--dim); margin-top: 12px; }
 .dl-meta { max-width: 780px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.dl-meta div { background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+.dl-meta > div { background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
 .dl-meta .k { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); margin-bottom: 6px; }
 .dl-meta .v { font-weight: 600; }
 .dl-req { max-width: 780px; margin: 40px auto 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
@@ -509,3 +510,29 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .footer-social a:hover { transform: translateY(-2px); border-color: var(--border-2); background: var(--card); }
 .footer-social svg { width: 18px; height: 18px; fill: var(--muted); transition: fill .15s; }
 .footer-social a:hover svg { fill: var(--text); }
+
+/* Pricing: single one-time price, "no monthly fees" emphasized */
+.price-once { font-size: clamp(17px, 2.2vw, 20px); font-weight: 700; color: var(--text); margin: 8px 0 14px; }
+.price-points { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin: 0 0 26px; padding: 0; }
+.price-points li { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 14.5px; font-weight: 600; }
+.price-points svg { width: 17px; height: 17px; color: var(--accent); }
+.price-buy { margin: 14px 0 0; font-size: 14px; }
+.price-buy a { color: var(--accent); font-weight: 600; }
+
+/* Download page: free vs product key, side by side */
+.dl-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; text-align: left; }
+@media (max-width: 620px) { .dl-plans { grid-template-columns: 1fr; } }
+.dl-sysreq { color: var(--dim); font-size: 13px; margin: 26px auto 0; max-width: 70ch; text-align: center; }
+
+/* Features page: quick-jump chips for skimmers */
+.feat-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 26px auto 0; max-width: 900px; }
+.feat-jump a { font-size: 13.5px; font-weight: 600; color: var(--muted); border: 1px solid var(--border); background: var(--card); padding: 7px 14px; border-radius: 999px; transition: color .15s, border-color .15s; }
+.feat-jump a:hover { color: var(--text); border-color: var(--accent); }
+[id] { scroll-margin-top: 84px; }
+.price-callout .btn { max-width: 100%; white-space: normal; text-align: center; }
+@media (max-width: 600px) {
+  .showcase-nav { width: 30px; height: 30px; font-size: 18px; opacity: .75; }
+  .showcase-nav.prev { left: 6px; }
+  .showcase-nav.next { right: 6px; }
+}
+.hero-shot .showcase { max-width: 1040px; }
