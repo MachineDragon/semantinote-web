@@ -7,3 +7,9 @@ wrangler.jsonc
 .assetsignore
 .gitattributes
 .nojekyll
+.DS_Store
+__pycache__/
+*.py
+*.sh
+result-link
+result__a
