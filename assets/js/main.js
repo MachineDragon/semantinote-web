@@ -142,6 +142,23 @@
     if (prevBtn) { prevBtn.addEventListener("click", prev); }
     if (nextBtn) { nextBtn.addEventListener("click", next); }
 
+    // Enlarge: full-screen the reel so the app text is easy to read on small screens.
+    var frame = showcase.querySelector(".showcase-frame");
+    var fsEl = function () { return document.fullscreenElement || document.webkitFullscreenElement; };
+    var toggleFs = function () {
+      if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+      var req = frame.requestFullscreen || frame.webkitRequestFullscreen;
+      if (req) { req.call(frame); return; }
+      // iPhone Safari can only full-screen a <video> itself.
+      var v = vidOf(idx); if (v && v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
+    };
+    if (frame) {
+      frame.addEventListener("click", function (e) {
+        if (e.target.closest(".showcase-nav")) { return; }
+        toggleFs();
+      });
+    }
+
     render();
     // Auto-play whenever the reel is on screen; pause (to save resources) when it
     // scrolls away, and resume from the current clip when it comes back.
