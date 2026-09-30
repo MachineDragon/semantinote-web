@@ -110,7 +110,7 @@
     var prevBtn = showcase.querySelector(".showcase-nav.prev");
     var nextBtn = showcase.querySelector(".showcase-nav.next");
     var idx = 0, timer = null, inview = false;
-    var IMG_MS = 4200, SAFETY_MS = 45000;
+    var IMG_MS = 4200, SAFETY_MS = 45000, END_HOLD_MS = 1500;
     var vidOf = function (i) { return slides[i] ? slides[i].querySelector("video") : null; };
     var clearTimer = function () { if (timer) { clearTimeout(timer); timer = null; } };
     var render = function () {
@@ -136,7 +136,7 @@
     var prev = function () { go(idx - 1); };
     slides.forEach(function (s) {
       var v = s.querySelector("video");
-      if (v) { v.addEventListener("ended", function () { if (inview && slides[idx] === s) { next(); } }); }
+      if (v) { v.addEventListener("ended", function () { if (inview && slides[idx] === s) { clearTimer(); timer = setTimeout(next, END_HOLD_MS); } }); }
     });
     dots.forEach(function (d, j) { d.addEventListener("click", function () { go(j); }); });
     if (prevBtn) { prevBtn.addEventListener("click", prev); }
