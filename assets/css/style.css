@@ -289,6 +289,7 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
      sit under the previous section's heading (e.g. the model-picker shot ending
      up under "Semantic search"). */
   .feat-row .frame { order: 1; }
+  .feat-row .frame { width: 100%; max-width: min(100%, calc((100vh - 150px) * 1.586)); margin-inline: auto; }
 }
 @media (max-width: 940px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -535,4 +536,5 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
   .showcase-nav.prev { left: 6px; }
   .showcase-nav.next { right: 6px; }
 }
-.hero-shot .showcase { max-width: 1040px; }
+/* Fit the whole 16:10 clip + caption/dots under the sticky nav on short laptop screens */
+.hero-shot .showcase { max-width: min(1040px, calc((100vh - 190px) * 1.6)); }
