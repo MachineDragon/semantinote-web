@@ -210,6 +210,9 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 .problem-card .p-q { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.35; margin-bottom: 11px; }
 .problem-card .p-a { font-size: 14.5px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; flex: 1; }
 .problem-card .p-a strong { color: var(--accent); font-weight: 700; }
+.problem-card .p-link { font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; margin-top: auto; }
+.problem-card .p-link:hover { text-decoration: underline; }
+.problems-more { text-align: center; margin-top: 28px; }
 .problem-card .p-a em { color: var(--text); font-style: italic; }
 .problem-card .p-who { font-size: 12px; color: var(--dim); letter-spacing: 0.02em; border-top: 1px solid var(--border); padding-top: 12px; }
 .problem-card .p-a:last-child { margin-bottom: 0; }
@@ -552,3 +555,119 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
 }
 /* Fill the screen height under the sticky nav; the caption/dots can sit just below the fold */
 .hero-shot .showcase { max-width: min(1040px, calc((100vh - 92px) * 1.6)); }
+
+/* Homepage feature sections (Apple-style): a "Free" pill next to free features. */
+.free-tag { display: inline-block; vertical-align: middle; margin-left: 10px; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: #10281c; background: #4ecb8d; border-radius: 999px; padding: 3px 10px; transform: translateY(-3px); }
+#features .feat-row { margin-top: clamp(56px, 8vw, 104px); }
+#features .feat-row-text h2 { font-size: clamp(28px, 3.8vw, 42px); line-height: 1.12; }
+#features .feat-row-text p { font-size: 18px; max-width: 34ch; }
+@media (max-width: 1400px) {
+  /* Homepage features, stacked: Apple-style centered headline + one line, big picture below. */
+  #features .feat-row { gap: 22px; }
+  #features .feat-row-text { text-align: center; max-width: 720px; margin-inline: auto; }
+  #features .feat-row-text p { margin-inline: auto; max-width: 46ch; }
+}
+
+/* =========================================================================
+   Apple-style layer (Oct 2026): black canvas, big tight headlines, lots of
+   space, slim frosted nav, pill buttons, "Learn more ›" links, clean rounded
+   screenshots and soft #1d1d1f tiles. Overrides the rules above.
+   ========================================================================= */
+:root {
+  --bg: #000; --bg-2: #0d0d0e; --bg-3: #161617; --card: #1d1d1f;
+  --border: rgba(255, 255, 255, 0.08); --border-2: rgba(255, 255, 255, 0.14);
+  --text: #f5f5f7; --muted: #a1a1a6; --dim: #6e6e73;
+  --accent: #b3a6ff; --pill: #7c6cf2; --pill-hover: #8d7ff5;
+}
+body {
+  background: #000;
+  font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Inter, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+body::before { opacity: 0.45; } /* just a hint of the brand glow */
+
+/* Type — Apple: semibold, tight, huge */
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.03em; }
+.hero h1 { font-size: clamp(46px, 8.2vw, 96px); line-height: 1.04; max-width: 14ch; margin-bottom: 26px; }
+h2.section-title { font-size: clamp(36px, 5.6vw, 64px); line-height: 1.06; }
+.lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.42; color: var(--muted); font-weight: 400; letter-spacing: -0.005em; }
+.eyebrow { text-transform: none; letter-spacing: -0.01em; font-size: clamp(17px, 1.8vw, 21px); font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+
+/* Nav — slim, frosted, small type */
+.nav { background: rgba(22, 22, 23, 0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.nav-inner { height: 52px; }
+.brand { font-size: 16px; font-weight: 600; gap: 9px; }
+.brand img { width: 24px; height: 24px; }
+.nav-links { gap: 34px; }
+.nav-links a { font-size: 13px; font-weight: 400; color: rgba(245,245,247,0.8); letter-spacing: 0; }
+.nav-links a:hover { color: #fff; }
+.nav-cta .btn { padding: 6px 16px; font-size: 13px; }
+
+/* Buttons — pills, solid accent, no glow, no jumping */
+.btn { border-radius: 980px; font-weight: 500; letter-spacing: -0.01em; box-shadow: none; }
+.btn-primary { background: var(--pill); box-shadow: none; }
+.btn-primary:hover { background: var(--pill-hover); transform: none; box-shadow: none; }
+.btn-ghost { background: transparent; color: var(--accent); border-color: var(--accent); }
+.btn-ghost:hover { background: rgba(179,166,255,0.1); transform: none; }
+.btn-lg { padding: 14px 28px; font-size: 17px; border-radius: 980px; }
+
+/* Space — Apple lets everything breathe */
+section { padding: clamp(80px, 11vw, 150px) 0; }
+.hero { padding: clamp(70px, 10vw, 130px) 0 50px; }
+.hero .lead { max-width: 40ch; margin-bottom: 36px; }
+.hero-note { font-size: 14px; }
+.section-head { margin-bottom: clamp(44px, 6vw, 76px); }
+
+/* Screenshots — clean rounded image, no fake window chrome */
+.frame { border-radius: 22px; border: 1px solid var(--border); box-shadow: 0 30px 80px -40px rgba(0,0,0,0.9); background: #0d0d0e; }
+.frame-bar { display: none; }
+.showcase-frame { border-radius: 24px; border-color: var(--border); box-shadow: 0 40px 100px -50px rgba(124,108,242,0.35); background: #0d0d0e; }
+.showcase-caption { font-size: 17px; color: var(--muted); font-weight: 400; margin-top: 20px; }
+
+/* Trust strip — quiet gray line, no box */
+.trust { background: transparent; border-color: rgba(255,255,255,0.06); }
+.trust-item { font-size: 14px; font-weight: 400; color: var(--muted); }
+
+/* Problem cards → Apple highlight tiles */
+.problem-grid { gap: 20px; }
+.problem-card { background: var(--card); border: none; border-radius: 28px; padding: 34px 32px 30px; }
+.problem-card .p-q { font-size: clamp(21px, 2vw, 24px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 14px; }
+.problem-card .p-a { font-size: 17px; line-height: 1.47; color: var(--muted); }
+.problem-card .p-a strong { color: var(--text); font-weight: 600; }
+.problem-card .p-link { font-size: 17px; font-weight: 400; color: var(--accent); }
+
+/* Homepage feature sections — one per screen, centered, big */
+#features .feat-row { margin-top: clamp(90px, 12vw, 160px); }
+#features .feat-row-text h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1.05; letter-spacing: -0.035em; margin-bottom: 18px; }
+#features .feat-row-text p { font-size: clamp(19px, 2.1vw, 24px); line-height: 1.4; color: var(--muted); }
+#features .feat-row-text .eyebrow { font-size: clamp(17px, 1.8vw, 21px); }
+.free-tag { font-size: 14px; font-weight: 600; letter-spacing: 0; padding: 4px 12px; transform: translateY(-6px); }
+.more-link { display: inline-block; font-size: 19px; color: var(--accent); }
+.more-link:hover { text-decoration: underline; }
+
+/* "All features" page small cards */
+.feat-card { background: var(--card); border: none; border-radius: 24px; }
+.feat-card:hover { transform: none; box-shadow: none; }
+.feat-row-text h2 { letter-spacing: -0.03em; }
+
+/* Pricing & FAQ tiles */
+.price-callout { background: var(--card); border: none; border-radius: 30px; box-shadow: none; }
+.price-big { font-weight: 600; letter-spacing: -0.035em; }
+.faq-item { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.1); border-radius: 0; }
+.faq-item[open] { border-color: rgba(255,255,255,0.1); }
+
+/* Download page tiles */
+.dl-card, .dl-req, .dl-meta > div { background: var(--card); border: none; border-radius: 24px; }
+.dl-card.recommended { box-shadow: 0 0 0 2px var(--pill); }
+
+/* Footer — small gray type on a dark band */
+.footer { background: #161617; border-top: none; margin-top: 0; padding: 44px 0 30px; }
+.footer-tag, .footer-col a { font-size: 12.5px; color: #a1a1a6; }
+.footer-col h4 { font-size: 12px; text-transform: none; letter-spacing: 0; color: #e8e8ed; font-weight: 600; }
+.footer-bottom { font-size: 12px; border-top-color: rgba(255,255,255,0.08); }
+
+/* Final call to action — big and simple */
+.cta-final h2 { font-size: clamp(40px, 6.4vw, 80px); letter-spacing: -0.035em; line-height: 1.05; }
+
+/* Calmer scroll-in, like Apple's */
+.js .reveal { transform: translateY(32px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }

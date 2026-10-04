@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Features — SemantiNote</title>
-  <meta name="description" content="Semantic search, chat with your notes, AI summaries, web-search fact-checking, voice dictation, meeting capture, an encrypted secret safe and more — all running privately on your device." />
+  <title>All features — SemantiNote</title>
+  <meta name="description" content="Semantic search, chat with your notes, AI summaries, web-search fact-checking, voice dictation, meeting capture, PDF signing, calendar reminders, an encrypted secret safe and more — all running privately on your device." />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261004a" />
 </head>
 <body>
 
@@ -33,9 +33,9 @@
   <!-- ===================== HEADER ===================== -->
   <section class="hero" style="padding-bottom:20px;">
     <div class="wrap">
-      <span class="eyebrow reveal">Features</span>
+      <span class="eyebrow reveal">All features · the details</span>
       <h1 class="reveal" style="font-size:clamp(34px,5vw,58px);">Everything you need, <span class="grad-text">nothing sent away</span></h1>
-      <p class="lead reveal">A full notebook, a private AI, voice and meeting capture, and a vault for your secrets — working together on your device, offline.</p>
+      <p class="lead reveal">A full notebook, a private AI, voice and meeting capture, PDF signing, a calendar and a vault for your secrets — working together on your device, offline.</p>
       <div class="hero-cta reveal">
         <a href="download.html" class="btn btn-primary btn-lg" data-track="cta_features_hero">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
@@ -50,6 +50,8 @@
         <a href="#voice">Voice</a>
         <a href="#meetings">Meetings</a>
         <a href="#secret-safe">Secret safe</a>
+        <a href="#sign-pdf">Sign PDFs</a>
+        <a href="#calendar">Calendar</a>
       </nav>
     </div>
   </section>
@@ -106,6 +108,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>One-click summaries of any note</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pull out action items and decisions</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reorganize messy notes into a clean outline</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Turn any note or spreadsheet into a polished PDF — tables included</li>
           </ul>
         </div>
         <div class="frame">
@@ -180,16 +183,59 @@
         <div class="feat-row-text">
           <span class="eyebrow">Keep it locked</span>
           <h2>Encrypted secret safe</h2>
-          <p>A built-in vault for the things you shouldn't paste into a plain note — API keys, passwords, license codes. Everything's encrypted on your machine using your operating system's secure keychain, searchable by name, and revealed only when you ask.</p>
+          <p>A built-in vault for the things you shouldn't paste into a plain note — logins, API keys, license codes. Save a name, username and password together; everything's encrypted on your machine with your operating system's secure keychain, and revealed only when you ask. <strong>Free for everyone.</strong></p>
           <ul class="feat-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Encrypted with the OS keychain (macOS &amp; Windows)</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Search by name, reveal or copy in one click</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Name, username &amp; password — reveal or copy each in one click</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Optional PIN lock on top of the encryption</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kept out of your notes — never indexed or sent to AI</li>
           </ul>
         </div>
         <div class="frame">
           <div class="frame-bar"><i></i><i></i><i></i><span>Secret Safe</span></div>
           <img class="shot" src="assets/img/shots/secrets.png" data-clip="assets/img/shots/secrets.mp4" alt="The encrypted Secret Safe in SemantiNote" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Sign & fill PDFs -->
+    <section id="sign-pdf" style="padding-top:0;">
+      <div class="feat-row reveal">
+        <div class="feat-row-text">
+          <span class="eyebrow">Free for everyone</span>
+          <h2>Sign &amp; fill in PDFs</h2>
+          <p>Someone sends you a contract or a form? Open it in SemantiNote, add your signature, type the date or any text, fill in the form's boxes — and save. No printing, scanning, or extra app.</p>
+          <ul class="feat-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Draw your signature, or type it in a script, handwritten or classic style</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Add text anywhere — pick the size, color or a highlight</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fill in a PDF's own form fields, checkboxes and dropdowns</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Save a copy or save over the original — opens anywhere</li>
+          </ul>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Sign a PDF</span></div>
+          <img class="shot" src="assets/img/shots/sign.png" alt="Signing a contract PDF in SemantiNote" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendar & reminders -->
+    <section id="calendar" style="padding-top:0;">
+      <div class="feat-row reveal">
+        <div class="feat-row-text">
+          <span class="eyebrow">Free for everyone</span>
+          <h2>Calendar &amp; reminders</h2>
+          <p>A simple calendar built right in. Add a reminder for an appointment, a bill or a birthday — it pops up with the sound you pick, even when SemantiNote is minimized. Missed one while the app was closed? You'll see it next time you open it.</p>
+          <ul class="feat-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>One-time or repeating reminders (every weekday, every Monday…)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Snooze for 10 minutes, an hour, or until tomorrow</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Month, year and "next 7 days" views</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Choose a sound: chime, bell, alarm, gentle or silent</li>
+          </ul>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Calendar</span></div>
+          <img class="shot" src="assets/img/shots/calendar.png" alt="SemantiNote's calendar with reminders" />
         </div>
       </div>
     </section>
@@ -235,6 +281,21 @@
           <h3>Recent &amp; last edited</h3>
           <p>Jump straight back to what you just opened or changed — every note shows its date.</p>
         </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+          <h3>Works with Excel</h3>
+          <p>Open and edit CSV spreadsheets in a familiar grid — accents, € signs and Excel's formats are kept exactly, so they open right back in Excel.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg></div>
+          <h3>Keyboard shortcuts</h3>
+          <p>Browser-style shortcuts on Mac and Windows — switch tabs with Ctrl+Tab, jump with ⌘1–9, reopen a closed tab with ⌘⇧T.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>Light on your computer</h3>
+          <p>Nothing runs when SemantiNote is closed, the AI frees its memory when idle, and you pick how much memory it can use.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -269,7 +330,8 @@
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Product</h4>
-          <a href="features.html">Features</a>
+          <a href="index.html#features">Features</a>
+          <a href="features.html">All features</a>
           <a href="episodes.html">Episodes</a>
           <a href="download.html">Download</a>
         </div>

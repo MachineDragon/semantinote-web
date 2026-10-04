@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SemantiNote — Private AI notes that live on your machine</title>
-  <meta name="description" content="Private AI notes app for students and professionals. Find any note by meaning, record lectures and meetings into searchable notes, and chat with a local AI — 100% on your computer. Free to start, $9.99 once, no subscription." />
+  <meta name="description" content="Private AI notes app for students and professionals. Find any note by meaning, record lectures and meetings, sign PDFs, set reminders, and chat with a local AI — 100% on your computer. Free to start, $9.99 once, no subscription." />
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261004a" />
   <meta property="og:title" content="SemantiNote — Private AI notes that live on your machine" />
   <meta property="og:description" content="A local, open-source AI runs 100% on your computer — so your notes, meeting recordings, AI chats and secrets never touch the cloud. Search by meaning, chat with your notes, record meetings, keep passwords encrypted. No account, no monthly subscription." />
   <meta property="og:type" content="website" />
@@ -27,7 +27,7 @@
     <div class="wrap nav-inner">
       <a href="index.html" class="brand"><img src="assets/img/logo.svg" alt="" />SemantiNote</a>
       <nav class="nav-links">
-        <a href="features.html">Features</a>
+        <a href="index.html#features">Features</a>
         <a href="episodes.html">Episodes</a>
         <a href="index.html#pricing">Pricing</a>
         <a href="index.html#faq">FAQ</a>
@@ -47,13 +47,13 @@
     <div class="wrap">
       <span class="eyebrow reveal">The private AI notebook for <span style="white-space:nowrap">Mac &amp; Windows</span></span>
       <h1 class="reveal">Your notes, your AI, <span class="grad-text" style="white-space:nowrap">your machine.</span></h1>
-      <p class="lead reveal">Find any note just by describing it, chat with your PDFs, and record meetings into notes — with AI that runs 100% on your computer.</p>
+      <p class="lead reveal">Find any note by describing it. Chat with your PDFs. Record your meetings. All with AI that runs 100% on your computer.</p>
       <div class="hero-cta reveal">
         <a href="download.html" class="btn btn-primary btn-lg" data-track="cta_hero">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
           Download free
         </a>
-        <a href="features.html" class="btn btn-ghost btn-lg" data-track="cta_features">See all features</a>
+        <a href="#features" class="btn btn-ghost btn-lg" data-track="cta_features">See what it does</a>
       </div>
       <p class="hero-note reveal">No account · Free to start, then <span class="price-was">$25</span> $9.99 once</p>
 
@@ -69,6 +69,9 @@
           <div class="showcase-slide" data-caption="Ask about a PDF — the AI reads it and answers on the spot">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/pdf.png"><source src="assets/img/shots/pdf.mp4" type="video/mp4" /></video>
           </div>
+          <div class="showcase-slide" data-caption="Sign any PDF — draw or type your signature, add text, fill in forms (free)">
+            <img class="showcase-media" src="assets/img/shots/sign.png" alt="Signing a PDF contract in SemantiNote" loading="lazy" />
+          </div>
           <div class="showcase-slide" data-caption="Ask about a spreadsheet — then have the AI edit it for you">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/csv.png"><source src="assets/img/shots/csv.mp4" type="video/mp4" /></video>
           </div>
@@ -80,6 +83,9 @@
           </div>
           <div class="showcase-slide" data-caption="An encrypted Secret Safe — save a password once, reveal or copy it in one click">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/secrets.png"><source src="assets/img/shots/secrets.mp4" type="video/mp4" /></video>
+          </div>
+          <div class="showcase-slide" data-caption="Calendar &amp; reminders — pop-ups with a sound, snooze in one click (free)">
+            <img class="showcase-media" src="assets/img/shots/calendar.png" alt="SemantiNote calendar with reminders" loading="lazy" />
           </div>
           <div class="showcase-slide" data-caption="Dictate — just talk and it types into your note">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/voice.png"><source src="assets/img/shots/voice.mp4" type="video/mp4" /></video>
@@ -105,10 +111,12 @@
           <button class="showcase-dot active" aria-label="Semantic search"></button>
           <button class="showcase-dot" aria-label="Chat with your notes"></button>
           <button class="showcase-dot" aria-label="Ask about a PDF"></button>
+          <button class="showcase-dot" aria-label="Sign a PDF"></button>
           <button class="showcase-dot" aria-label="Ask about and edit a spreadsheet"></button>
           <button class="showcase-dot" aria-label="Organize a messy note"></button>
           <button class="showcase-dot" aria-label="Agentic web to note"></button>
           <button class="showcase-dot" aria-label="Secret Safe"></button>
+          <button class="showcase-dot" aria-label="Calendar and reminders"></button>
           <button class="showcase-dot" aria-label="Voice dictation"></button>
           <button class="showcase-dot" aria-label="Meeting capture"></button>
           <button class="showcase-dot" aria-label="Lecture capture"></button>
@@ -140,27 +148,139 @@
         <div class="problem-card">
           <div class="p-q">Can't find the note you need?</div>
           <div class="p-a"><strong>Search by meaning.</strong> Describe it — <em>"the pricing idea from the client call"</em> — and it finds it, even without the exact words.</div>
+          <a class="p-link" href="#f-search">Learn more ›</a>
         </div>
         <div class="problem-card">
           <div class="p-q">Can't keep up in class or meetings?</div>
           <div class="p-a"><strong>Just hit record.</strong> Every word of your lecture or Zoom / Teams call becomes a searchable note.</div>
+          <a class="p-link" href="#f-meetings">Learn more ›</a>
         </div>
         <div class="problem-card">
           <div class="p-q">Buried in PDFs and spreadsheets?</div>
           <div class="p-a"><strong>Just ask.</strong> Get instant summaries and answers — it can even edit your spreadsheets for you.</div>
+          <a class="p-link" href="#f-chat">Learn more ›</a>
         </div>
         <div class="problem-card">
           <div class="p-q">Worried where your notes end up?</div>
           <div class="p-a"><strong>They never leave your computer.</strong> No cloud, no account — nothing uploaded, ever.</div>
+          <a class="p-link" href="privacy.html">How it stays private ›</a>
         </div>
         <div class="problem-card">
           <div class="p-q">Always forgetting passwords?</div>
           <div class="p-a"><strong>Keep them in an encrypted safe.</strong> Find any login in seconds — locked so tight even the AI can't read it.</div>
+          <a class="p-link" href="#f-safe">Learn more ›</a>
+        </div>
+        <div class="problem-card">
+          <div class="p-q">Someone sent you a PDF to sign?</div>
+          <div class="p-a"><strong>Sign it right there.</strong> Draw or type your signature, add the date, fill in the form — then save. Free, no printer needed.</div>
+          <a class="p-link" href="#f-sign">Learn more ›</a>
+        </div>
+        <div class="problem-card">
+          <div class="p-q">Forgetting appointments and to-dos?</div>
+          <div class="p-a"><strong>Set a reminder.</strong> A built-in calendar pops up a reminder with a sound — snooze it for 10 minutes or until tomorrow. Free.</div>
+          <a class="p-link" href="#f-calendar">Learn more ›</a>
+        </div>
+        <div class="problem-card">
+          <div class="p-q">Need a clean report, fast?</div>
+          <div class="p-a"><strong>Ask the AI for a PDF.</strong> Turn any note or spreadsheet into a polished, ready-to-share PDF — tables and all.</div>
+          <a class="p-link" href="#f-chat">Learn more ›</a>
         </div>
         <div class="problem-card">
           <div class="p-q">Tired of paying monthly for AI?</div>
           <div class="p-a"><strong>Pay once, use it forever.</strong> Unlimited AI for $9.99 — no subscription, no per-message fees.</div>
+          <a class="p-link" href="#pricing">See pricing ›</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== FEATURES (Apple-style: headline, one line, picture) ===================== -->
+  <section id="features" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What it does</span>
+        <h2 class="section-title">One app. Everything private.</h2>
+      </div>
+      <div class="feat-row reveal" id="f-search">
+        <div class="feat-row-text">
+          <span class="eyebrow">Find anything</span>
+          <h2>Search by meaning.</h2>
+          <p>Describe what you remember — “the pricing idea from the client call” — and SemantiNote finds it, even without the exact words.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Search</span></div>
+          <img class="shot" src="assets/img/shots/search.png" data-clip="assets/img/shots/search.mp4" alt="Searching notes by meaning in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reverse reveal" id="f-chat">
+        <div class="feat-row-text">
+          <span class="eyebrow">Ask your notes</span>
+          <h2>Chat with your notes, PDFs &amp; spreadsheets.</h2>
+          <p>Get real answers from your own files — summaries, action items, a clean outline, or a polished PDF report.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Chat</span></div>
+          <img class="shot" src="assets/img/shots/chat.png" data-clip="assets/img/shots/chat.mp4" alt="Chatting with notes in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reveal" id="f-meetings">
+        <div class="feat-row-text">
+          <span class="eyebrow">Never miss a word</span>
+          <h2>Record calls &amp; lectures.</h2>
+          <p>Zoom, Teams, any call or lecture — every word becomes a note you can search and ask about.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Meeting</span></div>
+          <img class="shot" src="assets/img/shots/meeting.png" data-clip="assets/img/shots/meeting.mp4" alt="Recording a call into a note in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reverse reveal" id="f-voice">
+        <div class="feat-row-text">
+          <span class="eyebrow">Just talk</span>
+          <h2>Dictate instead of typing.</h2>
+          <p>Press the mic and speak — your words appear in the note, transcribed on your own computer.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Dictation</span></div>
+          <img class="shot" src="assets/img/shots/voice.png" data-clip="assets/img/shots/voice.mp4" alt="Voice dictation in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reveal" id="f-sign">
+        <div class="feat-row-text">
+          <span class="eyebrow">No printer needed</span>
+          <h2>Sign any PDF. <span class="free-tag">Free</span></h2>
+          <p>Draw or type your signature, add the date, fill in the form — then save. Done in seconds.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Sign a PDF</span></div>
+          <img class="shot" src="assets/img/shots/sign.png" alt="Signing a contract PDF in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reverse reveal" id="f-calendar">
+        <div class="feat-row-text">
+          <span class="eyebrow">Stay on top of it</span>
+          <h2>Reminders that actually remind you. <span class="free-tag">Free</span></h2>
+          <p>A built-in calendar pops up your reminders with a sound — snooze for 10 minutes or until tomorrow.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Calendar</span></div>
+          <img class="shot" src="assets/img/shots/calendar.png" alt="SemantiNote calendar with reminders" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reveal" id="f-safe">
+        <div class="feat-row-text">
+          <span class="eyebrow">Locked tight</span>
+          <h2>Your passwords, encrypted. <span class="free-tag">Free</span></h2>
+          <p>Logins, keys and codes in an encrypted safe — reveal or copy in one click, never seen by the AI.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Secret Safe</span></div>
+          <img class="shot" src="assets/img/shots/secrets.png" data-clip="assets/img/shots/secrets.mp4" alt="The encrypted Secret Safe in SemantiNote" loading="lazy" />
+        </div>
+      </div>
+      <div class="problems-more reveal">
+        <a href="features.html" class="more-link" data-track="cta_all_features">See all features in detail ›</a>
       </div>
     </div>
   </section>
@@ -172,7 +292,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">Pay once. Own it.</span>
         <h2 class="section-title">Try it free. Pay once if you love it.</h2>
-        <p class="lead">Notebook free forever · all AI free for 14 days · no card needed</p>
+        <p class="lead">Notebook, PDF signing, calendar &amp; Secret Safe free forever · AI free for 14 days · no card needed</p>
       </div>
       <div class="price-callout reveal">
         <div class="price-sale-tag">🎉 On sale</div>
@@ -187,7 +307,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
           Download free — try it 14 days
         </a>
-        <p class="price-buy"><a href="https://buy.stripe.com/7sYeVf7XI40XaaF0c97ok00" target="_blank" rel="noreferrer">Already love it? Get your product key →</a></p>
+        <p class="price-buy"><a href="https://buy.stripe.com/7sYeVf7XI40XaaF0c97ok00" target="_blank" rel="noreferrer">Already love it? Get your product key ›</a></p>
         <p class="price-guarantee">💯 <strong>100% money-back guarantee.</strong> Not happy? Full refund, no hassle.</p>
       </div>
     </div>
@@ -203,7 +323,7 @@
       <div class="faq reveal">
         <details class="faq-item">
           <summary>Is it really free?</summary>
-          <p>Yes — the notebook, dictation and keyword search are <strong>free forever</strong>. Every AI feature is free for <strong>14 days</strong>; after that it's one payment of $9.99. Never a subscription.</p>
+          <p>Yes — the notebook, dictation, keyword search, <strong>PDF signing &amp; form filling</strong>, the <strong>calendar &amp; reminders</strong> and the <strong>Secret Safe</strong> are <strong>free forever</strong>. The AI (chat, summaries, search by meaning, AI-made PDFs) and call &amp; lecture recording are free for <strong>14 days</strong>; after that it's one payment of $9.99 for a product key. Never a subscription.</p>
         </details>
         <details class="faq-item">
           <summary>Is my data really private?</summary>
@@ -255,7 +375,8 @@
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Product</h4>
-          <a href="features.html">Features</a>
+          <a href="index.html#features">Features</a>
+          <a href="features.html">All features</a>
           <a href="episodes.html">Episodes</a>
           <a href="download.html">Download</a>
         </div>
