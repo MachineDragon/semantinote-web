@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About SemantiNote — notes that know what you mean</title>
+  <meta name="description" content="Where the name SemantiNote comes from (Greek sēmantikós, &quot;having meaning&quot;), how its AI understands what your notes mean, and why it runs entirely on your own computer." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261004a" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand"><img src="assets/img/logo.svg" alt="" />SemantiNote</a>
+      <nav class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="episodes.html">Episodes</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="about.html" class="active">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      <div class="nav-cta"><a href="download.html" class="btn btn-primary">Download</a></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <style>
+    /* About page */
+    .ab-wrap { max-width: 860px; margin: 0 auto; }
+    .ab-section { padding: clamp(56px, 8vw, 96px) 0 0; }
+    .ab-section h2 { font-size: clamp(28px, 4vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 18px; }
+    .ab-section p { color: var(--muted); font-size: clamp(16px, 1.6vw, 18.5px); line-height: 1.65; margin-bottom: 16px; }
+    .ab-section p strong { color: var(--text); font-weight: 600; }
+    .ab-word { margin: 36px auto 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(26px, 4vw, 44px); text-align: center; }
+    .ab-greek { font-size: clamp(38px, 7vw, 68px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+    .ab-translit { color: var(--accent); font-size: clamp(18px, 2.2vw, 22px); font-style: italic; margin-top: 8px; }
+    .ab-def { color: var(--muted); font-size: clamp(16px, 1.8vw, 19px); margin-top: 10px; }
+    .ab-chain { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 14px; margin-top: 28px; font-size: 15px; color: var(--muted); }
+    .ab-chain b { color: var(--text); font-weight: 600; }
+    .ab-chain .ab-arrow { color: var(--dim); }
+    .ab-equation { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; font-size: clamp(18px, 2.4vw, 24px); font-weight: 600; }
+    .ab-chip { background: var(--bg-3); border: 1px solid var(--border-2); border-radius: 999px; padding: 8px 18px; }
+    .ab-op { color: var(--dim); font-weight: 400; }
+    .ab-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .ab-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .ab-card h3 { font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .ab-card .ab-q { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; background: var(--bg-3); border-radius: 10px; padding: 10px 12px; color: var(--text); }
+    .ab-card .ab-r { margin-top: 12px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .ab-card.good { border-color: rgba(169, 155, 230, 0.45); }
+    .ab-card .tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+    .ab-card .tag.no { background: rgba(255,255,255,0.06); color: var(--dim); }
+    .ab-card .tag.yes { background: rgba(169,155,230,0.16); color: var(--accent); }
+    .ab-points { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .ab-point { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    .ab-point svg { width: 26px; height: 26px; color: var(--accent); margin-bottom: 12px; }
+    .ab-point h3 { font-size: 17px; margin-bottom: 6px; }
+    .ab-point p { font-size: 15px; line-height: 1.55; margin: 0; }
+    .ab-quote { margin-top: 30px; padding-left: 20px; border-left: 3px solid var(--purple-2); font-size: clamp(19px, 2.4vw, 25px); line-height: 1.4; color: var(--text); font-weight: 500; }
+    .ab-cta { text-align: center; padding: clamp(64px, 9vw, 110px) 0 clamp(56px, 8vw, 90px); }
+    .ab-cta .hero-cta { justify-content: center; margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 680px) { .ab-compare, .ab-points { grid-template-columns: 1fr; } }
+  </style>
+
+  <!-- HERO -->
+  <section class="dl-hero">
+    <div class="wrap ab-wrap">
+      <span class="eyebrow reveal">About SemantiNote</span>
+      <h1 class="reveal" style="font-size:clamp(36px,6vw,68px);">Notes that know <span class="grad-text">what you mean.</span></h1>
+      <p class="lead reveal" style="max-width:52ch;margin:16px auto 0;">SemantiNote is a notebook with an AI that understands the <em>meaning</em> of what you write — and it does all of it on your own computer, where your notes stay yours.</p>
+    </div>
+  </section>
+
+  <!-- THE NAME -->
+  <section class="ab-section">
+    <div class="wrap ab-wrap">
+      <span class="eyebrow reveal">Where the name comes from</span>
+      <h2 class="reveal">Semanti + Note.</h2>
+      <p class="reveal">The first half comes from Ancient Greek. <strong>Sēmantikós</strong> means “having meaning” or “significant.” It grew out of <strong>sêma</strong>, “a sign,” the idea that marks and words point to something beyond themselves. It’s the same root that gives English the word <strong>semantic</strong>: to do with meaning.</p>
+      <div class="ab-word reveal">
+        <div class="ab-greek" lang="grc">σημαντικός</div>
+        <div class="ab-translit">sēmantikós</div>
+        <div class="ab-def">“having meaning”</div>
+        <div class="ab-chain" aria-label="How the word evolved">
+          <span><b lang="grc">σῆμα</b> sêma · a sign</span><span class="ab-arrow">→</span>
+          <span><b lang="grc">σημαίνω</b> sēmaínō · to signify</span><span class="ab-arrow">→</span>
+          <span><b lang="grc">σημαντικός</b> sēmantikós · having meaning</span><span class="ab-arrow">→</span>
+          <span><b>semantic</b> · about meaning</span>
+        </div>
+        <div class="ab-equation" aria-label="Semantic plus note equals SemantiNote">
+          <span class="ab-chip">Semantic</span><span class="ab-op">+</span><span class="ab-chip">Note</span><span class="ab-op">=</span><span class="ab-chip" style="border-color:rgba(169,155,230,0.5);"><span class="grad-text" style="font-weight:700;">SemantiNote</span></span>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:28px;">Put simply, a SemantiNote is a <strong>meaning-based note</strong>: a note your AI understands by what it’s about, not just by the letters in it.</p>
+    </div>
+  </section>
+
+  <!-- WHAT IT MEANS IN PRACTICE -->
+  <section class="ab-section">
+    <div class="wrap ab-wrap">
+      <span class="eyebrow reveal">What that means in practice</span>
+      <h2 class="reveal">Search for an idea, not the exact words.</h2>
+      <p class="reveal">Most apps search by matching letters. If you don’t remember the exact words you used, you don’t find the note. SemantiNote looks at the <strong>underlying concept</strong>. Each note is turned into a kind of fingerprint of its meaning, so notes about the same idea sit close together even when they share no words at all.</p>
+      <div class="ab-compare reveal">
+        <div class="ab-card">
+          <h3>Keyword search <span class="tag no">matches letters</span></h3>
+          <div class="ab-q">how much do I pay to insure my car</div>
+          <div class="ab-r">No results. Your note never used the words “insure” or “pay.”</div>
+        </div>
+        <div class="ab-card good">
+          <h3>SemantiNote <span class="tag yes">matches meaning</span></h3>
+          <div class="ab-q">how much do I pay to insure my car</div>
+          <div class="ab-r">Finds <strong style="color:var(--text);">“Geico renewal: $642 every 6 months”</strong>, because it’s about the same thing.</div>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:26px;">Because your notes carry meaning the AI can understand, you can also <strong>ask them questions</strong> (“what did we decide about the launch date?”), get summaries of long meetings and PDFs, and turn rough notes into clean ones.</p>
+    </div>
+  </section>
+
+  <!-- WHY WE BUILT IT -->
+  <section class="ab-section">
+    <div class="wrap ab-wrap">
+      <span class="eyebrow reveal">Why we built it</span>
+      <h2 class="reveal">Powerful AI, without giving up your privacy.</h2>
+      <p class="reveal">Notes are some of the most personal things people write: journals, health notes, client meetings, ideas, passwords. Most AI tools work by uploading that writing to a company’s servers, where it can be stored, read and used to train the next model.</p>
+      <p class="reveal">We wanted the power of modern AI <strong>without that trade</strong>. So SemantiNote runs <strong>open-source large language models</strong>, including Qwen for chat and Nomic Embed for search by meaning, <strong>fully on your own computer</strong>. The AI comes to your notes. Your notes never go to the AI company.</p>
+      <div class="ab-points">
+        <div class="ab-point reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+          <h3>Runs on your computer</h3>
+          <p>The AI runs locally on your Mac or PC. Your notes aren’t sent to us or to anyone else.</p>
+        </div>
+        <div class="ab-point reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3>Never used for training</h3>
+          <p>No big company trains its models on your writing, because your writing never reaches one.</p>
+        </div>
+        <div class="ab-point reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><path d="M3 3l18 18"/></svg>
+          <h3>Works offline</h3>
+          <p>After a one-time model download during setup, the AI works without the internet.</p>
+        </div>
+        <div class="ab-point reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+          <h3>Your files, not ours</h3>
+          <p>No account and no cloud lock-in. Notes are ordinary files on your drive that you can back up, move or open anywhere.</p>
+        </div>
+      </div>
+      <p class="ab-quote reveal">We believe your thoughts should stay yours. SemantiNote gives you the help of AI while keeping your privacy.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ab-cta">
+    <div class="wrap ab-wrap">
+      <h2 class="reveal" style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.02em;">Give your notes meaning.</h2>
+      <p class="lead reveal" style="margin-top:12px;">Free to download for Mac and Windows.</p>
+      <div class="hero-cta reveal">
+        <a href="download.html" class="btn btn-primary" data-track="cta_about">Download SemantiNote</a>
+        <a href="features.html" class="btn btn-ghost">See all features</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand"><img src="assets/img/logo.svg" alt="" style="width:30px;height:30px;" />SemantiNote</div>
+        <p class="footer-tag">Private AI notes that live on your machine. Search, chat, transcribe and organize — all offline.</p>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@SemantiNote" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://x.com/SemantiNote" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/semantinote/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://www.tiktok.com/@semantinote" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="index.html#features">Features</a>
+          <a href="features.html">All features</a>
+          <a href="about.html">About SemantiNote</a>
+          <a href="episodes.html">Episodes</a>
+          <a href="download.html">Download</a>
+          <a href="help.html">Help &amp; Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <a href="index.html#privacy">Local-first</a>
+          <a href="features.html#secret-safe">Secret safe</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="refund.html">Refund Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 SemantiNote. All rights reserved.</span>
+      <span>Made for people who like to keep their thinking private.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
