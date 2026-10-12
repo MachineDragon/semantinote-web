@@ -291,7 +291,8 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
   /* Keep each screenshot BELOW its own heading when stacked, so an image can't
      sit under the previous section's heading (e.g. the model-picker shot ending
      up under "Semantic search"). */
-  .feat-row .frame { order: 1; }
+  .feat-row .frame, .feat-row .qa-figure { order: 1; }
+  .feat-row .qa-figure { max-width: 680px; margin-inline: auto; }
   .feat-row .frame { width: 100%; max-width: min(100%, calc((100vh - 150px) * 1.586)); margin-inline: auto; }
 }
 @media (max-width: 940px) {
@@ -308,7 +309,8 @@ section { padding: clamp(64px, 9vw, 110px) 0; }
   }
   .nav[data-open="true"] .nav-links a { padding: 10px 0; font-size: 16px; }
   .feat-row, .feat-row.reverse .feat-row-text { grid-template-columns: 1fr; order: 0; }
-  .feat-row .frame { order: 1; }
+  .feat-row .frame, .feat-row .qa-figure { order: 1; }
+  .feat-row .qa-figure { max-width: 680px; margin-inline: auto; }
   .feat-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .dl-cards { grid-template-columns: 1fr; }
@@ -671,3 +673,12 @@ section { padding: clamp(80px, 11vw, 150px) 0; }
 
 /* Calmer scroll-in, like Apple's */
 .js .reveal { transform: translateY(32px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+
+/* Quick Ask / Second Brain: real screenshots of the pop-up (already a card on a soft backdrop — no window frame) */
+.qa-figure { border-radius: 16px; overflow: hidden; border: 1px solid var(--border-2); box-shadow: var(--shadow); }
+.qa-figure img { width: 100%; height: auto; display: block; }
+.qa-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: clamp(36px, 5vw, 56px); }
+.qa-strip figcaption { color: var(--muted); font-size: 14px; margin-top: 10px; text-align: center; }
+.key { display: inline-block; font: 600 0.85em/1 -apple-system, "Segoe UI", system-ui, sans-serif; padding: 4px 8px; border-radius: 7px;
+  border: 1px solid var(--border-2); background: var(--bg-3); color: var(--text); box-shadow: 0 1px 0 var(--border-2); white-space: nowrap; }
+.qa-strip figure { margin: 0; }

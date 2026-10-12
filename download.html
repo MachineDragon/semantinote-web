@@ -241,23 +241,27 @@
           <div class="inst-step">
             <div class="inst-num">3</div>
             <div class="inst-shot">
-              <svg viewBox="0 0 360 196" role="img" aria-label="macOS Privacy and Security with the Open Anyway button circled in red">
+              <svg viewBox="0 0 360 196" role="img" aria-label="macOS asks to confirm opening SemantiNote, verified by Apple — click Open">
                 <rect class="dlg-bg" x="0" y="0" width="360" height="196" rx="10"/>
-                <rect class="dlg-card" x="24" y="16" width="312" height="150" rx="8"/>
-                <text class="dlg-title" x="46" y="50" font-size="13">Privacy &amp; Security</text>
-                <text class="dlg-text" x="46" y="84" font-size="11.5">“SemantiNote” was blocked</text>
-                <text class="dlg-text" x="46" y="102" font-size="11.5">to protect your Mac.</text>
-                <rect class="dlg-btn-blue" x="196" y="112" width="116" height="32" rx="6"/>
-                <text class="dlg-btn-txt-w" x="254" y="133" font-size="12.5" font-weight="600" text-anchor="middle">Open Anyway</text>
-                <rect class="hl" x="191" y="107" width="126" height="42" rx="9"/>
-                <path class="hl-arrow" d="M254 164 V150"/><path class="hl-arrow" d="M254 150 l-4 7 m4 -7 l4 7"/>
+                <rect class="dlg-card" x="24" y="12" width="312" height="172" rx="8"/>
+                <image href="assets/img/logo.svg" x="164" y="22" width="32" height="32"/>
+                <text class="dlg-title" x="180" y="74" font-size="12" text-anchor="middle">“SemantiNote” is an app downloaded</text>
+                <text class="dlg-title" x="180" y="90" font-size="12" text-anchor="middle">from the Internet. Open it?</text>
+                <text class="dlg-text" x="180" y="110" font-size="10.5" text-anchor="middle">Apple checked it for malicious software</text>
+                <text class="dlg-text" x="180" y="124" font-size="10.5" text-anchor="middle">and none was detected.</text>
+                <rect class="dlg-card" x="56" y="140" width="112" height="28" rx="6" stroke="#c8c8cc" stroke-width="1"/>
+                <text class="dlg-text" x="112" y="158" font-size="12" text-anchor="middle">Cancel</text>
+                <rect class="dlg-btn-blue" x="192" y="140" width="112" height="28" rx="6"/>
+                <text class="dlg-btn-txt-w" x="248" y="158" font-size="12" font-weight="600" text-anchor="middle">Open</text>
+                <rect class="hl" x="187" y="135" width="122" height="38" rx="9"/>
               </svg>
             </div>
-            <p class="inst-cap">The first time it’s blocked — open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong></p>
+            <p class="inst-cap">Open <strong>SemantiNote</strong> from Applications and click <strong>Open</strong> — it’s verified by Apple</p>
           </div>
         </div>
 
-        <p class="inst-safe">The one-time “unrecognized app” warning is normal for brand-new apps — it’s safe, and your notes never leave your device.</p>
+        <p class="inst-safe" data-os-note="win">The one-time “unrecognized app” warning on Windows is normal for new apps — it’s safe, and your notes never leave your device.</p>
+        <p class="inst-safe" data-os-note="mac" hidden>The Mac app is signed and notarized by Apple — it opens like any app from a trusted developer. Your notes never leave your device.</p>
         <p class="dl-more" id="dlMore" hidden><a id="dlMoreLink">‹ Choose a different download</a></p>
       </div>
 
@@ -282,6 +286,8 @@
           <h3>Product key — $9.99 once</h3>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Chat with your notes, PDFs &amp; spreadsheets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Quick Ask from any app (⌥ Option + Space / Alt + Space)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Second Brain — remembers what matters to you</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Search by meaning &amp; AI summaries</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>AI-made PDFs from your notes</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Call &amp; lecture recording</li>
@@ -359,6 +365,7 @@
       // Show only one OS's install cards (the download button the visitor clicks decides which).
       function showOnly(os) {
         grids.forEach(function (g) { g.hidden = (g.dataset.os !== os); });
+        document.querySelectorAll("#firstrun [data-os-note]").forEach(function (n) { n.hidden = (n.getAttribute("data-os-note") !== os); });
       }
 
       // Default the visible steps to the visitor's OS (before any click).
