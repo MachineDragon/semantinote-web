@@ -13,3 +13,5 @@ __pycache__/
 *.sh
 result-link
 result__a
+/site-worker/
+/.wrangler/

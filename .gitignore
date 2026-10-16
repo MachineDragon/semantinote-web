@@ -3,3 +3,4 @@
 # Scratch capture files (should never be committed)
 assets/img/shots/_*.png
 assets/img/shots/*_proof.png
+.wrangler/

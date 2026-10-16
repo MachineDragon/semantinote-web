@@ -1,8 +1,16 @@
 {
   // Static marketing site for SemantiNote, served as a Cloudflare Worker with
-  // static assets (assets-only — no Worker script). `npx wrangler deploy` uploads
-  // everything in "." except the paths listed in .assetsignore.
+  // static assets. `npx wrangler deploy` uploads everything in "." except the
+  // paths listed in .assetsignore.
+  // The small Worker (site-worker/index.js) runs ONLY for video files, so they can
+  // be skipped ahead (range requests); every other file is served straight from
+  // the static assets, as before.
   "name": "semantinote-web",
   "compatibility_date": "2025-06-01",
-  "assets": { "directory": "." }
+  "main": "site-worker/index.js",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": ["/assets/*.mp4", "/assets/*.webm"]
+  }
 }
