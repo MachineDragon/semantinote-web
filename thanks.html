@@ -23,7 +23,7 @@
       <p class="lead" style="max-width:52ch;margin:14px auto 0;">Here's your SemantiNote product key. Open the app, click <strong>Enter product key</strong>, and paste it in — you're set forever, on this and future devices.</p>
 
       <div class="dl-req" style="margin-top:30px;text-align:center;">
-        <div id="keyBox" style="font-size:22px;font-weight:700;letter-spacing:1px;font-family:ui-monospace,Menlo,monospace;user-select:all;padding:8px 0;">Loading your key…</div>
+        <div id="keyBox" data-clarity-mask="True" style="font-size:22px;font-weight:700;letter-spacing:1px;font-family:ui-monospace,Menlo,monospace;user-select:all;padding:8px 0;">Loading your key…</div>
         <button id="copyBtn" class="btn" style="margin-top:14px;" hidden>Copy key</button>
         <p id="keyNote" class="dl-soon" style="margin-top:14px;">We've also emailed it to you (via your Stripe receipt). Keep it somewhere safe.</p>
       </div>
@@ -32,6 +32,16 @@
     </div>
   </section>
 
+  <script>
+    // Microsoft Clarity (same project as the rest of the site): counts completed purchases.
+    // The product key box is masked (data-clarity-mask), so recordings never show the key.
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "yheruwpyeh");
+    function track(name) { try { window.clarity("event", name); } catch (e) {} }
+  </script>
   <script>
     // The deployed Cloudflare Worker that mints and looks up license keys.
     var WORKER_URL = "https://semantinote-license.budai-support.workers.dev";
@@ -42,10 +52,13 @@
 
     function show(key) {
       box.textContent = key;
+      track("purchase_complete");
+      try { window.clarity("upgrade", "purchase"); } catch (e) {}
       copyBtn.hidden = false;
       copyBtn.onclick = function () {
         navigator.clipboard.writeText(key);
         copyBtn.textContent = "Copied!";
+        track("key_copied");
         setTimeout(function () { copyBtn.textContent = "Copy key"; }, 1500);
       };
     }

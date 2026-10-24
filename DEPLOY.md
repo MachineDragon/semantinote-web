@@ -88,8 +88,8 @@ GitHub Pages caps files at **100 MB**; your installers are bigger. Put them on
 3. **Tag:** `v0.1.0` → **Title:** `SemantiNote 0.1.0`.
 4. **Drag the `.dmg` and `.exe`** into the "Attach binaries" box → **Publish release**.
 5. Your permanent download links become:
-   - `https://github.com/<you>/semantinote-web/releases/latest/download/SemantiNote-universal.dmg`
-   - `https://github.com/<you>/semantinote-web/releases/latest/download/SemantiNote-Setup.exe`
+   - `https://github.com/<you>/semantinote-web/releases/latest/download/SemantiNote-mac.dmg`
+   - `https://github.com/<you>/semantinote-web/releases/latest/download/SemantiNote-win.exe`
    (`releases/latest/download/...` always points at your newest release.)
 6. In `download.html`, replace the two disabled **"Coming soon"** buttons (there's a
    `<!-- TODO -->` comment marking them) with links to those URLs. Re-upload

@@ -57,6 +57,7 @@
         <a href="#features" class="btn btn-ghost btn-lg" data-track="cta_features">See what it does</a>
       </div>
       <p class="hero-note reveal">No account · Free to start, then <span class="price-was">$25</span> $9.99 once</p>
+      <p class="hero-note hero-req reveal">Mac &amp; Windows · 1 GB download · works offline · signed &amp; verified</p>
 
       <div class="hero-shot reveal" id="demo">
       <div class="showcase">
@@ -69,6 +70,9 @@
           </div>
           <div class="showcase-slide" data-caption="New: Second Brain — it learns what matters about you; see, add or delete memories, and it uses them to answer">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/brain-poster.jpg" aria-label="Second Brain in SemantiNote: the list of what it remembers, adding and deleting a memory, remembering something from the chat, then an answer that uses those memories"><source src="assets/img/shots/brain.mp4" type="video/mp4" /></video>
+          </div>
+          <div class="showcase-slide" data-caption="New: Diagrams in your notes — type a list, get a chart, edit it, or just ask the AI to draw or change it">
+            <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/diagram.png" aria-label="Inserting a diagram into a note, drawing an org chart from a typed list, recoloring boxes, then asking the AI to add a box"><source src="assets/img/shots/diagram.mp4" type="video/mp4" /></video>
           </div>
           <div class="showcase-slide" data-caption="Chat with your notes — a real answer, grounded in your notebook">
             <video class="showcase-media" muted playsinline preload="auto" poster="assets/img/shots/chat.png"><source src="assets/img/shots/chat.mp4" type="video/mp4" /></video>
@@ -118,6 +122,7 @@
           <button class="showcase-dot active" aria-label="Semantic search"></button>
           <button class="showcase-dot" aria-label="Quick Ask"></button>
           <button class="showcase-dot" aria-label="Second Brain"></button>
+          <button class="showcase-dot" aria-label="Diagrams"></button>
           <button class="showcase-dot" aria-label="Chat with your notes"></button>
           <button class="showcase-dot" aria-label="Ask about a PDF"></button>
           <button class="showcase-dot" aria-label="Sign a PDF"></button>
@@ -195,6 +200,21 @@
           <a class="p-link" href="#f-chat">Learn more ›</a>
         </div>
         <div class="problem-card">
+          <div class="p-q">Need to explain a plan or a team?</div>
+          <div class="p-a"><strong>Draw it right in your note.</strong> Type a simple list and get an org chart or flowchart — edit it like a drawing, or just ask the AI to change it.</div>
+          <a class="p-link" href="#f-diagrams">Learn more ›</a>
+        </div>
+        <div class="problem-card">
+          <div class="p-q">Answering the same questions in Slack or Teams?</div>
+          <div class="p-a"><strong>Quick Ask, from any app.</strong> Press one shortcut, get the answer from your notes, and paste it straight into the chat.</div>
+          <a class="p-link" href="#f-quickask">Learn more ›</a>
+        </div>
+        <div class="problem-card">
+          <div class="p-q">Wish your AI remembered what matters?</div>
+          <div class="p-a"><strong>Turn on Second Brain.</strong> It learns your people, projects and preferences — and you can see or delete any memory.</div>
+          <a class="p-link" href="#f-brain">Learn more ›</a>
+        </div>
+        <div class="problem-card">
           <div class="p-q">Tired of paying monthly for AI?</div>
           <div class="p-a"><strong>Pay once, use it forever.</strong> Unlimited AI for $9.99 — no subscription, no per-message fees.</div>
           <a class="p-link" href="#pricing">See pricing ›</a>
@@ -255,7 +275,18 @@
           <img class="shot" src="assets/img/shots/brain-poster.jpg" data-clip="assets/img/shots/brain.mp4" alt="Second Brain in SemantiNote: the list of what it remembers, adding and deleting a memory, remembering something from the chat, then an answer that uses those memories" loading="lazy" />
         </div>
       </div>
-      <div class="feat-row reveal" id="f-meetings">
+      <div class="feat-row reveal" id="f-diagrams">
+        <div class="feat-row-text">
+          <span class="eyebrow">New · Draw it out</span>
+          <h2>Diagrams inside your notes.</h2>
+          <p>Type a simple list and get an org chart or flowchart, right in your note. Recolor it, drag it, add boxes and arrows — or just ask the AI to draw a new one or change it. It's saved with your note.</p>
+        </div>
+        <div class="frame">
+          <div class="frame-bar"><i></i><i></i><i></i><span>Diagrams</span></div>
+          <img class="shot" src="assets/img/shots/diagram.png" data-clip="assets/img/shots/diagram.mp4" alt="Drawing an org chart from a typed list inside a SemantiNote note, recoloring boxes, then asking the AI to add a box" loading="lazy" />
+        </div>
+      </div>
+      <div class="feat-row reverse reveal" id="f-meetings">
         <div class="feat-row-text">
           <span class="eyebrow">Never miss a word</span>
           <h2>Record calls &amp; lectures.</h2>
@@ -266,7 +297,7 @@
           <img class="shot" src="assets/img/shots/meeting.png" data-clip="assets/img/shots/meeting.mp4" alt="Recording a call into a note in SemantiNote" loading="lazy" />
         </div>
       </div>
-      <div class="feat-row reverse reveal" id="f-voice">
+      <div class="feat-row reveal" id="f-voice">
         <div class="feat-row-text">
           <span class="eyebrow">Just talk</span>
           <h2>Dictate instead of typing.</h2>
@@ -277,7 +308,7 @@
           <img class="shot" src="assets/img/shots/voice.png" data-clip="assets/img/shots/voice.mp4" alt="Voice dictation in SemantiNote" loading="lazy" />
         </div>
       </div>
-      <div class="feat-row reveal" id="f-sign">
+      <div class="feat-row reverse reveal" id="f-sign">
         <div class="feat-row-text">
           <span class="eyebrow">No printer needed</span>
           <h2>Sign any PDF. <span class="free-tag">Free</span></h2>
@@ -288,7 +319,7 @@
           <img class="shot" src="assets/img/shots/sign.png" alt="Signing a contract PDF in SemantiNote" loading="lazy" />
         </div>
       </div>
-      <div class="feat-row reverse reveal" id="f-calendar">
+      <div class="feat-row reveal" id="f-calendar">
         <div class="feat-row-text">
           <span class="eyebrow">Stay on top of it</span>
           <h2>Reminders that actually remind you. <span class="free-tag">Free</span></h2>
@@ -299,7 +330,7 @@
           <img class="shot" src="assets/img/shots/calendar.png" alt="SemantiNote calendar with reminders" loading="lazy" />
         </div>
       </div>
-      <div class="feat-row reveal" id="f-safe">
+      <div class="feat-row reverse reveal" id="f-safe">
         <div class="feat-row-text">
           <span class="eyebrow">Locked tight</span>
           <h2>Your passwords, encrypted. <span class="free-tag">Free</span></h2>
@@ -318,6 +349,30 @@
 
 
   <!-- ===================== PRICING ===================== -->
+  <!-- ===================== WHAT USERS SAY ===================== -->
+  <section id="voices" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">From early users</span>
+        <h2 class="section-title">What people use it for.</h2>
+      </div>
+      <div class="problem-grid voices-grid reveal">
+        <div class="problem-card">
+          <div class="p-a">“I record my college lectures on Zoom with it, and it <strong>transcribes what the professor says right into my note</strong>.”</div>
+          <div class="p-who">College student · records Zoom lectures</div>
+        </div>
+        <div class="problem-card">
+          <div class="p-a">“It has everything I need — <strong>Second Brain</strong>, <strong>Quick Ask</strong> to search my notes and paste the answer into my messaging app, and <strong>diagrams</strong>. I've recommended it to my colleagues.”</div>
+          <div class="p-who">Professional</div>
+        </div>
+        <div class="problem-card">
+          <div class="p-a">“Because the AI runs locally and <strong>none of our data is sent to the cloud</strong>, my company can use it. I recommended it in a professional meeting.”</div>
+          <div class="p-who">Professional · high-security work</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="pricing" style="padding-top:0;">
     <div class="wrap">
       <div class="section-head reveal">

@@ -19,7 +19,7 @@ This directory contains the build assets for the vertical SemantiNote social ree
 ffmpeg -version
 ffprobe -version
 python3 --version
-/Users/mmu8133/Library/CloudStorage/OneDrive-MassMutual/Desktop/myvscodeextensionbudai/.venv/bin/edge-tts --version
+<your projects folder>/.venv/bin/edge-tts --version
 ```
 
 The build scripts use Pillow through Python and Edge TTS from the workspace virtual environment. macOS `say` with the `Daniel` voice is the fallback if Edge TTS is unavailable.
@@ -46,7 +46,7 @@ For authentic desktop-app captures, also require:
 Run this from the web asset folder:
 
 ```bash
-cd "/Users/mmu8133/Library/CloudStorage/OneDrive-MassMutual/Desktop/myvscodeextensionbudai/semantinote-web/assets/img"
+cd "<your projects folder>/semantinote-web/assets/img"
 bash build-reel.sh
 ```
 
@@ -74,7 +74,7 @@ make_narration 4 "en-US-RogerNeural" "Your CTA narration."
 List available voices:
 
 ```bash
-/Users/mmu8133/Library/CloudStorage/OneDrive-MassMutual/Desktop/myvscodeextensionbudai/.venv/bin/edge-tts --list-voices | grep -E '^en-.*Male'
+<your projects folder>/.venv/bin/edge-tts --list-voices | grep -E '^en-.*Male'
 ```
 
 ## Capture Real SemantiNote Footage
@@ -84,7 +84,7 @@ The most convincing scenes use native Electron `capturePage()` rather than scree
 ### 1. Start the desktop app
 
 ```bash
-cd "/Users/mmu8133/Library/CloudStorage/OneDrive-MassMutual/Desktop/myvscodeextensionbudai/semantinote-app"
+cd "<your projects folder>/semantinote-app"
 npm run dev -- --remote-debugging-port=9222
 ```
 

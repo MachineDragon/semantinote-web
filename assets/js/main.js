@@ -262,4 +262,50 @@
       if (!reelFired) { reelFired = true; track("demo_clicked"); }
     });
   });
+
+  var slug = function (s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 40); };
+
+  // Which demo clips people pick by hand (‹ › or a dot) — e.g. "slide_diagrams", "slide_quick_ask".
+  document.querySelectorAll(".showcase-nav, .showcase-dot").forEach(function (b) {
+    b.addEventListener("click", function () {
+      setTimeout(function () {
+        var d = document.querySelector(".showcase-dot.active");
+        if (d) { track("slide_" + slug(d.getAttribute("aria-label"))); }
+      }, 0);
+    });
+  });
+  onClick(".showcase-expand", "demo_enlarged");
+
+  // How far down people read: each feature / section fires once when half of it is on screen
+  // ("seen_f_diagrams" on the homepage, "seen_diagrams" on the Features page, "seen_pricing", …).
+  if ("IntersectionObserver" in window) {
+    var seenObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        // half of it on screen — or, for a section taller than the screen, it fills half the screen
+        if (en.isIntersecting && (en.intersectionRatio >= 0.5 || en.intersectionRect.height >= window.innerHeight * 0.5)) {
+          track("seen_" + slug(en.target.id)); seenObs.unobserve(en.target);
+        }
+      });
+    }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5] });
+    document.querySelectorAll(".feat-row[id], section[id]").forEach(function (el) { seenObs.observe(el); });
+  }
+
+  // Which questions people open — e.g. "faq_is_it_really_free".
+  document.querySelectorAll("details").forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) { var q = d.querySelector("summary"); track("faq_" + slug(q ? q.textContent : "")); }
+    });
+  });
+
+  // Tag each session with the visitor's computer, so recordings can be filtered by Mac / Windows / phone.
+  try {
+    var ua = navigator.userAgent || "";
+    var os = /iPhone|iPad|Android/i.test(ua) ? "phone" : /Mac/i.test(ua) ? "mac" : /Win/i.test(ua) ? "windows" : "other";
+    if (window.clarity) { window.clarity("set", "os", os); }
+  } catch (e) {}
+
+  // Keep the recordings of sessions that downloaded or went to buy (Clarity samples the rest).
+  document.querySelectorAll('a[href*="SemantiNote-mac"], a[href*="SemantiNote-win"], a[href*="buy.stripe"]').forEach(function (a) {
+    a.addEventListener("click", function () { try { if (window.clarity) { window.clarity("upgrade", /stripe/.test(a.href) ? "buy" : "download"); } } catch (e) {} });
+  });
 })();
