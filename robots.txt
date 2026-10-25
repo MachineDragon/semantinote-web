@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 # Post-purchase confirmation page — no reason to index it.
+Disallow: /thanks
 Disallow: /thanks.html
 
 Sitemap: https://semantinote.com/sitemap.xml
