@@ -23,6 +23,21 @@
     });
   }
 
+  /* ---------------- "Other Software" dropdown (tap/keyboard) ---------------- */
+  document.querySelectorAll(".nav-drop").forEach(function (drop) {
+    var btn = drop.querySelector(".nav-drop-btn");
+    function set(open) {
+      drop.setAttribute("data-open", open ? "true" : "false");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      set(drop.getAttribute("data-open") !== "true");
+    });
+    document.addEventListener("click", function (e) { if (!drop.contains(e.target)) set(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { set(false); } });
+  });
+
   /* ---------------- OS detection (download page) ---------------- */
   function detectOS() {
     var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
