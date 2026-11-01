@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SemantiNote Agents Studio — Build AI agents &amp; teams for Mac &amp; Windows</title>
+  <link rel="canonical" href="https://semantinote.com/agents-studio/" />
+  <meta name="description" content="SemantiNote Agents Studio is a free desktop app for Mac and Windows for building your own AI agents and teams of agents, powered by open-source AI models that run on your own computer. No account, no tracking." />
+  <link rel="icon" type="image/png" href="/agents-studio/icon.png" />
+  <link rel="apple-touch-icon" href="/agents-studio/icon.png" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261030a" />
+  <style>
+    /* ---------- Agents Studio page (page-specific; builds on style.css) ---------- */
+    .a-hero { text-align: center; padding: clamp(56px, 8vw, 100px) 0 clamp(56px, 8vw, 96px); }
+    .a-icon { width: clamp(104px, 14vw, 140px); height: auto; margin: 0 auto 10px; filter: drop-shadow(0 18px 40px rgba(124, 92, 240, 0.32)); }
+    .a-hero h1 { font-size: clamp(44px, 7.4vw, 84px); line-height: 1.04; margin: 0 auto 18px; }
+    .a-hero h1 .free-tag { font-size: 15px; transform: translateY(-14px); }
+    .a-brand { display: block; font-size: 0.4em; font-weight: 600; letter-spacing: 0.02em; color: #c4b8f5; margin-bottom: 0.1em; }
+    .a-grad { background: linear-gradient(135deg, #b7a4ff 0%, #8a6cf6 45%, #d07cf2 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .a-hero .lead { max-width: 46ch; margin: 0 auto; }
+    .a-small { max-width: 64ch; margin: 22px auto 0; color: var(--dim); font-size: 13px; line-height: 1.55; }
+    .a-small a { color: var(--muted); text-decoration: underline; }
+    .a-hero .dl-cards { margin-top: 30px; }
+    .a-hero #osHint { margin-top: 26px; color: var(--dim); font-size: 14px; }
+    .a-free-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 22px; color: var(--muted); font-size: 14px; }
+    .a-free-row span { display: inline-flex; align-items: center; gap: 7px; }
+    .a-free-row svg { width: 16px; height: 16px; color: #4ecb8d; }
+
+    /* Team diagram (illustration of how a team chat works; not real output) */
+    .a-team { max-width: 860px; margin: 0 auto; background: var(--card); border-radius: 28px; padding: clamp(26px, 4vw, 44px); text-align: center; }
+    .a-team-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); margin-bottom: 14px; }
+    .a-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .a-chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-2); font-size: 14.5px; color: var(--text); }
+    .a-chip svg { width: 16px; height: 16px; color: #b7a4ff; }
+    .a-arrow { width: 22px; height: 30px; margin: 16px auto; color: var(--dim); }
+    .a-mod { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 16px; background: linear-gradient(135deg, rgba(138,108,246,0.26), rgba(208,124,242,0.16)); border: 1px solid rgba(183,164,255,0.38); font-weight: 600; }
+    .a-mod svg { width: 20px; height: 20px; color: #b7a4ff; }
+    .a-modes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .a-mode { padding: 7px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 600; background: rgba(138,108,246,0.13); color: #cfc3ff; }
+    .a-team-note { color: var(--muted); font-size: 14.5px; margin: 18px auto 0; max-width: 54ch; }
+
+    .a-grid { grid-template-columns: repeat(3, 1fr); }
+    .a-steps { grid-template-columns: repeat(3, 1fr); max-width: 980px; margin: 0 auto; }
+    .a-steps .step { background: var(--card); border: none; border-radius: 24px; padding: 30px 26px; }
+
+    .a-req { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 860px; margin: 0 auto; }
+    .a-req .dl-req { margin: 0; text-align: left; }
+
+    /* Install help — same visuals as /download */
+    .dlg-bg{fill:#f4f5f7}.dlg-card{fill:#ffffff}
+    .dlg-title{fill:#1d1d1f;font-family:-apple-system,Segoe UI,system-ui,sans-serif;font-weight:700}
+    .dlg-text{fill:#6b7078;font-family:-apple-system,Segoe UI,system-ui,sans-serif}
+    .dlg-link{fill:#0067c5;font-family:Segoe UI,system-ui,sans-serif}
+    .dlg-btn{fill:#e7e8ea}.dlg-btn-blue{fill:#0067c5}.dlg-btn-txt{fill:#1d1d1f;font-family:-apple-system,Segoe UI,system-ui,sans-serif}
+    .dlg-btn-txt-w{fill:#ffffff;font-family:-apple-system,Segoe UI,system-ui,sans-serif}
+    .hl{fill:none;stroke:#ff3b30;stroke-width:3}
+    .hl-arrow{stroke:#ff3b30;stroke-width:3;fill:none;stroke-linecap:round}
+    .dl-started{max-width:640px;margin:34px auto 0;text-align:center;animation:dlpop .3s ease}
+    .dl-started[hidden]{display:none}
+    @keyframes dlpop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .dl-started-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(46,204,113,.16);color:#2ecc71;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:20px}
+    .dl-started-badge svg{width:15px;height:15px}
+    .dl-started h2{font-size:clamp(24px,3.4vw,34px);margin:14px 0 8px;color:var(--text)}
+    .dl-started>p{color:var(--muted);font-size:14.5px;margin:0 auto;max-width:52ch}
+    .dl-started>p a{color:var(--accent);text-decoration:underline}
+    .dl-inst{max-width:900px;margin:0 auto;text-align:center}
+    .inst-tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--card);margin:0 auto 30px}
+    .inst-tabs button{font:inherit;font-size:14px;color:var(--muted);background:none;border:0;border-radius:999px;padding:7px 18px;cursor:pointer}
+    .inst-tabs button[aria-selected="true"]{background:var(--pill);color:#fff}
+    .inst-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:0 auto}
+    .inst-grid[hidden]{display:none}
+    .inst-step{text-align:center}
+    .inst-num{width:44px;height:44px;border-radius:50%;background:var(--pill);color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+    .inst-shot{background:var(--bg-3);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center;min-height:150px}
+    .inst-shot svg{width:100%;max-width:320px;height:auto;border-radius:8px}
+    .inst-cap{color:var(--muted);font-size:15px;margin:16px auto 0;max-width:30ch;line-height:1.5}
+    .inst-cap strong{color:var(--text)}
+    .inst-safe{color:var(--dim);font-size:13px;margin:30px auto 0;max-width:60ch;line-height:1.6}
+    .inst-safe[hidden]{display:none}
+
+    @media (max-width: 940px) {
+      .a-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .a-grid, .a-steps, .a-req, .inst-grid { grid-template-columns: 1fr; }
+      .inst-grid { gap: 34px; }
+      .a-hero h1 .free-tag { transform: translateY(-8px); }
+      .inst-cap strong { overflow-wrap: anywhere; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="brand"><img src="/assets/img/logo.svg" alt="" />SemantiNote</a>
+      <nav class="nav-links">
+        <a href="/#features">Features</a>
+        <a href="/episodes">Episodes</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/about">About</a>
+        <a href="/help">Help</a>
+        <div class="nav-drop">
+          <button class="nav-drop-btn" type="button" aria-haspopup="true" aria-expanded="false">Other Software<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-drop-menu">
+            <a href="/demyr/" class="nav-drop-item"><img src="/demyr/icon.png" alt="" width="36" height="36" /><span><strong>Demyr</strong><small>Home workouts &amp; health tracker for iPhone</small></span></a>
+            <a href="/stock-analyzer/" class="nav-drop-item"><img src="/stock-analyzer/icon.png" alt="" width="36" height="36" /><span><strong>SemantiNote Stock Analyzer</strong><small>AI stock research for Mac &amp; Windows</small></span></a>
+            <a href="/agents-studio/" class="nav-drop-item"><img src="/agents-studio/icon.png" alt="" width="36" height="36" /><span><strong>SemantiNote Agents Studio</strong><small>Build AI agents &amp; teams on Mac &amp; Windows</small></span></a>
+          </div>
+        </div>
+      </nav>
+      <div class="nav-cta">
+        <a href="#download" class="btn btn-primary" data-track="agents_studio_cta_nav">Get Agents Studio</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO + DOWNLOAD ===================== -->
+  <section class="a-hero" id="download">
+    <div class="wrap">
+      <img class="a-icon reveal" src="/agents-studio/icon.png" alt="SemantiNote Agents Studio app icon" width="140" height="140" />
+      <h1 class="reveal"><span class="a-brand">SemantiNote</span><span class="a-grad">Agents Studio</span><span class="free-tag">Free</span></h1>
+      <p class="lead reveal">Build your own AI agents and teams of agents — powered by open-source AI models that run on your own computer.</p>
+
+      <!-- OS-detecting recommendation is filled by main.js -->
+      <p class="reveal" id="osHint"></p>
+
+      <div class="dl-cards reveal">
+        <div class="dl-card recommended" id="macCard">
+          <span class="dl-badge" id="macBadge" hidden>Detected</span>
+          <svg class="dl-os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.36 12.68c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.13 5.62c.64-.78 1.07-1.85.95-2.92-.92.04-2.03.61-2.69 1.38-.59.68-1.1 1.78-.96 2.83 1.02.08 2.07-.52 2.7-1.29z"/></svg>
+          <h3>macOS</h3>
+          <p class="dl-sub">Apple Silicon &amp; Intel · macOS 11+</p>
+          <a class="btn btn-primary" href="https://github.com/MachineDragon/agents-studio-releases/releases/latest/download/SemantiNote-Agents-Studio-mac.dmg" data-track="agents_studio_download_mac">Download for Mac</a>
+          <p class="dl-soon">First open may show a one-time macOS prompt — <a href="#install" style="text-decoration:underline;">see the quick steps</a>.</p>
+        </div>
+
+        <div class="dl-card" id="winCard">
+          <span class="dl-badge" id="winBadge" hidden>Detected</span>
+          <svg class="dl-os" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1 10.5 4v7.5H3zM11.5 3.9 21 2.5v9H11.5zM3 12.5h7.5V20L3 18.9zM11.5 12.5H21v9l-9.5-1.4z"/></svg>
+          <h3>Windows</h3>
+          <p class="dl-sub">64-bit · Windows 10 &amp; 11</p>
+          <a class="btn btn-primary" href="https://github.com/MachineDragon/agents-studio-releases/releases/latest/download/SemantiNote-Agents-Studio-win.exe" data-track="agents_studio_download_win">Download for Windows</a>
+          <p class="dl-soon">While the app is new, Windows may ask once — click <strong>More info → Run anyway</strong> (<a href="#install" style="text-decoration:underline;">see steps</a>).</p>
+        </div>
+      </div>
+
+      <!-- Revealed by the script below after a download click -->
+      <div class="dl-started" id="dlStarted" hidden aria-live="polite">
+        <span class="dl-started-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Download started
+        </span>
+        <h2>Thanks for downloading Agents Studio!</h2>
+        <p>Your download should begin automatically. If it didn’t start, <a id="dlManual" href="https://github.com/MachineDragon/agents-studio-releases/releases/latest/download/SemantiNote-Agents-Studio-mac.dmg">download Agents Studio manually</a>. The install steps are <a href="#install">just below</a>.</p>
+      </div>
+
+      <div class="a-free-row reveal">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No account, no card</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>AI runs on your computer</span>
+      </div>
+
+      <p class="a-small reveal">Agents and tools can run code on your computer — only add tools and MCP servers you trust. AI output can be wrong. <a href="#faq">Read the FAQ</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===================== TEAMS ===================== -->
+  <section id="teams" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Teams of agents</span>
+        <h2 class="section-title">One agent is good.<br />A team is better.</h2>
+        <p class="lead">Give each agent its own role, model and tools — then put them in a team and let them work on your request together.</p>
+      </div>
+      <div class="a-team reveal" role="img" aria-label="Diagram: you build agents such as a researcher, a coder and a writer, put them in a team, and choose how the team works: group chat, round-robin, sequential, parallel, handoff or Magentic.">
+        <div class="a-team-label">Your agents</div>
+        <div class="a-chips">
+          <span class="a-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Researcher</span>
+          <span class="a-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Coder</span>
+          <span class="a-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Writer</span>
+          <span class="a-chip" style="color:var(--muted);border-style:dashed;">+ any agent you build</span>
+        </div>
+        <svg class="a-arrow" viewBox="0 0 22 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v24M4 19l7 7 7-7"/></svg>
+        <div class="a-mod"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 7.5-3.4"/></svg>Team chat — pick how they work</div>
+        <svg class="a-arrow" viewBox="0 0 22 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2v24M4 19l7 7 7-7"/></svg>
+        <div class="a-modes"><span class="a-mode">Group chat</span><span class="a-mode">Round-robin</span><span class="a-mode">Sequential</span><span class="a-mode">Parallel</span><span class="a-mode">Handoff</span><span class="a-mode">Magentic</span></div>
+        <p class="a-team-note">In a group chat a manager picks who speaks next. Sequential works like an assembly line, parallel runs agents at the same time, and Magentic is manager-driven. Prefer it simple? Chat with one agent, or straight with a model.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section id="features" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Features</span>
+        <h2 class="section-title">Everything you need to build agents.</h2>
+      </div>
+      <div class="feat-grid a-grid">
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 7V4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg></div>
+          <h3>Create agents</h3>
+          <p>Give each agent a name, a role and instructions, and a model. Not sure where to start? An AI helper can draft an agent from a one-line description.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div>
+          <h3>Give agents tools</h3>
+          <p>Built-in tools — web search, read web pages, run Python code, calculator and time — plus your own Python tools. An AI helper can draft a tool for you too.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Require approval</h3>
+          <p>Optional: turn on “require approval” and the agent asks before running a tool. You choose Approve or Reject.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7V3M15 7V3"/><path d="M6 7h12v4a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></svg></div>
+          <h3>MCP servers</h3>
+          <p>Connect MCP (Model Context Protocol) servers to give your agents even more tools.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 7.5-3.4"/></svg></div>
+          <h3>Team chats</h3>
+          <p>Group chat with a manager, round-robin, sequential, parallel, handoff or Magentic — or chat with one agent, or straight with a model.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 9.2-9.2M17 6l3 3M14 9l2 2"/></svg></div>
+          <h3>Secrets Vault</h3>
+          <p>API keys are stored in your computer’s secure keychain and given only to the tools you choose.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V5a3 3 0 0 0-3-1z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1"/></svg></div>
+          <h3>Memory &amp; checkpoints</h3>
+          <p>Long-term memory notes your agents can use. Save a chat checkpoint and restore it later.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
+          <h3>Open-source models, on your computer</h3>
+          <p>Run models like Qwen 3.5, Llama, Mistral and DeepSeek-R1 with a built-in AI engine — nothing else to install. Already use Ollama? Agents Studio can use your models.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></div>
+          <h3>Choose where code runs</h3>
+          <p>Agents can run code on your computer, in an isolated process, or in a Docker container (needs Docker Desktop).</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9h-1.3A7 7 0 1 0 4 15.3"/><path d="M12 13v8M9 18l3 3 3-3"/></svg></div>
+          <h3>Optional cloud models</h3>
+          <p>Add your own Ollama API key to use Ollama Cloud models. Entirely up to you.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Private</h3>
+          <p>No account, no tracking. Your chats, agents and keys stay on your computer.</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5M3 21v-5h5"/></svg></div>
+          <h3>Automatic updates</h3>
+          <p>Agents Studio keeps itself up to date, so you always have the latest version.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="how" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">Up and running in three steps.</h2>
+      </div>
+      <div class="steps a-steps">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <h3>Install Agents Studio</h3>
+          <p>Download it for Mac or Windows and open it like any other app.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">2</div>
+          <h3>Pick your AI models</h3>
+          <p>Choose the open-source models you want (2–8 GB) and they run on your computer. Already have Ollama? Use your models.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">3</div>
+          <h3>Build your agents</h3>
+          <p>Create an agent, give it tools, put agents in a team — and start chatting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INSTALL HELP ===================== -->
+  <section id="install" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:28px;">
+        <span class="eyebrow">Installing</span>
+        <h2 class="section-title">Installing takes about 30 seconds.</h2>
+      </div>
+      <div class="dl-inst reveal" id="firstrun">
+        <div class="inst-tabs" role="tablist" aria-label="Choose your computer">
+          <button type="button" role="tab" data-os-tab="mac" aria-selected="true">Mac</button>
+          <button type="button" role="tab" data-os-tab="win" aria-selected="false">Windows</button>
+        </div>
+
+        <!-- ===== macOS ===== -->
+        <div class="inst-grid" data-os="mac">
+          <div class="inst-step">
+            <div class="inst-num">1</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 420 250" role="img" aria-label="Browser toolbar — click the download icon at the top-right, then open SemantiNote-Agents-Studio-mac.dmg">
+                <rect x="0" y="0" width="420" height="250" rx="12" fill="#eceef1"/>
+                <path d="M12 0 h396 a12 12 0 0 1 12 12 v40 h-420 v-40 a12 12 0 0 1 12 -12z" fill="#ffffff"/>
+                <line x1="0" y1="52" x2="420" y2="52" stroke="#dadce0" stroke-width="1"/>
+                <rect x="18" y="15" width="250" height="22" rx="11" fill="#f1f3f4"/>
+                <circle cx="33" cy="26" r="4.5" fill="none" stroke="#9aa0a6" stroke-width="1.4"/>
+                <rect x="46" y="23" width="150" height="6" rx="3" fill="#dadce0"/>
+                <circle cx="330" cy="26" r="8" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <line x1="378" y1="16" x2="378" y2="36" stroke="#dadce0" stroke-width="1.4"/>
+                <circle cx="398" cy="26" r="15" fill="#e8f0fe"/>
+                <path d="M398 18 v10 M393 24 l5 5 5 -5 M391 34 h14" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse class="hl" cx="398" cy="26" rx="19" ry="18"/>
+                <rect x="180" y="66" width="226" height="164" rx="12" fill="#000" opacity="0.06"/>
+                <rect x="178" y="64" width="226" height="164" rx="12" fill="#ffffff" stroke="#e8eaed" stroke-width="1"/>
+                <text x="196" y="92" font-size="13" font-weight="700" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">Recent download history</text>
+                <path d="M386 86 l9 9 M395 86 l-9 9" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
+                <image href="/agents-studio/icon.png" x="194" y="106" width="34" height="34"/>
+                <text textLength="176" lengthAdjust="spacingAndGlyphs" x="234" y="122" font-size="11" font-weight="700" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">SemantiNote-Agents-Studio-mac.dmg</text>
+                <text x="234" y="138" font-size="11" fill="#5f6368" font-family="-apple-system,Segoe UI,system-ui,sans-serif">just now</text>
+                <text x="196" y="210" font-size="12.5" fill="#202124" font-family="-apple-system,Segoe UI,system-ui,sans-serif">Full download history</text>
+              </svg>
+            </div>
+            <p class="inst-cap">Open <strong>SemantiNote-Agents-Studio-mac.dmg</strong> from your Downloads</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">2</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 220" role="img" aria-label="Installer window — drag the Agents Studio icon onto the Applications folder">
+                <rect x="18" y="12" width="324" height="196" rx="14" fill="#f3f1ee" stroke="#d8d5d1" stroke-width="1"/>
+                <path d="M18 26 a14 14 0 0 1 14 -14 h296 a14 14 0 0 1 14 14 v6 h-324z" fill="#e7e4e0"/>
+                <circle cx="40" cy="26" r="5.5" fill="#ff5f57"/>
+                <circle cx="58" cy="26" r="5.5" fill="#febc2e"/>
+                <circle cx="76" cy="26" r="5.5" fill="#28c840"/>
+                <image href="/agents-studio/icon.png" x="60" y="66" width="72" height="72"/>
+                <text x="96" y="152" font-size="12.5" font-weight="600" text-anchor="middle" fill="#2b2b2b" font-family="-apple-system,system-ui,sans-serif">Agents Studio</text>
+                <path d="M150 102 h50 M193 93 l11 9 -11 9" fill="none" stroke="#9aa0a6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M232 84 h20 l7 8 h35 a5 5 0 0 1 5 5 v3 h-72z" fill="#5a9bd8"/>
+                <rect x="228" y="94" width="72" height="44" rx="6" fill="#7cb2e8"/>
+                <text x="264" y="152" font-size="12.5" font-weight="600" text-anchor="middle" fill="#2b2b2b" font-family="-apple-system,system-ui,sans-serif">Applications</text>
+              </svg>
+            </div>
+            <p class="inst-cap">Drag <strong>Agents Studio</strong> into your Applications folder</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">3</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 196" role="img" aria-label="macOS asks to confirm opening Agents Studio — click Open">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="196" rx="10"/>
+                <rect class="dlg-card" x="24" y="12" width="312" height="172" rx="8"/>
+                <image href="/agents-studio/icon.png" x="160" y="18" width="40" height="40"/>
+                <text class="dlg-title" x="180" y="78" font-size="12" text-anchor="middle">“SemantiNote Agents Studio” is an app downloaded</text>
+                <text class="dlg-title" x="180" y="94" font-size="12" text-anchor="middle">from the Internet. Open it?</text>
+                <rect class="dlg-card" x="56" y="140" width="112" height="28" rx="6" stroke="#c8c8cc" stroke-width="1"/>
+                <text class="dlg-text" x="112" y="158" font-size="12" text-anchor="middle">Cancel</text>
+                <rect class="dlg-btn-blue" x="192" y="140" width="112" height="28" rx="6"/>
+                <text class="dlg-btn-txt-w" x="248" y="158" font-size="12" font-weight="600" text-anchor="middle">Open</text>
+                <rect class="hl" x="187" y="135" width="122" height="38" rx="9"/>
+              </svg>
+            </div>
+            <p class="inst-cap">Open <strong>Agents Studio</strong> from Applications — if macOS asks, click <strong>Open</strong></p>
+          </div>
+        </div>
+
+        <!-- ===== Windows ===== -->
+        <div class="inst-grid" data-os="win" hidden>
+          <div class="inst-step">
+            <div class="inst-num">1</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 420 250" role="img" aria-label="Browser toolbar — click the download icon at the top-right, then open SemantiNote-Agents-Studio-win.exe">
+                <rect x="0" y="0" width="420" height="250" rx="12" fill="#eceef1"/>
+                <path d="M12 0 h396 a12 12 0 0 1 12 12 v40 h-420 v-40 a12 12 0 0 1 12 -12z" fill="#ffffff"/>
+                <line x1="0" y1="52" x2="420" y2="52" stroke="#dadce0" stroke-width="1"/>
+                <rect x="18" y="15" width="250" height="22" rx="11" fill="#f1f3f4"/>
+                <circle cx="33" cy="26" r="4.5" fill="none" stroke="#9aa0a6" stroke-width="1.4"/>
+                <rect x="46" y="23" width="150" height="6" rx="3" fill="#dadce0"/>
+                <circle cx="330" cy="26" r="8" fill="none" stroke="#5f6368" stroke-width="1.4"/>
+                <line x1="378" y1="16" x2="378" y2="36" stroke="#dadce0" stroke-width="1.4"/>
+                <circle cx="398" cy="26" r="15" fill="#e8f0fe"/>
+                <path d="M398 18 v10 M393 24 l5 5 5 -5 M391 34 h14" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <ellipse class="hl" cx="398" cy="26" rx="19" ry="18"/>
+                <rect x="180" y="66" width="226" height="164" rx="12" fill="#000" opacity="0.06"/>
+                <rect x="178" y="64" width="226" height="164" rx="12" fill="#ffffff" stroke="#e8eaed" stroke-width="1"/>
+                <text x="196" y="92" font-size="13" font-weight="700" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">Recent download history</text>
+                <path d="M386 86 l9 9 M395 86 l-9 9" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
+                <image href="/agents-studio/icon.png" x="194" y="106" width="34" height="34"/>
+                <text textLength="176" lengthAdjust="spacingAndGlyphs" x="234" y="122" font-size="11" font-weight="700" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">SemantiNote-Agents-Studio-win.exe</text>
+                <text x="234" y="138" font-size="11" fill="#5f6368" font-family="Segoe UI,system-ui,sans-serif">just now</text>
+                <text x="196" y="210" font-size="12.5" fill="#202124" font-family="Segoe UI,system-ui,sans-serif">Full download history</text>
+              </svg>
+            </div>
+            <p class="inst-cap">Open <strong>SemantiNote-Agents-Studio-win.exe</strong> from your Downloads</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">2</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 210" role="img" aria-label="Windows SmartScreen dialog — click the small More info link">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
+                <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
+                <text class="dlg-title" x="46" y="56" font-size="16.5">Windows protected your PC</text>
+                <text class="dlg-text" x="46" y="86" font-size="12">Microsoft Defender SmartScreen</text>
+                <text class="dlg-text" x="46" y="104" font-size="12">prevented an unrecognized app from</text>
+                <text class="dlg-text" x="46" y="122" font-size="12">starting. Running this app might put</text>
+                <text class="dlg-text" x="46" y="140" font-size="12">your PC at risk.</text>
+                <text class="dlg-link" x="46" y="174" font-size="13" font-weight="600">More info</text>
+                <ellipse class="hl" cx="80" cy="169" rx="46" ry="14"/>
+                <path class="hl-arrow" d="M170 166 Q142 152 134 167"/><path class="hl-arrow" d="M134 167 l8 -3 m-8 3 l3 -8"/>
+                <rect class="dlg-btn" x="248" y="158" width="80" height="28" rx="4"/>
+                <text class="dlg-btn-txt" x="288" y="176" font-size="12" text-anchor="middle">Don't run</text>
+              </svg>
+            </div>
+            <p class="inst-cap">If Windows asks, click the small <strong>More info</strong> link</p>
+          </div>
+          <div class="inst-step">
+            <div class="inst-num">3</div>
+            <div class="inst-shot">
+              <svg viewBox="0 0 360 210" role="img" aria-label="Windows SmartScreen dialog with the Run anyway button circled in red">
+                <rect class="dlg-bg" x="0" y="0" width="360" height="210" rx="10"/>
+                <rect class="dlg-card" x="24" y="16" width="312" height="176" rx="8"/>
+                <text class="dlg-title" x="46" y="54" font-size="16">Windows protected your PC</text>
+                <text class="dlg-text" textLength="268" lengthAdjust="spacingAndGlyphs" x="46" y="88" font-size="12">App:  SemantiNote-Agents-Studio-win.exe</text>
+                <rect class="dlg-btn-blue" x="112" y="150" width="112" height="32" rx="5"/>
+                <text class="dlg-btn-txt-w" x="168" y="171" font-size="13" font-weight="600" text-anchor="middle">Run anyway</text>
+                <rect class="dlg-btn" x="236" y="150" width="88" height="32" rx="5"/>
+                <text class="dlg-btn-txt" x="280" y="171" font-size="12" text-anchor="middle">Don't run</text>
+                <rect class="hl" x="107" y="145" width="122" height="42" rx="8"/>
+                <path class="hl-arrow" d="M168 204 V190"/><path class="hl-arrow" d="M168 190 l-4 7 m4 -7 l4 7"/>
+              </svg>
+            </div>
+            <p class="inst-cap">Then click <strong>Run anyway</strong></p>
+          </div>
+        </div>
+
+        <p class="inst-safe" data-os-note="mac">The first time you open Agents Studio, pick the AI models you want and they download to your Mac. After that, the AI runs on your Mac.</p>
+        <p class="inst-safe" data-os-note="win" hidden>Because the app is new, Windows may ask once before the first run — that’s normal. Then pick the AI models you want; they download to your PC and run there.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REQUIREMENTS ===================== -->
+  <section id="requirements" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Requirements</span>
+        <h2 class="section-title">What you’ll need.</h2>
+      </div>
+      <div class="a-req reveal">
+        <div class="dl-req">
+          <h3>Computer</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>macOS 11 or later (Apple Silicon or Intel)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Windows 10 or 11, 64-bit</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>8 GB RAM minimum, 16 GB recommended — teams of agents are faster with more memory</li>
+          </ul>
+        </div>
+        <div class="dl-req">
+          <h3>Space &amp; extras</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>About 2 GB free disk space for the app</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Plus 2–8 GB for the AI models you choose</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Optional: Docker Desktop, to run agent code in a Docker container</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title">Questions, answered.</h2>
+      </div>
+      <div class="faq reveal">
+        <details class="faq-item">
+          <summary>Is Agents Studio free?</summary>
+          <p>Yes — Agents Studio is <strong>free</strong>. There’s no account to create and no card to enter. Just download it and start building.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data private?</summary>
+          <p>Yes. There’s no account and no tracking, and your chats, agents and keys <strong>stay on your computer</strong>. Agents Studio only goes online when you use something that needs it — like web search, reading web pages, or cloud models. See the <a class="legal-link" href="/agents-studio/privacy">privacy policy</a> for the details.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need Ollama?</summary>
+          <p>No. Agents Studio has a <strong>built-in AI engine</strong>, so there’s nothing else to install. If you already use Ollama, Agents Studio can use your models.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which AI models can I use?</summary>
+          <p>Open-source models such as Qwen 3.5, Llama, Mistral and DeepSeek-R1, running on your own computer — you choose which ones to download (2–8 GB). With your own Ollama API key you can also use Ollama Cloud models.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is it safe to let agents run code?</summary>
+          <p>Agents and tools <strong>can run code on your computer</strong>, so only add tools and MCP servers you trust. For extra safety, turn on “require approval” so an agent asks before running a tool, or have agents run code in an isolated process or a Docker container (needs Docker Desktop). And remember: AI output can be wrong — check anything important.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What powers Agents Studio?</summary>
+          <p>Agents Studio is built on <strong>Microsoft Agent Framework</strong> and <strong>Ollama</strong>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where are my API keys kept?</summary>
+          <p>In the Secrets Vault, which stores them in your computer’s secure keychain. A key is only given to the tools you choose.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section style="padding-top:0;">
+    <div class="wrap cta-final">
+      <h2 class="reveal">Build your own AI team.</h2>
+      <p class="lead reveal">Free for Mac and Windows. No account, no card.</p>
+      <div class="hero-cta reveal" style="justify-content:center;">
+        <a href="#download" class="btn btn-primary btn-lg" data-track="agents_studio_cta_final">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+          Download Agents Studio free
+        </a>
+      </div>
+      <p class="legal-foot-links" style="margin-top:28px;"><a href="/agents-studio/privacy">Agents Studio Privacy Policy</a> · <a href="/agents-studio/terms">Agents Studio Terms of Use</a> · <a href="mailto:semantinotesupport@gmail.com?subject=Agents%20Studio">Contact</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand"><img src="/assets/img/logo.svg" alt="" style="width:30px;height:30px;" />SemantiNote</div>
+        <p class="footer-tag">Agents Studio is a SemantiNote app. Build AI agents and teams of agents on Mac &amp; Windows, with AI that runs on your own computer.</p>
+        <div class="footer-social">
+          <a href="https://www.youtube.com/@SemantiNote" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://x.com/SemantiNotes" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/semantinote/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://www.tiktok.com/@semantinote" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Agents Studio</h4>
+          <a href="#download">Download</a>
+          <a href="#features">Features</a>
+          <a href="#requirements">Requirements</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>SemantiNote</h4>
+          <a href="/">Home</a>
+          <a href="/features">All features</a>
+          <a href="/about">About SemantiNote</a>
+          <a href="/download">Download SemantiNote</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/agents-studio/privacy">Agents Studio Privacy</a>
+          <a href="/agents-studio/terms">Agents Studio Terms</a>
+          <a href="/privacy">Website Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 SemantiNote. Agents Studio is a SemantiNote app.</span>
+      <span>AI output can be wrong. Only add tools you trust.</span>
+    </div>
+  </footer>
+
+  <!-- ===================== STICKY MOBILE CTA ===================== -->
+  <div class="mobile-cta">
+    <div class="mobile-cta-text">
+      <strong>Agents Studio — Free</strong>
+      <span>Mac &amp; Windows · no account</span>
+    </div>
+    <a href="#download" class="btn btn-primary" data-track="agents_studio_cta_mobile_bar">Download</a>
+  </div>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    // Agents Studio download page behaviour (mirrors /download):
+    // - show the install steps for the visitor's OS (tabs let them switch)
+    // - after a download click: "Download started ✓" on the button, reveal the
+    //   thanks panel, and switch the steps to the OS they downloaded for.
+    (function () {
+      var MAC_URL = "https://github.com/MachineDragon/agents-studio-releases/releases/latest/download/SemantiNote-Agents-Studio-mac.dmg";
+      var WIN_URL = "https://github.com/MachineDragon/agents-studio-releases/releases/latest/download/SemantiNote-Agents-Studio-win.exe";
+      var started = document.getElementById("dlStarted");
+      var manual = document.getElementById("dlManual");
+      var grids = document.querySelectorAll("#firstrun .inst-grid");
+      var tabs = document.querySelectorAll("#firstrun [data-os-tab]");
+
+      function showOnly(os) {
+        grids.forEach(function (g) { g.hidden = (g.getAttribute("data-os") !== os); });
+        document.querySelectorAll("#firstrun [data-os-note]").forEach(function (n) { n.hidden = (n.getAttribute("data-os-note") !== os); });
+        tabs.forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-os-tab") === os ? "true" : "false"); });
+      }
+      tabs.forEach(function (t) { t.addEventListener("click", function () { showOnly(t.getAttribute("data-os-tab")); }); });
+
+      var ua = navigator.userAgent || "";
+      var isWin = /Win/i.test((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "") || /Windows/i.test(ua);
+      showOnly(isWin ? "win" : "mac");
+      if (manual) { manual.setAttribute("href", isWin ? WIN_URL : MAC_URL); }
+
+      document.querySelectorAll('a[href*="Agents-Studio-mac"], a[href*="Agents-Studio-win"]').forEach(function (a) {
+        if (a.id === "dlManual") { return; }
+        a.addEventListener("click", function () {
+          var href = a.getAttribute("href") || "";
+          var win = /\.exe(\?|#|$)/i.test(href);
+          try { if (window.clarity) { window.clarity("upgrade", "agents_studio_download"); } } catch (e) {}
+          if (manual) { manual.setAttribute("href", href); }
+          showOnly(win ? "win" : "mac");
+          if (started) { started.hidden = false; }
+          if (a.dataset.dlBusy) { return; }
+          a.dataset.dlBusy = "1";
+          var original = a.innerHTML;
+          a.innerHTML = "Download started ✓";
+          a.style.pointerEvents = "none";
+          a.style.opacity = "0.85";
+          setTimeout(function () {
+            a.innerHTML = original;
+            a.style.pointerEvents = "";
+            a.style.opacity = "";
+            delete a.dataset.dlBusy;
+          }, 5000);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
