@@ -15,3 +15,6 @@ result-link
 result__a
 /site-worker/
 /.wrangler/
+# Planning docs: kept locally, never published on the site
+SEO_*.txt
+SEMANTINOTE_*.txt

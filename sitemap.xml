@@ -1,105 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://semantinote.com/</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/features</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/download</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://semantinote.com/about</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/episodes</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-12</lastmod>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c1-paper-mountain.jpg</video:thumbnail_loc>
+      <video:title>The Paper Mountain — SemantiNote episode 1</video:title>
+      <video:description>Search by meaning, not keywords. Buried in 400 pages, Dave describes the contract he needs — and SemantiNote finds the note with zero matching words.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c1-paper-mountain.mp4</video:content_loc>
+      <video:duration>55</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c2-meeting-memory.jpg</video:thumbnail_loc>
+      <video:title>Meeting Memory — SemantiNote episode 2</video:title>
+      <video:description>Kevin agreed to four things and remembers none of them. SemantiNote recorded and transcribed the meeting, so every promise is searchable.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c2-meeting-memory.mp4</video:content_loc>
+      <video:duration>69</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c3-grandpa-passwords.jpg</video:thumbnail_loc>
+      <video:title>Grandpa's Passwords — SemantiNote episode 3</video:title>
+      <video:description>47 sticky notes, zero working logins. The encrypted Secret Safe keeps every password in one private place — no more lockouts.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c3-grandpa-passwords.mp4</video:content_loc>
+      <video:duration>64</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c4-all-nighter.jpg</video:thumbnail_loc>
+      <video:title>The All-Nighter — SemantiNote episode 4</video:title>
+      <video:description>3 AM, four notebooks, one missing page. Ken just asks his own notes how cells turn food into energy — and gets the answer instantly.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c4-all-nighter.mp4</video:content_loc>
+      <video:duration>81</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c5-token-bill.jpg</video:thumbnail_loc>
+      <video:title>The $16,200 Bill — SemantiNote episode 5</video:title>
+      <video:description>A company's cloud-AI bill won't stop climbing. One employee shows the fix: AI that runs on your own computer, for free.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c5-token-bill.mp4</video:content_loc>
+      <video:duration>79</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c6-lecture-nap.jpg</video:thumbnail_loc>
+      <video:title>The Lecture Nap — SemantiNote episode 6</video:title>
+      <video:description>Jamal sleeps through his 9 AM. SemantiNote recorded and summarized the whole lecture — so he still walks away with an A+.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c6-lecture-nap.mp4</video:content_loc>
+      <video:duration>90</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c7-data-leak.jpg</video:thumbnail_loc>
+      <video:title>The Data Leak — SemantiNote episode 7</video:title>
+      <video:description>Staff pasted client data into cloud chatbots 1,284 times. SemantiNote's AI runs locally — so sensitive data never leaves the machine.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c7-data-leak.mp4</video:content_loc>
+      <video:duration>90</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c8-hardcoded-key.jpg</video:thumbnail_loc>
+      <video:title>The Hardcoded Key — SemantiNote episode 8</video:title>
+      <video:description>Leo's about to push his API key to the whole internet. He asks the built-in AI to review his code first — and dodges a disaster.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c8-hardcoded-key.mp4</video:content_loc>
+      <video:duration>59</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c9-csv-spend.jpg</video:thumbnail_loc>
+      <video:title>CSV in Seconds — SemantiNote episode 9</video:title>
+      <video:description>“Q2 token spend by Friday.” Sam drops the expense CSV into SemantiNote, asks a question, and has the numbers in seconds.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c9-csv-spend.mp4</video:content_loc>
+      <video:duration>63</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c10-performance-review.jpg</video:thumbnail_loc>
+      <video:title>The Performance Review — SemantiNote episode 10</video:title>
+      <video:description>Nina's review is in an hour and she can't recall what she did all year. She asks a year of notes — and walks in completely ready.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c10-performance-review.mp4</video:content_loc>
+      <video:duration>71</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c11-origin-story.jpg</video:thumbnail_loc>
+      <video:title>The Origin Story — SemantiNote episode 11</video:title>
+      <video:description>Mike kept forgetting everything — meetings, passwords, where he put that file. So he built the private notes app he wished existed. This is how SemantiNote began.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c11-origin-story.mp4</video:content_loc>
+      <video:duration>108</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c12-sticky-notes.jpg</video:thumbnail_loc>
+      <video:title>Sticky Notes — SemantiNote episode 12</video:title>
+      <video:description>SemantiNote was built… but nobody had downloaded it. Too shy to pitch it out loud, Mike covered Boston in sticky notes to get the word out.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c12-sticky-notes.mp4</video:content_loc>
+      <video:duration>80</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://semantinote.com/assets/episodes/c13-head-of-no-sales.jpg</video:thumbnail_loc>
+      <video:title>The Head of Sales — SemantiNote episode 13</video:title>
+      <video:description>Mike made his best friend Head of Sales. His friend made exactly zero sales. An honest, funny look at building a product from scratch.</video:description>
+      <video:content_loc>https://semantinote.com/assets/episodes/c13-head-of-no-sales.mp4</video:content_loc>
+      <video:duration>138</video:duration>
+      <video:publication_date>2026-09-27</video:publication_date>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://semantinote.com/about</loc>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/help</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-11-12</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/privacy</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/terms</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/refund</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://semantinote.com/stock-analyzer/</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://semantinote.com/stock-analyzer/privacy</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://semantinote.com/stock-analyzer/terms</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://semantinote.com/agents-studio/</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://semantinote.com/agents-studio/privacy</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://semantinote.com/agents-studio/terms</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://semantinote.com/demyr/</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://semantinote.com/demyr/privacy</loc>
     <lastmod>2026-10-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 </urlset>

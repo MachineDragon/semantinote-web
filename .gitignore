@@ -4,3 +4,6 @@
 assets/img/shots/_*.png
 assets/img/shots/*_proof.png
 .wrangler/
+# Planning docs (local only; one contains a local work path)
+SEO_*.txt
+SEMANTINOTE_*.txt
