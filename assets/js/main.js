@@ -39,23 +39,67 @@
   });
 
   /* ---------------- OS detection (download page) ---------------- */
+  // iPhones say "like Mac OS X" and iPads ask for the desktop site as a "Macintosh", so check those FIRST
+  // (an iPad is the only "Mac" with a touch screen). Before this, iPhone visitors were told they're on a Mac.
   function detectOS() {
     var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
     var ua = navigator.userAgent || "";
     p = p.toLowerCase(); ua = ua.toLowerCase();
+    if (/iphone|ipod/.test(ua) || /iphone|ipod/.test(p)) { return "iphone"; }
+    if (/ipad/.test(ua) || /ipad/.test(p) || ((p.indexOf("mac") > -1 || ua.indexOf("macintosh") > -1) && navigator.maxTouchPoints > 1)) { return "ipad"; }
+    if (/android/.test(ua)) { return "android"; }
     if (p.indexOf("mac") > -1 || ua.indexOf("mac") > -1) { return "mac"; }
     if (p.indexOf("win") > -1 || ua.indexOf("win") > -1) { return "win"; }
     return "other";
   }
+  var visitorOS = detectOS();
+  var isIOS = visitorOS === "iphone" || visitorOS === "ipad";
+  var APP_STORE_URL = "https://apps.apple.com/us/app/semantinote/id6821954583";
+
+  /* ---------------- Sticky phone bar ---------------- */
+  // On an iPhone/iPad the bar's button goes straight to the App Store (Safari opens the App Store app
+  // right on SemantiNote's page); the line next to it still links to the page with the Mac & Windows downloads.
+  if (isIOS) {
+    document.querySelectorAll(".mobile-cta").forEach(function (bar) {
+      var btn = bar.querySelector("a.btn");
+      // Only SemantiNote's own bar (it points at /download). Stock Analyzer / Agents Studio have no iPhone app.
+      if (!btn || btn.getAttribute("href") !== "/download") { return; }
+      var txt = bar.querySelector(".mobile-cta-text");
+      if (btn) {
+        btn.setAttribute("href", APP_STORE_URL);
+        btn.setAttribute("data-appstore", "");
+        btn.setAttribute("data-track", "appstore_mobile_bar");
+        btn.textContent = "Get on App Store";
+      }
+      if (txt) {
+        txt.innerHTML = "<strong>Now on " + (visitorOS === "ipad" ? "iPad" : "iPhone") + "</strong>" +
+          '<span>Free to start · <a href="/download">also Mac &amp; Windows</a></span>';
+      }
+    });
+  }
 
   var osHint = document.getElementById("osHint");
   if (osHint) {
-    var os = detectOS();
+    var os = visitorOS;
     var macCard = document.getElementById("macCard");
     var winCard = document.getElementById("winCard");
+    var iosCard = document.getElementById("iosCard");
     var macBadge = document.getElementById("macBadge");
     var winBadge = document.getElementById("winBadge");
-    if (os === "mac") {
+    var iosBadge = document.getElementById("iosBadge");
+    if (!iosCard && (isIOS || os === "android")) {
+      // A Mac/Windows-only app's page (Stock Analyzer, Agents Studio) seen on a phone.
+      osHint.textContent = "This app is for Mac and Windows — open this page on your computer to download it.";
+    } else if (!iosCard && os === "other") {
+      osHint.textContent = "Available for macOS and Windows.";
+    } else if (isIOS) {
+      osHint.textContent = "Looks like you're on an " + (os === "ipad" ? "iPad" : "iPhone") + " — tap Download on the App Store. (Mac and Windows versions are below too.)";
+      if (iosBadge) { iosBadge.hidden = false; }
+      if (iosCard) { iosCard.classList.add("recommended", "dl-first"); }
+      if (macCard) { macCard.classList.remove("recommended"); }
+    } else if (os === "android") {
+      osHint.textContent = "SemantiNote is available for Mac, Windows, iPhone and iPad (not Android yet). Download it on your computer below.";
+    } else if (os === "mac") {
       osHint.textContent = "Looks like you're on a Mac — the macOS build is highlighted below.";
       if (macBadge) { macBadge.hidden = false; }
       if (winCard) { winCard.classList.remove("recommended"); }
@@ -65,7 +109,7 @@
       if (winCard) { winCard.classList.add("recommended"); }
       if (macCard) { macCard.classList.remove("recommended"); }
     } else {
-      osHint.textContent = "Available for macOS and Windows.";
+      osHint.textContent = "Available for Mac, Windows, iPhone and iPad.";
     }
   }
 
@@ -318,6 +362,11 @@
     var os = /iPhone|iPad|Android/i.test(ua) ? "phone" : /Mac/i.test(ua) ? "mac" : /Win/i.test(ua) ? "windows" : "other";
     if (window.clarity) { window.clarity("set", "os", os); }
   } catch (e) {}
+
+  // App Store taps (iPhone/iPad app) count as downloads too.
+  document.querySelectorAll("a[data-appstore]").forEach(function (a) {
+    a.addEventListener("click", function () { try { if (window.clarity) { window.clarity("event", "download_ios"); window.clarity("upgrade", "download"); } } catch (e) {} });
+  });
 
   // Keep the recordings of sessions that downloaded or went to buy (Clarity samples the rest).
   document.querySelectorAll('a[href*="SemantiNote-mac"], a[href*="SemantiNote-win"], a[href*="buy.stripe"]').forEach(function (a) {

@@ -717,3 +717,16 @@ section { padding: clamp(80px, 11vw, 150px) 0; }
   .nav-drop-menu::before { display: none; }
   .nav[data-open="true"] .nav-links .nav-drop-item { padding: 8px 0; font-size: 16px; }
 }
+
+/* ---------- iPhone & iPad (App Store) ---------- */
+.dl-cards.dl-cards-3 { grid-template-columns: repeat(3, 1fr); max-width: 1080px; }
+@media (max-width: 900px) { .dl-cards.dl-cards-3 { grid-template-columns: 1fr; max-width: 480px; } }
+.dl-card.dl-first { order: -1; }              /* on an iPhone/iPad, its card comes first */
+.dl-card .btn svg { flex-shrink: 0; }
+.hero-ios { margin-top: 6px; }
+.hero-ios a { display: inline-flex; align-items: center; gap: 6px; color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; }
+.hero-ios a:hover { border-bottom-color: currentColor; }
+.hero-ios svg { width: 15px; height: 15px; flex-shrink: 0; }
+.hero-ios a { max-width: 100%; text-align: left; }
+.price-ios { font-size: 13px; color: var(--dim); margin-top: 8px; }
+.mobile-cta-text span a { color: inherit; text-decoration: underline; }
