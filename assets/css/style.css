@@ -730,3 +730,6 @@ section { padding: clamp(80px, 11vw, 150px) 0; }
 .hero-ios a { max-width: 100%; text-align: left; }
 .price-ios { font-size: 13px; color: var(--dim); margin-top: 8px; }
 .mobile-cta-text span a { color: inherit; text-decoration: underline; }
+/* App Store download button on the iPhone apps' pages (Demyr, AI Celebrity) */
+.app-store-cta { margin: 18px 0 6px; }
+.app-store-cta .btn { display: inline-flex; align-items: center; }

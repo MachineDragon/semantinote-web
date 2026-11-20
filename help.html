@@ -33,7 +33,7 @@
         <a href="/#pricing">Pricing</a>
         <a href="/#faq">FAQ</a>
         <a href="/about">About</a>
-        <a href="/help" class="active">Help</a>
+        <a href="/help" class="active">Help &amp; Contact</a>
         <div class="nav-drop">
           <button class="nav-drop-btn" type="button" aria-haspopup="true" aria-expanded="false">Other Software<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-drop-menu">
@@ -61,7 +61,7 @@
            Change the endpoint if you want messages routed elsewhere. -->
       <div class="dl-req reveal" style="text-align:left;">
         <h3 style="text-align:center;">Send us a message</h3>
-        <p style="color:var(--muted);font-size:14.5px;margin:0 auto 18px;max-width:52ch;text-align:center;">Pick a topic and we'll get back to you. A real person reads every message.</p>
+        <p style="color:var(--muted);font-size:14.5px;margin:0 auto 18px;max-width:52ch;text-align:center;">Pick the product and a topic and we'll get back to you. A real person reads every message. Want help using AI in your business, or to learn AI? Choose <em>AI consulting</em>.</p>
         <form id="contactForm" class="sn-form" action="https://formspree.io/f/xnjkwvbg" method="POST">
           <label>Your name
             <input type="text" name="name" placeholder="Your name" required />
@@ -69,8 +69,28 @@
           <label>Email
             <input type="email" name="email" placeholder="you@example.com" required />
           </label>
+          <label>Which product is this about?
+            <select name="product" id="contactProduct" required>
+              <option value="" disabled selected>Select a product…</option>
+              <optgroup label="SemantiNote">
+                <option value="SemantiNote — Mac">SemantiNote for Mac</option>
+                <option value="SemantiNote — Windows">SemantiNote for Windows</option>
+                <option value="SemantiNote — iPhone/iPad">SemantiNote for iPhone &amp; iPad</option>
+              </optgroup>
+              <optgroup label="Other apps">
+                <option value="Stock Analyzer">SemantiNote Stock Analyzer (Mac &amp; Windows)</option>
+                <option value="Agents Studio">SemantiNote Agents Studio (Mac &amp; Windows)</option>
+                <option value="Demyr">Demyr (iPhone)</option>
+                <option value="AI Celebrity">AI Celebrity (iPhone)</option>
+              </optgroup>
+              <optgroup label="Services">
+                <option value="AI consulting">AI consulting or AI training for my business</option>
+              </optgroup>
+              <option value="Other">Something else / not about a product</option>
+            </select>
+          </label>
           <label>Topic
-            <select name="topic" required>
+            <select name="topic" id="contactTopic" required>
               <option value="" disabled selected>Select a topic…</option>
               <option>Help setting it up</option>
               <option>Customer support</option>
@@ -78,6 +98,8 @@
               <option>Request a refund</option>
               <option>Question</option>
               <option>Feature request</option>
+              <option>AI consulting for my business</option>
+              <option>Learn AI (training or a workshop)</option>
               <option>Something else</option>
             </select>
           </label>
@@ -160,8 +182,23 @@
       if (!form) { return; }
       var statusEl = document.getElementById("contactStatus");
       var btn = document.getElementById("contactSubmit");
+      var product = document.getElementById("contactProduct");
+      var topic = document.getElementById("contactTopic");
+      var subject = form.querySelector('input[name="_subject"]');
+      // Links like /help?product=demyr pick the product for you.
+      try {
+        var want = (new URLSearchParams(location.search).get("product") || "").toLowerCase();
+        var map = { mac: "SemantiNote — Mac", windows: "SemantiNote — Windows", ios: "SemantiNote — iPhone/iPad", iphone: "SemantiNote — iPhone/iPad",
+          "stock-analyzer": "Stock Analyzer", "agents-studio": "Agents Studio", demyr: "Demyr", aicelebrity: "AI Celebrity", consulting: "AI consulting" };
+        if (map[want]) { product.value = map[want]; }
+        if (want === "consulting") { topic.value = "AI consulting for my business"; }
+      } catch (e2) { /* old browser */ }
+      // Choosing AI consulting suggests the matching topic.
+      product.addEventListener("change", function () { if (product.value === "AI consulting" && !topic.value) { topic.value = "AI consulting for my business"; } });
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+        // The email subject says which product + topic, so the inbox sorts itself ("[Demyr] Feature request").
+        if (subject) { subject.value = "[" + (product.value || "Website") + "] " + (topic.value || "Message") + " — from semantinote.com"; }
         statusEl.className = "form-status";
         btn.disabled = true; btn.textContent = "Sending…";
         fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
