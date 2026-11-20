@@ -61,7 +61,7 @@
            Change the endpoint if you want messages routed elsewhere. -->
       <div class="dl-req reveal" style="text-align:left;">
         <h3 style="text-align:center;">Send us a message</h3>
-        <p style="color:var(--muted);font-size:14.5px;margin:0 auto 18px;max-width:52ch;text-align:center;">Pick the product and a topic and we'll get back to you. A real person reads every message. Want help using AI in your business, or to learn AI? Choose <em>AI consulting</em>.</p>
+        <p style="color:var(--muted);font-size:14.5px;margin:0 auto 18px;max-width:52ch;text-align:center;">Pick the product and a topic and we'll get back to you. A real person reads every message. Want a website or AI agents built for your business, AI consulting, or to learn AI? Pick it under <em>Services</em>.</p>
         <form id="contactForm" class="sn-form" action="https://formspree.io/f/xnjkwvbg" method="POST">
           <label>Your name
             <input type="text" name="name" placeholder="Your name" required />
@@ -84,6 +84,8 @@
                 <option value="AI Celebrity">AI Celebrity (iPhone)</option>
               </optgroup>
               <optgroup label="Services">
+                <option value="Website for my business">Building a website for my business</option>
+                <option value="AI agents for my business">Creating AI agents for my business</option>
                 <option value="AI consulting">AI consulting or AI training for my business</option>
               </optgroup>
               <option value="Other">Something else / not about a product</option>
@@ -98,6 +100,8 @@
               <option>Request a refund</option>
               <option>Question</option>
               <option>Feature request</option>
+              <option>Build a website for my business</option>
+              <option>Create AI agents for my business</option>
               <option>AI consulting for my business</option>
               <option>Learn AI (training or a workshop)</option>
               <option>Something else</option>
@@ -189,12 +193,15 @@
       try {
         var want = (new URLSearchParams(location.search).get("product") || "").toLowerCase();
         var map = { mac: "SemantiNote — Mac", windows: "SemantiNote — Windows", ios: "SemantiNote — iPhone/iPad", iphone: "SemantiNote — iPhone/iPad",
-          "stock-analyzer": "Stock Analyzer", "agents-studio": "Agents Studio", demyr: "Demyr", aicelebrity: "AI Celebrity", consulting: "AI consulting" };
+          "stock-analyzer": "Stock Analyzer", "agents-studio": "Agents Studio", demyr: "Demyr", aicelebrity: "AI Celebrity", consulting: "AI consulting",
+          website: "Website for my business", agents: "AI agents for my business" };
+        var topicFor = { consulting: "AI consulting for my business", website: "Build a website for my business", agents: "Create AI agents for my business" };
         if (map[want]) { product.value = map[want]; }
-        if (want === "consulting") { topic.value = "AI consulting for my business"; }
+        if (topicFor[want]) { topic.value = topicFor[want]; }
       } catch (e2) { /* old browser */ }
-      // Choosing AI consulting suggests the matching topic.
-      product.addEventListener("change", function () { if (product.value === "AI consulting" && !topic.value) { topic.value = "AI consulting for my business"; } });
+      // Choosing a service suggests the matching topic.
+      var serviceTopic = { "AI consulting": "AI consulting for my business", "Website for my business": "Build a website for my business", "AI agents for my business": "Create AI agents for my business" };
+      product.addEventListener("change", function () { if (serviceTopic[product.value] && (!topic.value || /for my business$/.test(topic.value))) { topic.value = serviceTopic[product.value]; } });
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         // The email subject says which product + topic, so the inbox sorts itself ("[Demyr] Feature request").
